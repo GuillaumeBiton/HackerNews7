@@ -58,7 +58,8 @@
 		window.localStorage.removeItem('stories');
 		app.template7Data.stories = stories();
 	});
-	
+
+	// Comments
 	app.onPageAfterAnimation('item', function (page) {
 		var id = $$(page.container).attr('data-story-id');
 		var comments = [];
@@ -75,10 +76,13 @@
 				if (comment.text && comment.text.length && !comment.deleted) comments.push(comment);
 				commentsCount ++;
 				if (commentsCount === story.kids.length) {
-					$$(page.container).find('.comments .messages-content').html(T7.templates.commentsTemplate(comments));
+					$$(page.container).find('.story-comments .messages').html(T7.templates.commentsTemplate(comments));
 				}
 			});
 		});
+	});
+	$$(document).on('click', '.message a', function (e) {
+		window.open($$(this).attr('href'));
 	});
 	
 	app.template7Data.stories = stories();

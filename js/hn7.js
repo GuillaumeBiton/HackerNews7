@@ -1,5 +1,9 @@
 (function (Framework7, $$, T7, moment, hnapi) {
 	'use strict';
+
+	T7.registerHelper('time_ago', function (time) {
+		return moment.unix(time).fromNow();
+	});
 	
 	var app = new Framework7({
 		modalTitle: 'HackerNews7',
@@ -22,8 +26,7 @@
 				data.forEach(function(id) {
 					hnapi.item(id, function(data) {
 						data = JSON.parse(data);
-						data['timeAgo'] = moment.unix(data.time).fromNow();
-						data['domain'] = data.url.split('/')[2];
+						data.domain = data.url.split('/')[2];
 						results.push(data);
 					});
 				});
@@ -72,7 +75,7 @@
 				if (comment.text && comment.text.length && !comment.deleted) comments.push(comment);
 				commentsCount ++;
 				if (commentsCount === story.kids.length) {
-					$$(page.container).find('#comments').html(T7.templates.commentsTemplate(comments));
+					$$(page.container).find('.comments .messages-content').html(T7.templates.commentsTemplate(comments));
 				}
 			});
 		});

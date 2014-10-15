@@ -1,0 +1,56 @@
+/* === Relation between toolbar/navbar types and pages === */
+.page, .view, .views{
+    >.navbar, >.toolbar {
+        position: absolute;
+    }
+}
+.navbar-through, .navbar-fixed {
+    .page-content {
+        padding-top: 44px;
+    }
+}
+.toolbar-through, .toolbar-fixed, .tabbar-through, .tabbar-fixed {
+    .page-content {
+        padding-bottom: 44px;
+    }
+}
+.tabbar-labels-fixed, .tabbar-labels-through {
+    .page-content {
+        padding-bottom: 50px;
+        @media all and (min-width:768px) {
+            padding-bottom: 56px;
+        }
+    }
+}
+// Page Hidden Navbar
+.hidden-navbar {
+    .navbar {
+        .transition(400ms);
+        .translate3d(0,-100%,0);
+    }
+}
+.hiding-navbar {
+    .navbar {
+        .transition(400ms);
+        .translate3d(0,0,0);
+    }
+}
+.page.no-navbar .page-content {
+    padding-top: 0;
+}
+// Page Hidden Toolbar
+.hidden-toolbar {
+    .toolbar {
+        .transition(400ms);
+        .translate3d(0,100%,0);
+    }
+}
+.hiding-toolbar {
+    .toolbar {
+        .transition(400ms);
+        .translate3d(0,0,0);
+    }
+}
+.page.no-toolbar .page-content {
+    padding-bottom: 0;
+}

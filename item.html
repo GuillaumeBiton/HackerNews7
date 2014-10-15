@@ -1,0 +1,27 @@
+
+ <div class="navbar">
+  <div class="navbar-inner">
+    <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
+    <div class="center sliding">{{title}}</div>
+  </div>
+</div>
+<div class="pages">
+  <div data-page="cars" class="page">
+    <div class="page-content">
+			<div class="content-block-title">{{title}}</div>
+			<div class="content-block">
+				{{score}} point{{if score}}s{{/if}} by {{by}} {{timeAgo}}<br />
+				<a href="{{url}}">{{domain}}</a>
+			</div>
+			<div class="list-block">
+				<ul>
+					{{#each comments}}
+						<li class='item-content'>
+							<div class="item-inner">{{text}}</div>
+						</li>
+					{{/each}}
+				</ul>
+			</div>
+    </div>
+  </div>
+</div>

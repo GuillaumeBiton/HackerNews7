@@ -1,0 +1,28 @@
+{
+  "name": "HackerNews7",
+  "version": "0.0.1",
+  "authors": [
+    "guillaumebiton <guillaume.biton@free.fr>"
+  ],
+  "description": "Framework7 HackerNews web app",
+  "main": "index.html",
+  "keywords": [
+    "Hackernews",
+    "Framework7",
+    "webapp",
+    "html5"
+  ],
+  "license": "MIT",
+  "homepage": "http://guillaumebiton.github.com/HackerNews7",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "framework7": "~0.9.7",
+    "moment": "~2.8.3"
+  }
+}

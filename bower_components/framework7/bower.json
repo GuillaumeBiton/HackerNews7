@@ -1,0 +1,30 @@
+{
+  "name": "Framework7",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nolimits4web/Framework7.git"
+  },
+  "description": "Full Featured HTML Framework For Building iOS 7 Apps",
+  "version": "0.9.7",
+  "author": "Vladimir Kharlampidi",
+  "homepage": "http://www.idangero.us/framework7",
+  "keywords": ["mobile", "framework", "ios 7", "ios7", "ios8", "ios 8", "iphone", "ipad", "apple", "phonegap", "native", "touch", "appstore", "app", "f7"],
+  "scripts": [
+    "dist/js/framework7.js"
+  ],
+  "main": "dist/",
+  "styles": [
+    "dist/css/framework7.css"
+  ],
+  "license": ["MIT"],
+  "ignore": [
+    ".*",
+    "build",
+    "custom",
+    "kitchen-sink/",
+    "Gruntfile.js",
+    "apps",
+    "node_modules",
+    "package.json"
+  ]
+}

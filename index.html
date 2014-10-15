@@ -58,6 +58,15 @@
 			{{/each}}
 			</ul>
 		</script>
+		<script type="text/template7" id="commentsTemplate">
+				{{#each this}}
+					<div class="content-block-title">{{by}}</div>
+					<div class='content-block'>
+						<div class="content-block-inner">{{text}}</div>
+					</div>
+				{{/each}}
+			</ul>
+		</script>
 		
 		<!-- libraries -->
 		<script src="bower_components/moment/min/moment.min.js"></script>

@@ -32,6 +32,10 @@
 		return results;
 	};
 	
+	var comments = function(id) {
+		var comments = [];
+	};
+		
 	$$(document).on('ajaxStart', function () {
 		if(typeof app.template7Data.stories === 'undefined') {
 			app.showIndicator();
@@ -50,6 +54,10 @@
 	$$('.pull-to-refresh-content').on('refresh', function () {
 		window.localStorage.removeItem('stories');
 		app.template7Data['stories'] = stories();
+	});
+	
+	app.onPageInit('item', function (page) {
+		console.log('page item init' + id);
 	});
 	
 	app.template7Data['stories'] = stories();

@@ -49,34 +49,36 @@
 			$$('.page[data-page="index"] .page-content .list-block').html(T7.templates.storiesTemplate(app.template7Data.stories));
 			app.pullToRefreshDone();
 		}
-		if(typeof app.template7Data.comments !== 'undefined' && app.template7Data.comments.length > 0) {
-			$$('#comments').html(T7.templates.commentsTemplate(app.template7Data.comments));
-		}
 	});
 	
 	$$('.pull-to-refresh-content').on('refresh', function () {
 		window.localStorage.removeItem('stories');
-		app.template7Data['stories'] = stories();
+		app.template7Data.stories = stories();
 	});
 	
-	app.onPageInit('item', function (page) {
+	app.onPageAfterAnimation('item', function (page) {
 		var id = $$(page.container).attr('data-story-id');
 		var comments = [];
-		var comments = function() {
-			var results = [];
-			hnapi.item(id, function (story) {
-				JSON.parse(story).kids.forEach(function (child) {
-					hnapi.item(child, function(data) {
-						results.push(JSON.parse(data));
-					});
-				});
+		var story;
+		for (var i = 0; i < app.template7Data.stories.length; i++) {
+			if (app.template7Data.stories[i].id === parseInt(id, 10)) {
+				story = app.template7Data.stories[i];
+			}
+		}
+		var commentsCount = 0;
+		story.kids.forEach(function (child) {
+			hnapi.item(child, function(data) {
+				var comment = JSON.parse(data);
+				if (comment.text && comment.text.length && !comment.deleted) comments.push(comment);
+				commentsCount ++;
+				if (commentsCount === story.kids.length) {
+					$$(page.container).find('#comments').html(T7.templates.commentsTemplate(comments));
+				}
 			});
-			return results;
-		};
-		app.template7Data['comments'] = comments();
+		});
 	});
 	
-	app.template7Data['stories'] = stories();
+	app.template7Data.stories = stories();
 	$$('.page-content .list-block').html(T7.templates.storiesTemplate(app.template7Data.stories));
 	
 	window.app = app;

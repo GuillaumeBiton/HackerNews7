@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    
-		<title>HackerNews7</title>
-		
-		<link rel="stylesheet" href="bower_components/framework7/dist/css/framework7.min.css">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<title>HackerNews7</title>
+	<link rel="stylesheet" href="bower_components/framework7/dist/css/framework7.min.css">
+	<link rel="stylesheet" href="css/hn7.css">
 	</head>
 	<body>
 		<!-- Status bar overlay for fullscreen mode -->
@@ -20,7 +18,7 @@
 		<div class="views">
 			<!-- main view -->
 			<div class="view view-main navbar-through">
-				<div class="navbar">
+				<div class="navbar theme-white">
 					<div class="navbar-inner">
 						<div class="center sliding">HackerNews7</div>
 					</div>
@@ -32,7 +30,7 @@
 								<div class="preloader"></div>
 								<div class="pull-to-refresh-arrow"></div>
 							</div>
-							<div class="list-block media-list">
+							<div class="list-block media-list stories-list">
 							</div>
 						</div>
 					</div>
@@ -49,9 +47,10 @@
 						<div class="item-inner">
 							<div class="item-title-row">
 								<div class="item-title">{{title}}</div>
+								<div class="item-after"><span class="badge">{{array_length kids}}</span></div>
 							</div>
 							<div class="item-subtitle">{{domain}}</div>
-							<div class="item-text">{{score}} points by {{by}} {{timeAgo}}</div>
+							<div class="item-text">{{score}} points by {{by}} {{time_ago time}}</div>
 						</div>
 					</a>
 				</li>
@@ -60,9 +59,9 @@
 		</script>
 		<script type="text/template7" id="commentsTemplate">
 				{{#each this}}
-					<div class="content-block-title">{{by}}</div>
-					<div class='content-block'>
-						<div class="content-block-inner">{{text}}</div>
+					<div class="message message-received message-with-tail message-last">
+						<div class="message-name"><span class="comment-name">{{by}}</span> <span class="comment-time">{{time_ago time}}</span></div>
+						<div class="message-text">{{text}}</div>
 					</div>
 				{{/each}}
 			</ul>

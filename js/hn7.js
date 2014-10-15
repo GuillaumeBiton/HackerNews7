@@ -56,10 +56,6 @@
 		app.template7Data['stories'] = stories();
 	});
 	
-	app.onPageInit('item', function (page) {
-		console.log('page item init' + id);
-	});
-	
 	app.template7Data['stories'] = stories();
 	$$('.page-content .list-block').html(T7.templates.storiesTemplate(app.template7Data.stories));
 	

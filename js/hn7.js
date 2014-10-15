@@ -42,7 +42,7 @@
 		if(typeof app.template7Data.stories !== 'undefined' && app.template7Data.stories.length === 100) {
 			window.localStorage.setItem('stories', JSON.stringify(app.template7Data.stories));
 			app.hideIndicator();
-			$$('.page-content .list-block').html(T7.templates.storiesTemplate(app.template7Data.stories));
+			$$('.page[data-page="index"] .page-content .list-block').html(T7.templates.storiesTemplate(app.template7Data.stories));
 			app.pullToRefreshDone();
 		}
 	});

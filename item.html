@@ -1,5 +1,4 @@
-
- <div class="navbar">
+<div class="navbar">
   <div class="navbar-inner">
     <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
     <div class="center sliding">{{title}}</div>
@@ -8,12 +7,17 @@
 <div class="pages">
   <div class="page" data-page="item" data-story-id="{{id}}">
     <div class="page-content">
-			<div class="content-block-title">{{title}}</div>
-			<div class="content-block">
-				{{score}} point{{if score}}s{{/if}} by {{by}} {{timeAgo}}<br />
-				<a href="{{url}}" class="external">{{domain}}</a>
-			</div>
-			<div id="comments"></div>
+      <div class="story-header">
+        <div class="story-title">{{title}}</div>
+        <div class="story-info">{{score}} points by {{by}} {{time_ago time}}</div>
+        <div class="story-link"><a href="{{url}}" target="_blank" class="external">{{domain}}</a></div>
+      </div>
+			<div class="story-comments">
+        <div class="messages">
+          <div class="preloader"></div>
+          <div class="preloader-label">Loading comments...</div>
+        </div>   
+      </div>
     </div>
   </div>
 </div>

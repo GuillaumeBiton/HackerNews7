@@ -84,6 +84,8 @@
 				var comment = JSON.parse(data);
 				if (comment.text && comment.text.length && !comment.deleted) comments.push(comment);
 				commentsCount ++;
+
+				$$(page.container).find('.preloader-progress').text(Math.floor(commentsCount/story.kids.length*100));
 				if (commentsCount === story.kids.length && allowCommentsInsert) {
 					$$(page.container).find('.story-comments .messages').html(T7.templates.commentsTemplate(comments));
 				}
@@ -96,7 +98,7 @@
 	$$(document).on('click', '.message a', function (e) {
 		window.open($$(this).attr('href'));
 	});
-	
+
 	// Get and parse stories on app load
 	getStories();
 	

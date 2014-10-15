@@ -1,10 +1,15 @@
 (function (Framework7, $$, T7, moment, hnapi) {
 	'use strict';
 
+	// Helpers
 	T7.registerHelper('time_ago', function (time) {
 		return moment.unix(time).fromNow();
 	});
+	T7.registerHelper('array_length', function (arr) {
+		return arr ? arr.length : 0;
+	});
 	
+	// Init App
 	var app = new Framework7({
 		modalTitle: 'HackerNews7',
 		
@@ -14,13 +19,21 @@
 		template7Pages: true
 	});
 	
+	// Add View
 	var mainView = app.addView('.view-main', {
 		dynamicNavbar: true
 	});
 	
-	var stories = function () {
-		var results = JSON.parse(window.localStorage.getItem('stories')) || [];
+	// Update data
+	function updateStories(stories) {
+		app.template7Data.stories = stories;
+		$$('.page[data-page="index"] .page-content .list-block').html(T7.templates.storiesTemplate(stories));
+	}
+	// Fetch Stories
+	function getStories(refresh) {
+		var results = refresh ? [] : JSON.parse(window.localStorage.getItem('stories')) || [];
 		if (results.length === 0) {		
+			if (!refresh) app.showIndicator();
 			hnapi.topStories(function (data) {
 				data = JSON.parse(data);
 				data.forEach(function(id) {
@@ -28,39 +41,35 @@
 						data = JSON.parse(data);
 						data.domain = data.url.split('/')[2];
 						results.push(data);
+						if (results.length === 100) {
+							if (!refresh) app.hideIndicator();
+							// Update local storage data
+							window.localStorage.setItem('stories', JSON.stringify(results));
+							// PTR Done
+							app.pullToRefreshDone();
+							// Update T7 data and render home page stories
+							updateStories(results);
+						}
 					});
 				});
 			});
 		}
+		else {
+			// Update T7 data and render home page stories
+			updateStories(results);
+		}
 		return results;
-	};
+	}
 	
-	var comments = function(id) {
-		var comments = [];
-	};
-		
-	$$(document).on('ajaxStart', function () {
-		if(typeof app.template7Data.stories === 'undefined') {
-			app.showIndicator();
-		}
-	});
-	
-	$$(document).on('ajaxComplete', function () {
-		if(typeof app.template7Data.stories !== 'undefined' && app.template7Data.stories.length === 100) {
-			window.localStorage.setItem('stories', JSON.stringify(app.template7Data.stories));
-			app.hideIndicator();
-			$$('.page[data-page="index"] .page-content .list-block').html(T7.templates.storiesTemplate(app.template7Data.stories));
-			app.pullToRefreshDone();
-		}
-	});
-	
+	// Update stories on PTR
 	$$('.pull-to-refresh-content').on('refresh', function () {
-		window.localStorage.removeItem('stories');
-		app.template7Data.stories = stories();
+		getStories(true);
 	});
 
 	// Comments
+	var allowCommentsInsert;
 	app.onPageAfterAnimation('item', function (page) {
+		allowCommentsInsert = true;
 		var id = $$(page.container).attr('data-story-id');
 		var comments = [];
 		var story;
@@ -75,19 +84,23 @@
 				var comment = JSON.parse(data);
 				if (comment.text && comment.text.length && !comment.deleted) comments.push(comment);
 				commentsCount ++;
-				if (commentsCount === story.kids.length) {
+				if (commentsCount === story.kids.length && allowCommentsInsert) {
 					$$(page.container).find('.story-comments .messages').html(T7.templates.commentsTemplate(comments));
 				}
 			});
 		});
 	});
+	app.onPageBack('item', function () {
+		allowCommentsInsert = false;
+	});
 	$$(document).on('click', '.message a', function (e) {
 		window.open($$(this).attr('href'));
 	});
 	
-	app.template7Data.stories = stories();
-	$$('.page-content .list-block').html(T7.templates.storiesTemplate(app.template7Data.stories));
+	// Get and parse stories on app load
+	getStories();
 	
+	// Export app to global
 	window.app = app;
 	
 })(Framework7, Dom7, Template7, moment, hnapi);

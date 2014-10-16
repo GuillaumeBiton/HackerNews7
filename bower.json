@@ -2,7 +2,7 @@
   "name": "HackerNews7",
   "version": "0.1.0",
   "authors": [
-    "guillaumebiton <guillaume.biton@free.fr>",
+		"guillaumebiton <guillaume.biton@free.fr>",
 		"Vladimir Kharlampidi" 
   ],
   "description": "Framework7 HackerNews web app",

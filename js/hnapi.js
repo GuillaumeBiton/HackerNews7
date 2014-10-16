@@ -25,8 +25,8 @@
     urls: urls,
     
 		item: function (id, success, error) {
-      return req('item/' + id + '.json', success, error);
-    },
+			return req('item/' + id + '.json', success, error);
+		},
 		
 		user: function (user, success, error) {
 			return req('user/' + user + '.json', success, error);

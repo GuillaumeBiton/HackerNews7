@@ -47,6 +47,8 @@
 							window.localStorage.setItem('stories', JSON.stringify(results));
 							// PTR Done
 							app.pullToRefreshDone();
+							// Clear searchbar
+							$$('.searchbar-input input')[0].value = '';
 							// Update T7 data and render home page stories
 							updateStories(results);
 						}

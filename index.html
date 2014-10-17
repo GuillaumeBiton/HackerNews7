@@ -24,13 +24,26 @@
 					</div>
 				</div>
 				<div class="pages">
+					
 					<div class="page" data-page="index">
+						<!-- Search bar -->
+						<form class="searchbar" data-search-list=".list-block-search" data-search-in=".item-title" data-searchbar-found=".searchbar-found" data-searchbar-not-found=".searchbar-not-found">
+								<div class="searchbar-input">
+										<input type="search" placeholder="Search">
+										<a href="#" class="searchbar-clear"></a>
+								</div>
+								<a href="#" class="searchbar-cancel">Cancel</a>
+						</form>
 						<div class="page-content pull-to-refresh-content">
 							<div class="pull-to-refresh-layer">
 								<div class="preloader"></div>
 								<div class="pull-to-refresh-arrow"></div>
 							</div>
-							<div class="list-block media-list stories-list">
+							
+							<!-- Search bar overlay-->
+							<div class="searchbar-overlay"></div>
+
+							<div class="list-block media-list stories-list list-block-search searchbar-found">
 							</div>
 						</div>
 					</div>

@@ -81,18 +81,22 @@
 			}
 		}
 		var commentsCount = 0;
-		story.kids.forEach(function (child) {
-			hnapi.item(child, function(data) {
-				var comment = JSON.parse(data);
-				if (comment.text && comment.text.length && !comment.deleted) comments.push(comment);
-				commentsCount ++;
+		if(story.kids) {
+			story.kids.forEach(function (child) {
+				hnapi.item(child, function(data) {
+					var comment = JSON.parse(data);
+					if (comment.text && comment.text.length && !comment.deleted) comments.push(comment);
+					commentsCount ++;
 
-				$$(page.container).find('.preloader-progress').text(Math.floor(commentsCount/story.kids.length*100));
-				if (commentsCount === story.kids.length && allowCommentsInsert) {
-					$$(page.container).find('.story-comments .messages').html(T7.templates.commentsTemplate(comments));
-				}
+					$$(page.container).find('.preloader-progress').text(Math.floor(commentsCount/story.kids.length*100));
+					if (commentsCount === story.kids.length && allowCommentsInsert) {
+						$$(page.container).find('.story-comments .messages').html(T7.templates.commentsTemplate(comments));
+					}
+				});
 			});
-		});
+		} else {
+			$$(page.container).find('.story-comments .messages').html('<div class="preloader-label">No comment</div>');
+		}
 	});
 	app.onPageBack('item', function () {
 		allowCommentsInsert = false;

@@ -33,7 +33,8 @@
 	function getStories(refresh) {
 		var results = refresh ? [] : JSON.parse(window.localStorage.getItem('stories')) || [];
 		if (results.length === 0) {		
-			if (!refresh) app.showIndicator();
+			if (!refresh) app.showPreloader('Loading top stories : <span class="preloader-progress">0</span> %');
+			var storiesCount = 0;
 			hnapi.topStories(function (data) {
 				data = JSON.parse(data);
 				data.forEach(function(id) {
@@ -41,8 +42,10 @@
 						data = JSON.parse(data);
 						data.domain = data.url.split('/')[2];
 						results.push(data);
+						storiesCount++;
+						$$('.page[data-page="index"]').find('.preloader-progress').text(Math.floor(storiesCount/100*100));
 						if (results.length === 100) {
-							if (!refresh) app.hideIndicator();
+							if (!refresh) app.hidePreloader();
 							// Update local storage data
 							window.localStorage.setItem('stories', JSON.stringify(results));
 							// PTR Done

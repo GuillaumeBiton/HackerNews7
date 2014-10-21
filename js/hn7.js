@@ -70,7 +70,8 @@
 	
 	// Update stories on PTR
 	$$('.pull-to-refresh-content').on('refresh', function () {
-		getStories(true);
+      $$('.refresh-link.refresh-home').addClass('refreshing');
+      getStories(true);
 	});
 	$$('.refresh-link.refresh-home').on('click', function () {
       var clicked = $$(this);

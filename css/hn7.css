@@ -132,3 +132,21 @@ a {
 .story-comments .message pre {
     white-space: normal;
 }
+.icon-refresh {
+  background: url(../img/icon-reload.png) no-repeat center;
+  width: 25px;
+  height: 25px;
+  background-size: 25px auto;
+}
+.refresh-link .preloader {
+  vertical-align: middle;
+  width: 25px;
+  height: 25px;
+  display: none;
+}
+.refresh-link.refreshing .preloader {
+  display: block;
+}
+.refresh-link.refreshing .icon-refresh {
+  display: none;
+}

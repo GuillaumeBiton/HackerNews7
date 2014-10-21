@@ -50,6 +50,8 @@
 							window.localStorage.setItem('stories', JSON.stringify(results));
 							// PTR Done
 							app.pullToRefreshDone();
+							// reset .refresh-icon if necessary
+							$$('.refresh-link.refresh-home').removeClass('refreshing');
 							// Clear searchbar
 							$$('.searchbar-input input')[0].value = '';
 							// Update T7 data and render home page stories
@@ -70,7 +72,13 @@
 	$$('.pull-to-refresh-content').on('refresh', function () {
 		getStories(true);
 	});
-
+	$$('.refresh-link.refresh-home').on('click', function () {
+		var clicked = $$(this);
+    if (clicked.hasClass('refreshing')) return;
+    clicked.addClass('refreshing');
+		getStories(true);
+	});
+	
 	// Comments
 	var allowCommentsInsert;
 	app.onPageAfterAnimation('item', function (page) {

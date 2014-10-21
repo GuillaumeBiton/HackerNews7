@@ -41,7 +41,6 @@
 					hnapi.item(id, function(data) {
 						data = JSON.parse(data);
 						data.domain = (data.url) ? data.url.split('/')[2] : '';
-                        console.log(data.domain);
 						results.push(data);
 						storiesCount++;
 						$$('.preloader-progress').text(Math.floor(storiesCount/100*100));

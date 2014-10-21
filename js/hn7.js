@@ -40,7 +40,8 @@
 				data.forEach(function(id) {
 					hnapi.item(id, function(data) {
 						data = JSON.parse(data);
-						data.domain = data.url.split('/')[2];
+						data.domain = (data.url) ? data.url.split('/')[2] : '';
+                        console.log(data.domain);
 						results.push(data);
 						storiesCount++;
 						$$('.preloader-progress').text(Math.floor(storiesCount/100*100));
@@ -73,10 +74,10 @@
 		getStories(true);
 	});
 	$$('.refresh-link.refresh-home').on('click', function () {
-		var clicked = $$(this);
-    if (clicked.hasClass('refreshing')) return;
-    clicked.addClass('refreshing');
-		getStories(true);
+      var clicked = $$(this);
+      if (clicked.hasClass('refreshing')) return;
+      clicked.addClass('refreshing');
+      getStories(true);
 	});
 	
 	// Comments

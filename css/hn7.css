@@ -138,21 +138,6 @@ a {
   height: 25px;
   background-size: 25px auto;
 }
-/*
-.refresh-link .preloader {
-  vertical-align: middle;
-  width: 25px;
-  height: 25px;
-  display: none;
-}
-.refresh-link.refreshing .preloader {
-  display: block;
-}
-.refresh-link.refreshing .icon-refresh {
-  display: block;
-}
-*/
-
 .refresh-link.refreshing .icon-refresh {
     -webkit-animation-name: rotate; 
     -webkit-animation-duration: 1s; 

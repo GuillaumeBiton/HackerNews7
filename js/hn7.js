@@ -43,7 +43,7 @@
 						data.domain = data.url.split('/')[2];
 						results.push(data);
 						storiesCount++;
-						$$('.page[data-page="index"]').find('.preloader-progress').text(Math.floor(storiesCount/100*100));
+						$$('.preloader-progress').text(Math.floor(storiesCount/100*100));
 						if (results.length === 100) {
 							if (!refresh) app.hidePreloader();
 							// Update local storage data

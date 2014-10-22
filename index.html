@@ -61,8 +61,9 @@
 		<script type="text/template7" id="storiesTemplate">
 			<ul>
 			{{#each this}}
-				<li>
-					<a href="item.html" data-contextName="stories.{{@index}}" class="item-content item-link">
+				<li class="swipeout">
+					<div class="swipeout-content item-content">
+					<a href="item.html" data-contextName="stories.{{@index}}" class="item-link">
 						<div class="item-inner">
 							<div class="item-title-row">
 								<div class="item-title">{{title}}</div>
@@ -72,6 +73,10 @@
 							<div class="item-text">{{score}} points by {{by}} {{time_ago time}}</div>
 						</div>
 					</a>
+					</div>
+					<div class="swipeout-actions-left">
+        		<a href="{{url}}" target="_blank" class="external"><i class="icon icon-watch"></i></a>
+      		</div>
 				</li>
 			{{/each}}
 			</ul>

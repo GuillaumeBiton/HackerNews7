@@ -37,11 +37,11 @@
 			var storiesCount = 0;
 			hnapi.topStories(function (data) {
 				data = JSON.parse(data);
-				data.forEach(function(id) {
+				data.forEach(function(id, index) {
 					hnapi.item(id, function(data) {
 						data = JSON.parse(data);
 						data.domain = (data.url) ? data.url.split('/')[2] : '';
-						results.push(data);
+						results[index] = data;
 						storiesCount++;
 						$$('.preloader-progress').text(Math.floor(storiesCount/100*100));
 						if (results.length === 100) {

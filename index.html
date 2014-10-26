@@ -62,21 +62,21 @@
 			<ul>
 			{{#each this}}
 				<li class="swipeout">
-					<div class="swipeout-content item-content">
-					<a href="item.html" data-contextName="stories.{{@index}}" class="item-link">
-						<div class="item-inner">
-							<div class="item-title-row">
-								<div class="item-title">{{title}}</div>
-								<div class="item-after"><span class="badge">{{array_length kids}}</span></div>
+					<div class="swipeout-content">
+						<a href="item.html" data-contextName="stories.{{@index}}" class="item-link item-content">
+							<div class="item-inner">
+								<div class="item-title-row">
+									<div class="item-title">{{title}}</div>
+									<div class="item-after"><span class="badge">{{array_length kids}}</span></div>
+								</div>
+								<div class="item-subtitle">{{domain}}</div>
+								<div class="item-text">{{score}} points by {{by}} {{time_ago time}}</div>
 							</div>
-							<div class="item-subtitle">{{domain}}</div>
-							<div class="item-text">{{score}} points by {{by}} {{time_ago time}}</div>
-						</div>
-					</a>
+						</a>
 					</div>
 					<div class="swipeout-actions-left">
-        		<a href="{{url}}" target="_blank" class="external"><i class="icon icon-watch"></i></a>
-      		</div>
+		        		<a href="{{url}}" target="_blank" class="external"><i class="icon icon-watch"></i></a>
+		      		</div>
 				</li>
 			{{/each}}
 			</ul>

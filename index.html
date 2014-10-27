@@ -11,8 +11,8 @@
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
 	
 	<title>HackerNews7</title>
-	
-	<link rel="stylesheet" href="bower_components/framework7/dist/css/framework7.min.css">
+
+	<link rel="stylesheet" href="bower_components/framework7/dist/css/framework7.css">
 	<link rel="stylesheet" href="css/hn7.css">
 	</head>
 	<body>
@@ -66,17 +66,22 @@
 		<script type="text/template7" id="storiesTemplate">
 			<ul>
 			{{#each this}}
-				<li>
-					<a href="item.html" data-contextName="stories.{{@index}}" class="item-content item-link">
-						<div class="item-inner">
-							<div class="item-title-row">
-								<div class="item-title">{{title}}</div>
-								<div class="item-after"><span class="badge">{{array_length kids}}</span></div>
+				<li class="swipeout">
+					<div class="swipeout-content">
+						<a href="item.html" data-contextName="stories.{{@index}}" class="item-link item-content">
+							<div class="item-inner">
+								<div class="item-title-row">
+									<div class="item-title">{{title}}</div>
+									<div class="item-after"><span class="badge">{{array_length kids}}</span></div>
+								</div>
+								<div class="item-subtitle">{{domain}}</div>
+								<div class="item-text">{{score}} points by {{by}} {{time_ago time}}</div>
 							</div>
-							<div class="item-subtitle">{{domain}}</div>
-							<div class="item-text">{{score}} points by {{by}} {{time_ago time}}</div>
-						</div>
-					</a>
+						</a>
+					</div>
+					<div class="swipeout-actions-left">
+		        		<a href="{{url}}" target="_blank" class="external"><i class="icon icon-watch"></i></a>
+		      		</div>
 				</li>
 			{{/each}}
 			</ul>
@@ -93,7 +98,7 @@
 		
 		<!-- libraries -->
 		<script src="bower_components/moment/min/moment.min.js"></script>
-		<script src="bower_components/framework7/dist/js/framework7.min.js"></script>
+		<script src="bower_components/framework7/dist/js/framework7.js"></script>
 		<script src="js/hnapi.js"></script>
 		<script src="js/hn7.js"></script>
 	</body>

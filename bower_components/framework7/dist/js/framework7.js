@@ -10,7 +10,7 @@
  *
  * Licensed under MIT
  *
- * Released on: October 7, 2014
+ * Released on: October 26, 2014
 */
 (function () {
 
@@ -24,7 +24,7 @@
         var app = this;
     
         // Version
-        app.version = '0.9.6';
+        app.version = '0.9.7';
     
         // Default Parameters
         app.params = {
@@ -54,19 +54,22 @@
             swipeBackPage: true,
             swipeBackPageThreshold: 0,
             swipeBackPageActiveArea: 30,
-            swipeBackPageBoxShadow: true,
+            swipeBackPageAnimateShadow: true,
+            swipeBackPageAnimateOpacity: true,
             // Ajax
             ajaxLinks: undefined, // or CSS selector
             // External Links
-            externalLinks: ['external'], // array of CSS class selectors and/or rel attributes
+            externalLinks: '.external', // CSS selector
             // Sortable
             sortable: true,
             // Scroll toolbars
             hideNavbarOnPageScroll: false,
             hideToolbarOnPageScroll: false,
+            hideTabbarOnPageScroll: false,
             showBarsOnPageScrollEnd: true,
             // Swipeout
             swipeout: true,
+            swipeoutActionsNoFold: false,
             swipeoutNoFollow: false,
             // Smart Select Back link template
             smartSelectBackTemplate: '<div class="left sliding"><a href="#" class="back link"><i class="icon icon-back"></i><span>{{backText}}</span></a></div>',
@@ -107,7 +110,7 @@
             animatePages: true,
             // Template7
             templates: {},
-            templatesData: {},
+            template7Data: {},
             template7Pages: false,
             precompileTemplates: false,
             // Auto init
@@ -160,7 +163,8 @@
                 uniqueHistory: app.params.uniqueHistory,
                 uniqueHistoryIgnoreGetParameters: app.params.uniqueHistoryIgnoreGetParameters,
                 swipeBackPage: app.params.swipeBackPage,
-                swipeBackPageBoxShadow: app.params.swipeBackPageBoxShadow,
+                swipeBackPageAnimateShadow: app.params.swipeBackPageAnimateShadow,
+                swipeBackPageAnimateOpacity: app.params.swipeBackPageAnimateOpacity,
                 swipeBackPageActiveArea: app.params.swipeBackPageActiveArea,
                 swipeBackPageThreshold: app.params.swipeBackPageThreshold,
                 animatePages: app.params.animatePages,
@@ -382,10 +386,10 @@
                 }
         
                 activePage.transform('translate3d(' + activePageTranslate + 'px,0,0)');
-                if (view.params.swipeBackPageBoxShadow && app.device.os !== 'android') activePage[0].style.boxShadow = '0px 0px 12px rgba(0,0,0,' + (0.5 - 0.5 * percentage) + ')';
+                if (view.params.swipeBackPageAnimateShadow && app.device.os !== 'android') activePage[0].style.boxShadow = '0px 0px 12px rgba(0,0,0,' + (0.5 - 0.5 * percentage) + ')';
         
                 previousPage.transform('translate3d(' + previousPageTranslate + 'px,0,0)');
-                previousPage[0].style.opacity = 0.9 + 0.1 * percentage;
+                if (view.params.swipeBackPageAnimateOpacity) previousPage[0].style.opacity = 0.9 + 0.1 * percentage;
         
                 // Dynamic Navbars Animation
                 if (dynamicNavbar) {
@@ -618,16 +622,16 @@
         
             // Bars methods
             view.hideNavbar = function () {
-                return app.hideNavbar(container);
+                return app.hideNavbar(container.find('.navbar'));
             };
             view.showNavbar = function () {
-                return app.showNavbar(container);
+                return app.showNavbar(container.find('.navbar'));
             };
             view.hideToolbar = function () {
-                return app.hideToolbar(container);
+                return app.hideToolbar(container.find('.toolbar'));
             };
             view.showToolbar = function () {
-                return app.showToolbar(container);
+                return app.showToolbar(container.find('.toolbar'));
             };
         
             // Push State on load
@@ -775,25 +779,25 @@
                 
             });
         };
-        app.hideNavbar = function (viewContainer) {
-            $(viewContainer).addClass('hidden-navbar');
+        app.hideNavbar = function (navbarContainer) {
+            $(navbarContainer).addClass('navbar-hidden');
             return true;
         };
-        app.showNavbar = function (viewContainer) {
-            var vc = $(viewContainer);
-            vc.addClass('hiding-navbar').removeClass('hidden-navbar').find('.navbar').transitionEnd(function () {
-                vc.removeClass('hiding-navbar');
+        app.showNavbar = function (navbarContainer) {
+            var navbar = $(navbarContainer);
+            navbar.addClass('navbar-hiding').removeClass('navbar-hidden').transitionEnd(function () {
+                navbar.removeClass('navbar-hiding');
             });
             return true;
         };
-        app.hideToolbar = function (viewContainer) {
-            $(viewContainer).addClass('hidden-toolbar');
+        app.hideToolbar = function (toolbarContainer) {
+            $(toolbarContainer).addClass('toolbar-hidden');
             return true;
         };
-        app.showToolbar = function (viewContainer) {
-            var vc = $(viewContainer);
-            vc.addClass('hiding-toolbar').removeClass('hidden-toolbar').find('.toolbar').transitionEnd(function () {
-                vc.removeClass('hiding-toolbar');
+        app.showToolbar = function (toolbarContainer) {
+            var toolbar = $(toolbarContainer);
+            toolbar.addClass('toolbar-hiding').removeClass('toolbar-hidden').transitionEnd(function () {
+                toolbar.removeClass('toolbar-hiding');
             });
         };
         
@@ -1228,18 +1232,20 @@
         };
         
         // On Page Init Callback
-        app.pageInitCallback = function (view, pageContainer, url, position, navbarInnerContainer) {
+        app.pageInitCallback = function (view, params) {
+            var pageContainer = params.pageContainer;
             if (pageContainer.f7PageInitialized && !view.params.domCache) return;
         
             // Page Data
             var pageData = {
                 container: pageContainer,
-                url: url,
-                query: $.parseUrlQuery(url || ''),
+                url: params.url,
+                query: $.parseUrlQuery(params.url || ''),
                 name: $(pageContainer).attr('data-page'),
                 view: view,
-                from: position,
-                navbarInnerContainer: navbarInnerContainer
+                from: params.position,
+                context: params.context,
+                navbarInnerContainer: params.navbarInnerContainer
             };
         
             if (pageContainer.f7PageInitialized && view.params.domCache) {
@@ -1282,6 +1288,8 @@
                 container: pageContainer,
                 name: $(pageContainer).attr('data-page'),
                 view: view,
+                url: pageContainer.f7PageData && pageContainer.f7PageData.url,
+                query: pageContainer.f7PageData && pageContainer.f7PageData.query,
                 from: position
             };
             // Before Init Callback
@@ -1301,6 +1309,7 @@
                 query: pageContainer.f7PageData && pageContainer.f7PageData.query,
                 view: view,
                 from: params.position,
+                context: params.context,
                 swipeBack: params.swipeBack
             };
         
@@ -1327,6 +1336,7 @@
                 name: $(params.pageContainer).attr('data-page'),
                 view: view,
                 from: params.position,
+                context: params.context,
                 swipeBack: params.swipeBack
             };
             var oldPage = params.oldPage,
@@ -1363,6 +1373,19 @@
                 if (!newPage.hasClass('no-toolbar') && (oldPage.hasClass('no-toolbar') || oldPage.hasClass('no-toolbar-by-scroll'))) {
                     view.showToolbar();
                 }
+                // Hide/show tabbar
+                var tabBar;
+                if (newPage.hasClass('no-tabbar') && !oldPage.hasClass('no-tabbar')) {
+                    tabBar = $(view.container).find('.tabbar');
+                    if (tabBar.length === 0) tabBar = $(view.container).parents('.' + app.params.viewsClass).find('.tabbar');
+                    app.hideToolbar(tabBar);
+                }
+                if (!newPage.hasClass('no-tabbar') && (oldPage.hasClass('no-tabbar') || oldPage.hasClass('no-tabbar-by-scroll'))) {
+                    tabBar = $(view.container).find('.tabbar');
+                    if (tabBar.length === 0) tabBar = $(view.container).parents('.' + app.params.viewsClass).find('.tabbar');
+                    app.showToolbar(tabBar);
+                }
+        
                 oldPage.removeClass('no-navbar-by-scroll no-toolbar-by-scroll');
                 // Callbacks
                 app.pluginHook('pageBeforeAnimation', pageData);
@@ -1600,7 +1623,7 @@
                     }
                     if (!t7_ctx) t7_ctx = {};
                 }
-                
+        
                 if (t7_template && t7_ctx) {
                     if (typeof t7_ctx === 'function') t7_ctx = t7_ctx();
                     if (url) {
@@ -1614,7 +1637,7 @@
                     t7_rendered_content = t7_template(t7_ctx);
                 }
         
-                return t7_rendered_content;
+                return {content: t7_rendered_content, context: t7_ctx};
             }
         };
         
@@ -1624,7 +1647,7 @@
             
             var url = options.url,
                 content = options.content, //initial content
-                t7_rendered_content = options.content, // will be rendered using Template7
+                t7_rendered = {content: options.content},
                 template = options.template, // Template 7 compiled template
                 pageName = options.pageName,
                 viewContainer = $(view.container), 
@@ -1641,9 +1664,9 @@
         
             // Render with Template7
             if (app.params.template7Pages && typeof content === 'string' || template) {
-                t7_rendered_content = app.router.template7Render(view, options);
-                if (t7_rendered_content && !content) {
-                    content = t7_rendered_content;
+                t7_rendered = app.router.template7Render(view, options);
+                if (t7_rendered.content && !content) {
+                    content = t7_rendered.content;
                 }
             }
         
@@ -1652,7 +1675,7 @@
             // Parse DOM
             if (!pageName) {
                 if (url || (typeof content === 'string')) {
-                    app.router.temporaryDom.innerHTML = t7_rendered_content;
+                    app.router.temporaryDom.innerHTML = t7_rendered.content;
                 } else {
                     if ('length' in content && content.length > 1) {
                         for (var ci = 0; ci < content.length; ci++) {
@@ -1850,7 +1873,13 @@
             }
         
             // Page Init Events
-            app.pageInitCallback(view, newPage[0], url, options.reload ? reloadPosition : 'right', dynamicNavbar ? newNavbarInner[0] : undefined);
+            app.pageInitCallback(view, {
+                pageContainer: newPage[0], 
+                url: url, 
+                position: options.reload ? reloadPosition : 'right', 
+                navbarInnerContainer: dynamicNavbar ? newNavbarInner[0] : undefined, 
+                context: t7_rendered.context
+            });
         
             // Navbar init event
             if (dynamicNavbar) {
@@ -1870,7 +1899,7 @@
             var clientLeft = newPage[0].clientLeft;
         
             // Before Anim Callback
-            app.pageAnimCallbacks('before', view, {pageContainer: newPage[0], url: url, position: 'right', oldPage: oldPage, newPage: newPage});
+            app.pageAnimCallbacks('before', view, {pageContainer: newPage[0], url: url, position: 'right', oldPage: oldPage, newPage: newPage, context: t7_rendered.context});
         
             function afterAnimation() {
                 view.allowPageChange = true;
@@ -1880,7 +1909,7 @@
                     newNavbarInner.removeClass('navbar-from-right-to-center navbar-on-right').addClass('navbar-on-center');
                     oldNavbarInner.removeClass('navbar-from-center-to-left navbar-on-center').addClass('navbar-on-left');
                 }
-                app.pageAnimCallbacks('after', view, {pageContainer: newPage[0], url: url, position: 'right', oldPage: oldPage, newPage: newPage});
+                app.pageAnimCallbacks('after', view, {pageContainer: newPage[0], url: url, position: 'right', oldPage: oldPage, newPage: newPage, context: t7_rendered.context});
                 if (app.params.pushState) app.pushStateClearQueue();
                 if (!(view.params.swipeBackPage || view.params.preloadPreviousPage)) {
                     if (view.params.domCache) {
@@ -1965,7 +1994,7 @@
             options = options || {};
             var url = options.url,
                 content = options.content, 
-                t7_rendered_content = options.content, // will be rendered using Template7
+                t7_rendered = {content: options.content}, // will be rendered using Template7
                 template = options.template, // Template 7 compiled template
                 animatePages = options.animatePages, 
                 preloadOnly = options.preloadOnly, 
@@ -1985,9 +2014,9 @@
         
             // Render with Template7
             if (app.params.template7Pages && typeof content === 'string' || template) {
-                t7_rendered_content = app.router.template7Render(view, options);
-                if (t7_rendered_content && !content) {
-                    content = t7_rendered_content;
+                t7_rendered = app.router.template7Render(view, options);
+                if (t7_rendered.content && !content) {
+                    content = t7_rendered.content;
                 }
             }
         
@@ -2001,14 +2030,14 @@
         
             // Animation
             function afterAnimation() {
-                app.pageBackCallbacks('after', view, {pageContainer: oldPage[0], url: url, position: 'center', oldPage: oldPage, newPage: newPage});
-                app.pageAnimCallbacks('after', view, {pageContainer: newPage[0], url: url, position: 'left', oldPage: oldPage, newPage: newPage});
+                app.pageBackCallbacks('after', view, {pageContainer: oldPage[0], url: url, position: 'center', oldPage: oldPage, newPage: newPage, context: t7_rendered.context});
+                app.pageAnimCallbacks('after', view, {pageContainer: newPage[0], url: url, position: 'left', oldPage: oldPage, newPage: newPage, context: t7_rendered.context});
                 app.router.afterBack(view, oldPage[0], newPage[0]);
             }
             function animateBack() {
                 // Page before animation callback
-                app.pageBackCallbacks('before', view, {pageContainer: oldPage[0], url: url, position: 'center', oldPage: oldPage, newPage: newPage});
-                app.pageAnimCallbacks('before', view, {pageContainer: newPage[0], url: url, position: 'left', oldPage: oldPage, newPage: newPage});
+                app.pageBackCallbacks('before', view, {pageContainer: oldPage[0], url: url, position: 'center', oldPage: oldPage, newPage: newPage, context: t7_rendered.context});
+                app.pageAnimCallbacks('before', view, {pageContainer: newPage[0], url: url, position: 'left', oldPage: oldPage, newPage: newPage, context: t7_rendered.context});
         
                 if (animatePages) {
                     // Set pages before animation
@@ -2035,7 +2064,7 @@
                 app.router.temporaryDom.innerHTML = '';
                 // Parse DOM
                 if (url || (typeof content === 'string')) {
-                    app.router.temporaryDom.innerHTML = t7_rendered_content;
+                    app.router.temporaryDom.innerHTML = t7_rendered.content;
                 } else {
                     if ('length' in content && content.length > 1) {
                         for (var ci = 0; ci < content.length; ci++) {
@@ -2058,7 +2087,7 @@
                     view.allowPageChange = true;
                     return;
                 }
-                if (view.params.dynamicNavbar) {
+                if (view.params.dynamicNavbar && typeof dynamicNavbar === 'undefined') {
                     if (!newNavbarInner || newNavbarInner.length === 0) {
                         dynamicNavbar = false;
                     }
@@ -2105,8 +2134,9 @@
         
                 oldPage = $(pagesInView[pagesInView.length - 1]);
                     
-                if (dynamicNavbar) {
+                if (dynamicNavbar && !oldNavbarInner) {
                     oldNavbarInner = $(navbarInners[navbarInners.length - 1]);
+                    if (oldNavbarInner.length === 0 || newNavbarInner[0] === oldNavbarInner[0]) dynamicNavbar = false;
                 }
         
                 if (dynamicNavbar) {
@@ -2117,7 +2147,13 @@
                 if (manipulateDom) newPage.insertBefore(oldPage);
         
                 // Page Init Events
-                app.pageInitCallback(view, newPage[0], url, 'left', dynamicNavbar ? newNavbarInner[0] : undefined);
+                app.pageInitCallback(view, {
+                    pageContainer: newPage[0], 
+                    url: url, 
+                    position: 'left', 
+                    navbarInnerContainer: dynamicNavbar ? newNavbarInner[0] : undefined, 
+                    context: t7_rendered.context
+                });
                 if (dynamicNavbar) {
                     app.navbarInitCallback(view, newPage[0], navbar[0], newNavbarInner[0], url, 'right');
                 }
@@ -2163,6 +2199,9 @@
                     navbarInners = viewContainer.find('.navbar-inner:not(.cached)');
                     newNavbarInner = $(navbarInners[0]);
                     oldNavbarInner = $(navbarInners[1]);
+                    if (newNavbarInner.length === 0 || oldNavbarInner.length === 0 || oldNavbarInner[0] === newNavbarInner[0]) {
+                        dynamicNavbar = false;
+                    }
                 }
                 manipulateDom = false;
                 setPages();
@@ -2367,7 +2406,6 @@
                     var preloadUrl = view.history[view.history.length - 2];
                     var previousPage;
                     var previousNavbar;
-        
                     if (preloadUrl && view.pagesCache[preloadUrl]) {
                         // Load by page name
                         previousPage = $(view.container).find('.page[data-page="' + view.pagesCache[preloadUrl] + '"]');
@@ -2376,6 +2414,7 @@
                             previousNavbar = $(view.container).find('.navbar-inner[data-page="' + view.pagesCache[preloadUrl] + '"]');
                             previousNavbar.insertBefore(newNavbar);
                         }
+                        if(!previousNavbar || previousNavbar.length === 0) previousNavbar = newNavbar.prev('.navbar-inner.cached');
                     }
                     else {
                         // Just load previous page
@@ -2614,6 +2653,7 @@
                             var buttonClass = button.label ? 'actions-modal-label' : 'actions-modal-button';
                             if (button.bold) buttonClass += ' actions-modal-button-bold';
                             if (button.color) buttonClass += ' color-' + button.color;
+                            if (button.bg) buttonClass += ' bg-' + button.bg;
                             buttonsHTML += '<span class="' + buttonClass + '">' + button.text + '</span>';
                             if (j === params[i].length - 1) buttonsHTML += '</div>';
                         }
@@ -3193,6 +3233,7 @@
                         (props.name ? '<div class="message-name">' + props.name + '</div>' : '') +
                         '<div class="message-text">' + props.text + '</div>' +
                         (props.avatar ? '<div class="message-avatar" style="background-image:url(' + props.avatar + ')"></div>' : '') +
+                        (props.label ? '<div class="message-label">' + props.label + '</div>' : '') +
                     '</div>';
             if (newOnTop) messages.prepend(html);
             else messages.append(html);
@@ -3266,7 +3307,7 @@
         app.swipeoutOpenedEl = undefined;
         app.allowSwipeout = true;
         app.initSwipeout = function (swipeoutEl) {
-            var isTouched, isMoved, isScrolling, touchesStart = {}, touchStartTime, touchesDiff, swipeOutEl, swipeOutContent, actionsRight, actionsLeft, actionsLeftWidth, actionsRightWidth, translate, opened, openedActions, buttonsLeft, buttonsRight, direction, overswipeLeftButton, overswipeRightButton, overswipeLeft, overswipeRight;
+            var isTouched, isMoved, isScrolling, touchesStart = {}, touchStartTime, touchesDiff, swipeOutEl, swipeOutContent, actionsRight, actionsLeft, actionsLeftWidth, actionsRightWidth, translate, opened, openedActions, buttonsLeft, buttonsRight, direction, overswipeLeftButton, overswipeRightButton, overswipeLeft, overswipeRight, noFoldLeft, noFoldRight;
             $(document).on(app.touchEvents.start, function (e) {
                 if (app.swipeoutOpenedEl) {
                     var target = $(e.target);
@@ -3281,7 +3322,6 @@
                     }
                 }
             });
-            
         
             function handleTouchStart(e) {
                 if (!app.allowSwipeout) return;
@@ -3312,6 +3352,8 @@
                     actionsRight = swipeOutEl.find('.swipeout-actions-right');
                     actionsLeft = swipeOutEl.find('.swipeout-actions-left');
                     actionsLeftWidth = actionsRightWidth = buttonsLeft = buttonsRight = overswipeRightButton = overswipeLeftButton = null;
+                    noFoldLeft = actionsLeft.hasClass('swipeout-actions-no-fold') || app.params.swipeoutActionsNoFold;
+                    noFoldRight = actionsRight.hasClass('swipeout-actions-no-fold') || app.params.swipeoutActionsNoFold;
                     if (actionsLeft.length > 0) {
                         actionsLeftWidth = actionsLeft.width();
                         buttonsLeft = actionsLeft.children('a');
@@ -3393,7 +3435,6 @@
                         if (overswipeRightButton.length > 0) {
                             overswipeRight = true;
                         }
-        
                     }
                     for (i = 0; i < buttonsRight.length; i++) {
                         if (typeof buttonsRight[i]._buttonOffset === 'undefined') {
@@ -3425,7 +3466,10 @@
                         if (overswipeLeftButton.length > 0 && $button.hasClass('swipeout-overswipe')) {
                             $button.css({left: (overswipeLeft ? buttonOffset : 0) + 'px'});
                         }
-                        $button.css('z-index', buttonsLeft.length - i).transform('translate3d(' + (translate + buttonOffset * (1 - Math.min(progress, 1))) + 'px,0,0)');
+                        if (buttonsLeft.length > 1) {
+                            $button.css('z-index', buttonsLeft.length - i); 
+                        }
+                        $button.transform('translate3d(' + (translate + buttonOffset * (1 - Math.min(progress, 1))) + 'px,0,0)');
                     }
                 }
                 swipeOutContent.transform('translate3d(' + translate + 'px,0,0)');
@@ -3436,11 +3480,13 @@
                     isMoved = false;
                     return;
                 }
+        
                 isTouched = false;
                 isMoved = false;
                 var timeDiff = (new Date()).getTime() - touchStartTime;
-                var action, actionsWidth, actions, buttons, i;
+                var action, actionsWidth, actions, buttons, i, noFold;
                 
+                noFold = direction === 'to-left' ? noFoldRight : noFoldLeft;
                 actions = direction === 'to-left' ? actionsRight : actionsLeft;
                 actionsWidth = direction === 'to-left' ? actionsRightWidth : actionsLeftWidth;
         
@@ -3542,6 +3588,7 @@
             }
             var swipeOutActions = el.find('.swipeout-actions-' + dir);
             if (swipeOutActions.length === 0) return;
+            var noFold = swipeOutActions.hasClass('swipeout-actions-no-fold') || app.params.swipeoutActionsNoFold;
             el.trigger('open').addClass('swipeout-opened').removeClass('transitioning');
             swipeOutActions.addClass('swipeout-actions-opened');
             var buttons = swipeOutActions.children('a');
@@ -3559,10 +3606,9 @@
                 }
                 var clientLeft = buttons[1].clientLeft;
             }
-            
             el.addClass('transitioning');
             for (i = 0; i < buttons.length; i++) {
-                $(buttons[i]).transform('translate3d(' + (translate) + 'px,0,0');
+                $(buttons[i]).transform('translate3d(' + (translate) + 'px,0,0)');
             }
             el.find('.swipeout-content').transform('translate3d(' + translate + 'px,0,0)').transitionEnd(function () {
                 el.trigger('opened');
@@ -3575,12 +3621,12 @@
             if (!el.hasClass('swipeout-opened')) return;
             var dir = el.find('.swipeout-actions-opened').hasClass('swipeout-actions-right') ? 'right' : 'left';
             var swipeOutActions = el.find('.swipeout-actions-opened').removeClass('swipeout-actions-opened');
+            var noFold = swipeOutActions.hasClass('swipeout-actions-no-fold') || app.params.swipeoutActionsNoFold;
             var buttons = swipeOutActions.children('a');
             var swipeOutActionsWidth = swipeOutActions.width();
             app.allowSwipeout = false;
             el.trigger('close');
             el.removeClass('swipeout-opened').addClass('transitioning');
-        
             el.find('.swipeout-content').transform('translate3d(' + 0 + 'px,0,0)').transitionEnd(function () {
                 el.trigger('closed');
                 buttons.transform('');
@@ -4176,29 +4222,44 @@
             if (scrollContent.length === 0) return;
             var hideNavbar = app.params.hideNavbarOnPageScroll || scrollContent.hasClass('hide-navbar-on-scroll') || scrollContent.hasClass('hide-bars-on-scroll');
             var hideToolbar = app.params.hideToolbarOnPageScroll || scrollContent.hasClass('hide-toolbar-on-scroll') || scrollContent.hasClass('hide-bars-on-scroll');
-            if (!(hideNavbar || hideToolbar)) return;
+            var hideTabbar = app.params.hideTabbarOnPageScroll || scrollContent.hasClass('hide-tabbar-on-scroll');
+        
+            if (!(hideNavbar || hideToolbar || hideTabbar)) return;
             
             var viewContainer = scrollContent.parents('.' + app.params.viewClass);
             if (viewContainer.length === 0) return;
         
-            var hasNavbar = viewContainer.find('.navbar').length > 0;
-            var hasToolbar = viewContainer.find('.toolbar').length > 0;
+            var navbar = viewContainer.find('.navbar'), 
+                toolbar = viewContainer.find('.toolbar'), 
+                tabbar;
+            if (hideTabbar) {
+                tabbar = viewContainer.find('.tabbar');
+                if (tabbar.length === 0) tabbar = viewContainer.parents('.' + app.params.viewsClass).find('.tabbar');
+            }
+        
+            var hasNavbar = navbar.length > 0,
+                hasToolbar = toolbar.length > 0,
+                hasTabbar = tabbar && tabbar.length > 0;
         
             var previousScroll, currentScroll;
                 previousScroll = currentScroll = scrollContent[0].scrollTop;
         
-            var scrollHeight, offsetHeight, reachEnd, action, navbarHidden, toolbarHidden;
+            var scrollHeight, offsetHeight, reachEnd, action, navbarHidden, toolbarHidden, tabbarHidden;
         
-            var toolbarHeight = (hasToolbar && hideToolbar) ? viewContainer.find('.toolbar')[0].offsetHeight : 0;
+            var toolbarHeight = (hasToolbar && hideToolbar) ? toolbar[0].offsetHeight : 0;
+            var tabbarHeight = (hasTabbar && hideTabbar) ? tabbar[0].offsetHeight : 0;
+            var bottomBarHeight = tabbarHeight || toolbarHeight;
         
             function handleScroll(e) {
                 if (pageContainer.hasClass('page-on-left')) return;
                 currentScroll = scrollContent[0].scrollTop;
                 scrollHeight = scrollContent[0].scrollHeight;
                 offsetHeight = scrollContent[0].offsetHeight;
-                reachEnd = app.params.showBarsOnPageScrollEnd && (currentScroll + offsetHeight >= scrollHeight - toolbarHeight);
-                navbarHidden = viewContainer.hasClass('hidden-navbar');
-                toolbarHidden = viewContainer.hasClass('hidden-toolbar');
+                reachEnd = app.params.showBarsOnPageScrollEnd && (currentScroll + offsetHeight >= scrollHeight - bottomBarHeight);
+                navbarHidden = navbar.hasClass('navbar-hidden');
+                toolbarHidden = toolbar.hasClass('toolbar-hidden');
+                tabbarHidden = tabbar && tabbar.hasClass('toolbar-hidden');
+        
         
                 if (previousScroll > currentScroll || reachEnd) {
                     action = 'show';
@@ -4214,26 +4275,36 @@
         
                 if (action === 'show') {
                     if (hasNavbar && hideNavbar && navbarHidden) {
-                        app.showNavbar(viewContainer);
+                        app.showNavbar(navbar);
                         pageContainer.removeClass('no-navbar-by-scroll'); 
                         navbarHidden = false;
                     }
                     if (hasToolbar && hideToolbar && toolbarHidden) {
-                        app.showToolbar(viewContainer);
+                        app.showToolbar(toolbar);
                         pageContainer.removeClass('no-toolbar-by-scroll'); 
                         toolbarHidden = false;
+                    }
+                    if (hasTabbar && hideTabbar && tabbarHidden) {
+                        app.showToolbar(tabbar);
+                        pageContainer.removeClass('no-tabbar-by-scroll'); 
+                        tabbarHidden = false;
                     }
                 }
                 else {
                     if (hasNavbar && hideNavbar && !navbarHidden) {
-                        app.hideNavbar(viewContainer);
+                        app.hideNavbar(navbar);
                         pageContainer.addClass('no-navbar-by-scroll'); 
                         navbarHidden = true;
                     }
                     if (hasToolbar && hideToolbar && !toolbarHidden) {
-                        app.hideToolbar(viewContainer);
+                        app.hideToolbar(toolbar);
                         pageContainer.addClass('no-toolbar-by-scroll'); 
                         toolbarHidden = true;
+                    }
+                    if (hasTabbar && hideTabbar && !tabbarHidden) {
+                        app.hideToolbar(tabbar);
+                        pageContainer.addClass('no-tabbar-by-scroll'); 
+                        tabbarHidden = true;
                     }
                 }
                     
@@ -4709,16 +4780,7 @@
                 }
                 // Check if link is external 
                 if (isLink) {
-                    /*jshint shadow:true */
-                    for (var i = 0; i < app.params.externalLinks.length; i++) {
-                        if (clicked.hasClass(app.params.externalLinks[i])) {
-                            return;
-                        }
-        
-                        if (clicked[0].rel === app.params.externalLinks[i]) {
-                            return;
-                        }
-                    }
+                    if (clicked.is(app.params.externalLinks)) return;
                 }
         
                 // Smart Select
@@ -5667,9 +5729,14 @@
                     s.wrapper.transitionEnd(function () {
                         s.startAutoplay();
                     });
-                    var index = s.activeSlideIndex + 1;
-                    if (index > s.slides.length - s.params.slidesPerView) index = 0;
-                    s.slideTo(index);
+                    if (s.params.loop) {
+                        s.slideNext();
+                    }
+                    else {
+                        var index = s.activeSlideIndex + 1;
+                        if (index > s.slides.length - s.params.slidesPerView) index = 0;
+                        s.slideTo(index);
+                    }
                 }, s.params.autoplay);
             };
             s.stopAutoplay = function () {
@@ -6655,7 +6722,7 @@
                 if (viewContainer) {
                     viewContainer.attr('data-page', pageContainer.attr('data-page') || undefined);
                 }
-                app.pageInitCallback(view, this, url, 'center');
+                app.pageInitCallback(view, {pageContainer: this, url: url, position: 'center'});
             });
             
             // Init resize events

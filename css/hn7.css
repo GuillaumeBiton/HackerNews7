@@ -138,6 +138,12 @@ a {
   height: 25px;
   background-size: 25px auto;
 }
+.icon-watch {
+  background: url(../img/icon-watch.png) no-repeat center;
+  width: 25px;
+  height: 25px;
+  background-size: 25px auto;
+}
 .refresh-link.refreshing .icon-refresh {
     -webkit-animation-name: rotate; 
     -webkit-animation-duration: 1s; 

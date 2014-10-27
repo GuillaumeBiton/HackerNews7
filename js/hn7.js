@@ -19,8 +19,13 @@
 		template7Pages: true
 	});
 	
-	// Add View
+	// Add Main View
 	var mainView = app.addView('.view-main', {
+		dynamicNavbar: true
+	});
+	
+	// Add Left View
+	var leftView = app.addView('.view-left', {
 		dynamicNavbar: true
 	});
 	
@@ -116,9 +121,22 @@
 	$$(document).on('click', '.message a', function (e) {
 		window.open($$(this).attr('href'));
 	});
+	
+	// check history on large screen
+	$$(document).on('pageInit', function (e) {
+		(mainView.history.length < 2) ? app.openPanel('left') : app.closePanel();
+	});
+
+	$$(document).on('pageBeforeAnimation', function (e) {
+		(mainView.history.length - 1 < 2) ? app.openPanel('left') : app.closePanel();
+		leftView.params.animatePages = (mainView.history.length - 1 < 2) ? false : true;
+	});
 
 	// Get and parse stories on app load
 	getStories();
+	
+	// on start check if we need to open index
+	(mainView.history.length < 2) ? app.openPanel('left') : app.closePanel();
 	
 	// Export app to global
 	window.app = app;

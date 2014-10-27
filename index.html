@@ -21,42 +21,58 @@
 		
 		<!-- views -->
 		<div class="views">
+			<!-- Put panels-overlay and left-panel with view inside of views-->
+      <!-- Panels overlay-->
+      <div class="panel-overlay"></div>
+      <!-- Left panel with reveal effect-->
+      <div class="panel panel-left panel-cover">
+        <!-- Left view-->
+        <div class="view view-left navbar-through">
+          <div class="navbar theme-white">
+            <div class="navbar-inner">
+							<div class="left"><a href="#" class="link icon-only refresh-link refresh-home"><i class="icon icon-refresh"></i></a></div>
+							<div class="center sliding">HackerNews7</div>
+						</div>
+          </div>
+          <div class="pages">
+            <div class="page" data-page="index">
+							<!-- Search bar -->
+							<form class="searchbar" data-search-list=".list-block-search" data-search-in=".item-title" data-searchbar-found=".searchbar-found" data-searchbar-not-found=".searchbar-not-found">
+									<div class="searchbar-input">
+											<input type="search" placeholder="Search">
+											<a href="#" class="searchbar-clear"></a>
+									</div>
+									<a href="#" class="searchbar-cancel">Cancel</a>
+							</form>
+							<div class="page-content pull-to-refresh-content">
+								<div class="pull-to-refresh-layer">
+									<div class="preloader"></div>
+									<div class="pull-to-refresh-arrow"></div>
+								</div>
+
+								<!-- Search bar overlay-->
+								<div class="searchbar-overlay"></div>
+
+								<!-- no result -->
+								<div class="content-block searchbar-not-found">
+									Nothing found
+								</div>
+
+								<div class="list-block media-list stories-list list-block-search searchbar-found">
+								</div>
+							</div>
+						</div>
+          </div>
+        </div>
+      </div>
 			<!-- main view -->
 			<div class="view view-main navbar-through">
 				<div class="navbar theme-white">
 					<div class="navbar-inner">
-						<div class="left"><a href="#" class="link icon-only refresh-link refresh-home"><i class="icon icon-refresh"></i></a></div>
-						<div class="center sliding">HackerNews7</div>
 					</div>
 				</div>
 				<div class="pages">
-					
-					<div class="page" data-page="index">
-						<!-- Search bar -->
-						<form class="searchbar" data-search-list=".list-block-search" data-search-in=".item-title" data-searchbar-found=".searchbar-found" data-searchbar-not-found=".searchbar-not-found">
-								<div class="searchbar-input">
-										<input type="search" placeholder="Search">
-										<a href="#" class="searchbar-clear"></a>
-								</div>
-								<a href="#" class="searchbar-cancel">Cancel</a>
-						</form>
-						<div class="page-content pull-to-refresh-content">
-							<div class="pull-to-refresh-layer">
-								<div class="preloader"></div>
-								<div class="pull-to-refresh-arrow"></div>
-							</div>
-							
-							<!-- Search bar overlay-->
-							<div class="searchbar-overlay"></div>
-			
-             	<!-- no result -->
-              <div class="content-block searchbar-not-found">
-                Nothing found
-			        </div>
- 
-							<div class="list-block media-list stories-list list-block-search searchbar-found">
-							</div>
-						</div>
+					<div class="page" data-page="main">
 					</div>
 				</div>
 			</div>
@@ -67,7 +83,7 @@
 			<ul>
 			{{#each this}}
 				<li>
-					<a href="item.html" data-contextName="stories.{{@index}}" class="item-content item-link">
+					<a href="item.html" data-contextName="stories.{{@index}}" data-view=".view-main" class="item-content item-link">
 						<div class="item-inner">
 							<div class="item-title-row">
 								<div class="item-title">{{title}}</div>

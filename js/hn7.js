@@ -12,22 +12,68 @@
 	// Init App
 	var app = new Framework7({
 		modalTitle: 'HackerNews7',
-		
 		animateNavBackIcon: true,
-		
 		precompileTemplates: true,
 		template7Pages: true
 	});
-	
-	// Add Main View
+
+	// Add Right/Main View
 	var mainView = app.addView('.view-main', {
-		dynamicNavbar: true
+		dynamicNavbar: true,
+		animatePages: false,
+		swipeBackPage: false,
+		preloadPreviousPage: false
 	});
-	
+
 	// Add Left View
 	var leftView = app.addView('.view-left', {
-		dynamicNavbar: true
+		dynamicNavbar: true,
 	});
+
+	var splitView;
+	function checkSplitView() {
+		var activeStoryLink;
+		if ($$(window).width()<767) {
+			delete leftView.params.linksView;
+			if (splitView) {
+				// Need to check main view history and load same page into left view
+				activeStoryLink = $$('.stories-list a.item-link.active-story');
+				if (mainView.history.length > 1 && activeStoryLink.length > 0) {
+					leftView.router.load({
+						animatePages: false,
+						url: activeStoryLink.attr('href'),
+						contextName: activeStoryLink.attr('data-contextName')
+					});
+				}
+			}
+			splitView = false;
+		}
+		else {
+			if (!splitView) {
+				// Need to check left view history and go back
+				if (leftView.history.length === 2) {
+					leftView.router.back({animatePages: false});
+					activeStoryLink = $$('.stories-list a.item-link.active-story');
+					// Need to load same page in main view on the right
+					mainView.router.load({
+						url: activeStoryLink.attr('href'),
+						contextName: activeStoryLink.attr('data-contextName'),
+					});
+				}
+			}
+			splitView = true;
+			leftView.params.linksView = '.view-main';
+		}
+	}
+	$$(window).resize(checkSplitView);
+	checkSplitView();
+
+	// Add active class for left view links and close panel
+	$$(document).on('click', '.view-left .stories-list a.item-link', function (e) {
+		$$('.stories-list a.item-link.active-story').removeClass('active-story');
+		$$(this).addClass('active-story');
+		if (splitView) app.closePanel();
+	}, true);
 	
 	// Update data
 	function updateStories(stories) {
@@ -75,14 +121,14 @@
 	
 	// Update stories on PTR
 	$$('.pull-to-refresh-content').on('refresh', function () {
-      $$('.refresh-link.refresh-home').addClass('refreshing');
-      getStories(true);
+		$$('.refresh-link.refresh-home').addClass('refreshing');
+		getStories(true);
 	});
 	$$('.refresh-link.refresh-home').on('click', function () {
-      var clicked = $$(this);
-      if (clicked.hasClass('refreshing')) return;
-      clicked.addClass('refreshing');
-      getStories(true);
+		var clicked = $$(this);
+		if (clicked.hasClass('refreshing')) return;
+		clicked.addClass('refreshing');
+		getStories(true);
 	});
 	
 	// Comments
@@ -122,21 +168,9 @@
 		window.open($$(this).attr('href'));
 	});
 	
-	// check history on large screen
-	$$(document).on('pageInit', function (e) {
-		(mainView.history.length < 2) ? app.openPanel('left') : app.closePanel();
-	});
-
-	$$(document).on('pageBeforeAnimation', function (e) {
-		(mainView.history.length - 1 < 2) ? app.openPanel('left') : app.closePanel();
-		leftView.params.animatePages = (mainView.history.length - 1 < 2) ? false : true;
-	});
 
 	// Get and parse stories on app load
 	getStories();
-	
-	// on start check if we need to open index
-	(mainView.history.length < 2) ? app.openPanel('left') : app.closePanel();
 	
 	// Export app to global
 	window.app = app;

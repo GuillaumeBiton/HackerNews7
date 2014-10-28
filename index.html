@@ -28,10 +28,13 @@
 	      	<div class="panel panel-left panel-cover">
 		        <!-- Left view-->
 		        <div class="view view-left navbar-through">
-		          <div class="navbar theme-white">
-		            <div class="navbar-inner">
-						<div class="left"><a href="#" class="link icon-only refresh-link refresh-home"><i class="icon icon-refresh"></i></a></div>
-							<div class="center sliding">HackerNews7</div>
+		            <div class="navbar theme-white">
+			            <div class="navbar-inner">
+							<div class="left"><a href="#" class="link icon-only refresh-link refresh-home"><i class="icon icon-refresh"></i></a></div>
+							<div class="center sliding">
+								<span class="mobile-title">HackerNews7</span>
+								<span class="tablet-title">Top Stories</span>
+							</div>
 						</div>
 		          	</div>
 		          	<div class="pages">
@@ -68,10 +71,19 @@
 			<div class="view view-main navbar-through">
 				<div class="navbar theme-white">
 					<div class="navbar-inner">
+						<div class="left">
+							<a href="#" class="link open-panel icon-only">
+								<i class="icon icon-bars"></i>
+							</a>
+						</div>
+						<div class="center">HackerNews7</div>
 					</div>
 				</div>
 				<div class="pages">
 					<div class="page" data-page="main">
+						<div class="choose-story">
+							<a href="#" class="open-panel">Choose Story</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -82,7 +94,7 @@
 			<ul>
 			{{#each this}}
 				<li>
-					<a href="item.html" data-contextName="stories.{{@index}}" class="item-content item-link">
+					<a href="item.html?id={{id}}" data-contextName="stories.{{@index}}" class="item-content item-link">
 						<div class="item-inner">
 							<div class="item-title-row">
 								<div class="item-title">{{title}}</div>

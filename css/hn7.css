@@ -173,3 +173,112 @@ a {
     from {transform: rotate(0deg);}
     to {transform: rotate(360deg);}
 }
+
+/* This will fix flicker navbar in left panel view */
+.panel-left .navbar {
+    -webkit-transform:translate3d(0,0,0);
+}
+
+/* Because we have panels-overlay inside of .views we need to fix its open position for right panel */
+body.with-panel-right-reveal .panel-overlay {
+    margin-left: 0;
+}
+html.with-statusbar-overlay body .panel {
+    padding-top: 0;
+}
+.navbar .left a + a {
+    margin-left: 0;
+}
+.view-left .navbar .left .open-panel {
+    display: none;
+}
+.choose-story {
+    display: none;
+}
+@media (max-width:767px) {
+    .navbar .left .open-panel {
+        display: none;
+    }
+    .view-main {
+        display: none;
+    }
+    .panel.panel-left.panel-cover {
+        display: block;
+        left: 0%;
+        width: 100%;
+        -webkit-transition: 0ms;
+        transition: 0ms;
+    }
+    body.with-panel-left-cover .panel-left {
+        -webkit-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+        transform: translate3d(0%, 0, 0);
+        -webkit-transition: 0ms;
+        transition: 0ms;
+    }
+    .view-left .tablet-title {
+        display: none;
+    }
+}
+@media (min-width: 768px) {
+    .panel.panel-left.panel-cover {
+        box-shadow: 1px 0px 0px rgba(0,0,0,0.2);
+        width: 320px;
+    }
+    .stories-list a.active-story {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    .view-main .navbar .back {
+        display: none;
+    }
+    .view-left .mobile-title {
+        display: none;
+    }
+    .view-left .tablet-title {
+        display: block;
+    }
+}
+@media (min-width:768px) and (max-width: 1023px) {
+    body.with-panel-left-cover .panel-left {
+        -webkit-transform: translate3d(100%, 0, 0);
+        -ms-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
+    }
+    .panel.panel-left.panel-cover {
+        left: -320px;
+    }
+    .choose-story {
+        display: block;
+        text-align: center;
+        font-size: 21px;
+        line-height: 30px;
+        font-weight: 300;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        top: 50%;
+        margin-top: -15px;
+        text-align: center;
+    }
+}
+@media (min-width:1024px) {
+    .panel.panel-left.panel-cover {
+        display: block;
+        left: 0%;
+    }
+    body.with-panel-left-cover .panel-left {
+        -webkit-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+        transform: translate3d(0%, 0, 0);
+    }
+    .view-main {
+        float: right;
+        width: -webkit-calc(100% - 320px);
+        width: -moz-calc(100% - 320px);
+        width: -ms-calc(100% - 320px);
+        width: calc(100% - 320px);
+    }
+    .view-main .navbar .open-panel{
+        display: none;
+    }
+}

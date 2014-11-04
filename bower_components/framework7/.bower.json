@@ -5,7 +5,7 @@
     "url": "https://github.com/nolimits4web/Framework7.git"
   },
   "description": "Full Featured HTML Framework For Building iOS 7 Apps",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "author": "Vladimir Kharlampidi",
   "homepage": "http://www.idangero.us/framework7",
   "keywords": [
@@ -45,14 +45,13 @@
     "node_modules",
     "package.json"
   ],
-  "_release": "0.9.7",
+  "_release": "0.9.8",
   "_resolution": {
     "type": "version",
-    "tag": "v0.9.7",
-    "commit": "1c171694650c870bd617da127cc365cb67144022"
+    "tag": "v0.9.8",
+    "commit": "c198b6890e8dd613541ef4064fe03944605f8164"
   },
   "_source": "git://github.com/nolimits4web/Framework7.git",
   "_target": "~0.9.7",
-  "_originalSource": "framework7",
-  "_direct": true
+  "_originalSource": "framework7"
 }

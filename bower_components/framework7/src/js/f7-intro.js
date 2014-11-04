@@ -8,7 +8,7 @@ window.Framework7 = function (params) {
     var app = this;
 
     // Version
-    app.version = '0.9.6';
+    app.version = '0.9.8';
 
     // Default Parameters
     app.params = {
@@ -38,19 +38,22 @@ window.Framework7 = function (params) {
         swipeBackPage: true,
         swipeBackPageThreshold: 0,
         swipeBackPageActiveArea: 30,
-        swipeBackPageBoxShadow: true,
+        swipeBackPageAnimateShadow: true,
+        swipeBackPageAnimateOpacity: true,
         // Ajax
         ajaxLinks: undefined, // or CSS selector
         // External Links
-        externalLinks: ['external'], // array of CSS class selectors and/or rel attributes
+        externalLinks: '.external', // CSS selector
         // Sortable
         sortable: true,
         // Scroll toolbars
         hideNavbarOnPageScroll: false,
         hideToolbarOnPageScroll: false,
+        hideTabbarOnPageScroll: false,
         showBarsOnPageScrollEnd: true,
         // Swipeout
         swipeout: true,
+        swipeoutActionsNoFold: false,
         swipeoutNoFollow: false,
         // Smart Select Back link template
         smartSelectBackTemplate: '<div class="left sliding"><a href="#" class="back link"><i class="icon icon-back"></i><span>{{backText}}</span></a></div>',
@@ -91,7 +94,7 @@ window.Framework7 = function (params) {
         animatePages: true,
         // Template7
         templates: {},
-        templatesData: {},
+        template7Data: {},
         template7Pages: false,
         precompileTemplates: false,
         // Auto init

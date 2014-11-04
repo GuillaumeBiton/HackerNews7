@@ -10,7 +10,7 @@
  *
  * Licensed under MIT
  *
- * Released on: October 26, 2014
+ * Released on: November 2, 2014
 */
 html,
 body {
@@ -1965,6 +1965,7 @@ html.retina.ios-gt-7 .item-link.list-button {
 .list-block input[type="url"],
 .list-block input[type="date"],
 .list-block input[type="datetime-local"],
+.list-block input[type="time"],
 .list-block input[type="number"],
 .list-block select,
 .list-block textarea {

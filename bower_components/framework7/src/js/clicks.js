@@ -16,16 +16,7 @@ app.initClickEvents = function () {
         }
         // Check if link is external 
         if (isLink) {
-            /*jshint shadow:true */
-            for (var i = 0; i < app.params.externalLinks.length; i++) {
-                if (clicked.hasClass(app.params.externalLinks[i])) {
-                    return;
-                }
-
-                if (clicked[0].rel === app.params.externalLinks[i]) {
-                    return;
-                }
-            }
+            if (clicked.is(app.params.externalLinks)) return;
         }
 
         // Smart Select
@@ -168,7 +159,8 @@ app.initClickEvents = function () {
             else {
                 view = clicked.parents('.' + app.params.viewClass)[0] && clicked.parents('.' + app.params.viewClass)[0].f7View;
                 if (view && view.params.linksView) {
-                    view = $(view.params.linksView)[0].f7View;
+                    if (typeof view.params.linksView === 'string') view = $(view.params.linksView)[0].f7View;
+                    else if (view.params.linksView instanceof View) view = view.params.linksView;
                 }
             }
             if (!view) {

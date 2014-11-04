@@ -14,7 +14,8 @@
 		modalTitle: 'HackerNews7',
 		animateNavBackIcon: true,
 		precompileTemplates: true,
-		template7Pages: true
+		template7Pages: true, 
+		router: true
 	});
 
 	// Add Right/Main View

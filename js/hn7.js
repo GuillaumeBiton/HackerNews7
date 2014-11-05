@@ -184,7 +184,7 @@
 				commentsCount ++;
 				
 				if (commentsCount === replies.length) {
-					$$(element).html(T7.templates.repliesTemplate(comments));
+					$$(element).parent().html(T7.templates.repliesTemplate(comments));
 				}
 			});
 		});
@@ -192,6 +192,7 @@
 	$$(document).on('click', '.message.message-sent', function (e) {
 		var replies = this.dataset.context.split(',');
 		getReplies(replies, this);
+		console.log(this);
 	});
 
 	// Get and parse stories on app load

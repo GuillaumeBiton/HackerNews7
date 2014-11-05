@@ -120,8 +120,10 @@
 					<div class="message-text">{{text}}</div>
 				</div>
 				{{#if kids}}
-					<div class="message message-sent message-with-tail message-last" data-context="{{kids}}">
-						<div class="message-text">show {{pluralize kids,"reply||replies"}}</div>
+					<div class="message-kids">
+						<div class="message message-sent message-with-tail message-last" data-context="{{kids}}">
+							<div class="message-text">show {{pluralize kids,"reply||replies"}}</div>
+						</div>
 					</div>
 				{{/if}}
 			{{/each}}
@@ -132,6 +134,13 @@
 					<div class="message-name"><span class="comment-name">{{by}}</span> <span class="comment-time">{{time_ago time}}</span></div>
 					<div class="message-text">{{text}}</div>
 				</div>
+				{{#if kids}}
+					<div class="message-kids">
+						<div class="message message-sent .message-kids message-with-tail message-last" data-context="{{kids}}">
+							<div class="message-text">show {{pluralize kids,"reply||replies"}}</div>
+						</div>
+				</div>
+				{{/if}}
 			{{/each}}
 		</script>
 		

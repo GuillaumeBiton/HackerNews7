@@ -10,7 +10,7 @@
 	});
 	T7.registerHelper('pluralize', function (arr, string) {
 		var options = string.split('||');
-		return (arr.length === 1) ? options[0] : options[1];
+		return (arr.length === 1) ? options[0] : arr.length + " " + options[1];
 	});
 	
 	// Init App

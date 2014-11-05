@@ -119,6 +119,19 @@
 					<div class="message-name"><span class="comment-name">{{by}}</span> <span class="comment-time">{{time_ago time}}</span></div>
 					<div class="message-text">{{text}}</div>
 				</div>
+				{{#if kids}}
+					<div class="message message-sent message-with-tail message-last" data-context="{{kids}}">
+						<div class="message-text">{{array_length kids}} {{pluralize kids,"reply||replies"}}</div>
+					</div>
+				{{/if}}
+			{{/each}}
+		</script>
+		<script type="text/template7" id="repliesTemplate">
+			{{#each this}}
+				<div class="message message-sent message-with-tail message-last">
+					<div class="message-name"><span class="comment-name">{{by}}</span> <span class="comment-time">{{time_ago time}}</span></div>
+					<div class="message-text">{{text}}</div>
+				</div>
 			{{/each}}
 		</script>
 		

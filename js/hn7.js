@@ -8,6 +8,10 @@
 	T7.registerHelper('array_length', function (arr) {
 		return arr ? arr.length : 0;
 	});
+	T7.registerHelper('pluralize', function (arr, string) {
+		var options = string.split('||');
+		return (arr.length === 1) ? options[0] : options[1];
+	});
 	
 	// Init App
 	var app = new Framework7({
@@ -169,6 +173,26 @@
 		window.open($$(this).attr('href'));
 	});
 	
+	// Replies
+	function getReplies(replies, element) {
+		var comments = [];
+		var commentsCount = 0;
+		replies.forEach(function(reply) {
+			hnapi.item(reply, function(data) {
+				var comment = JSON.parse(data);
+				if (comment.text && comment.text.length && !comment.deleted) comments.push(comment);
+				commentsCount ++;
+				
+				if (commentsCount === replies.length) {
+					$$(element).html(T7.templates.repliesTemplate(comments));
+				}
+			});
+		});
+	}
+	$$(document).on('click', '.message.message-sent', function (e) {
+		var replies = this.dataset.context.split(',');
+		getReplies(replies, this);
+	});
 
 	// Get and parse stories on app load
 	getStories();

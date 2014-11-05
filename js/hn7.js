@@ -136,7 +136,7 @@
 	var allowCommentsInsert;
 	app.onPageAfterAnimation('item', function (page) {
 		allowCommentsInsert = true;
-		var id = $$(page.container).attr('data-story-id');
+		var id = page.context.id;
 		var comments = [];
 		var story;
 		for (var i = 0; i < app.template7Data.stories.length; i++) {

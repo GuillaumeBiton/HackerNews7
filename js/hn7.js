@@ -8,9 +8,8 @@
 	T7.registerHelper('array_length', function (arr) {
 		return arr ? arr.length : 0;
 	});
-	T7.registerHelper('pluralize', function (arr, string) {
-		var options = string.split('||');
-		return (arr.length === 1) ? options[0] : arr.length + " " + options[1];
+	T7.registerHelper('pluralize', function (arr, options) {
+		return (arr.length === 1) ? options.hash.single : arr.length + " " + options.hash.multiple;
 	});
 	
 	// Init App

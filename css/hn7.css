@@ -101,7 +101,7 @@ a {
 .story-comments .messages {
     padding-bottom: 20px;
 }
-.story-comments .preloader {
+.story-comments .messages > .preloader {
     position: absolute;
     width: 32px;
     height: 32px;
@@ -137,6 +137,46 @@ a {
 }
 .story-comments .message-sent .message-text a{
     color:#555;
+}
+.story-comments .message-kids {
+    margin: 0 15px 0 20px;
+}
+.story-comments .message-kids > a, .story-comments .message-kids > .preloader {
+    margin-left: 12px;
+    position: relative;
+    top: -2px;
+    display: inline-block;
+}
+.story-comments .message-kids > a {
+    font-size: 12px;
+    margin-bottom: 10px;
+    height: 16px;
+}
+.story-comments .message-kids > .preloader {
+    width: 16px;
+    height: 16px;
+    margin-bottom: 7px;
+}
+.story-comments .message-kids > a i {
+    border: 1px solid #ff6600;
+    width: 15px;
+    height: 12px;
+    display: inline-block;
+    position: relative;
+    border-radius: 10px;
+    vertical-align: top;
+}
+.story-comments .message-kids > a i:before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 50%;
+    margin-left: -5px;
+    bottom: -3px;
+    border-left: 0px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 3px solid #ff6600;
 }
 .story-comments .message pre {
     white-space: normal;

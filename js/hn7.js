@@ -17,7 +17,8 @@
 		modalTitle: 'HackerNews7',
 		animateNavBackIcon: true,
 		precompileTemplates: true,
-		template7Pages: true, 
+		template7Pages: true,
+		externalLinks: 'a.external, .message a',
 		router: true
 	});
 
@@ -163,7 +164,7 @@
 				});
 			});
 		} else {
-			$$(page.container).find('.story-comments .messages').html('<div class="preloader-label">No comment</div>');
+			$$(page.container).find('.story-comments .messages').html('<div class="preloader-label">No comments</div>');
 		}
 	}
 	app.onPageInit('item', function (page) {
@@ -176,12 +177,15 @@
 		allowCommentsInsert = false;
 	});
 	$$(document).on('click', '.message a', function (e) {
+		e.preventDefault();
 		window.open($$(this).attr('href'));
 	});
 	
 	// Replies
 	function getReplies(replies, element) {
 		var comments = [];
+		var parent = $$(element).parent();
+		parent.html('<div class="preloader"></div>');
 		var commentsCount = 0;
 		replies.forEach(function(reply) {
 			hnapi.item(reply, function(data) {
@@ -190,15 +194,14 @@
 				commentsCount ++;
 				
 				if (commentsCount === replies.length) {
-					$$(element).parent().html(T7.templates.repliesTemplate(comments));
+					parent.html(T7.templates.repliesTemplate(comments));
 				}
 			});
 		});
 	}
-	$$(document).on('click', '.message.message-sent', function (e) {
+	$$(document).on('click', '.message-kids > a', function (e) {
 		var replies = this.dataset.context.split(',');
 		getReplies(replies, this);
-		console.log(this);
 	});
 
 	// Get and parse stories on app load

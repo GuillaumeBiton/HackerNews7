@@ -119,27 +119,24 @@
 					<div class="message-name"><span class="comment-name">{{by}}</span> <span class="comment-time">{{time_ago time}}</span></div>
 					<div class="message-text">{{text}}</div>
 				</div>
+
 				{{#if kids}}
 					<div class="message-kids">
-						<div class="message message-sent message-with-tail message-last" data-context="{{kids}}">
-							<div class="message-text">show {{pluralize kids single="reply" multiple="replies"}}</div>
-						</div>
+						<a href="#" data-context="{{kids}}"><i></i> show {{pluralize kids single="reply" multiple="replies"}}</a>
 					</div>
 				{{/if}}
 			{{/each}}
 		</script>
 		<script type="text/template7" id="repliesTemplate">
 			{{#each this}}
-				<div class="message message-sent message-with-tail message-last">
+				<div class="message message-received message-with-tail message-last">
 					<div class="message-name"><span class="comment-name">{{by}}</span> <span class="comment-time">{{time_ago time}}</span></div>
 					<div class="message-text">{{text}}</div>
 				</div>
 				{{#if kids}}
 					<div class="message-kids">
-						<div class="message message-sent .message-kids message-with-tail message-last" data-context="{{kids}}">
-							<div class="message-text">show {{pluralize kids single="reply" multiple="replies"}}</div>
-						</div>
-				</div>
+						<a href="#" data-context="{{kids}}"><i></i> show {{pluralize kids single="reply" multiple="replies"}}</a>
+					</div>
 				{{/if}}
 			{{/each}}
 		</script>

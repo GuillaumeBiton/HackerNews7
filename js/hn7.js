@@ -26,6 +26,7 @@
 		dynamicNavbar: true,
 		animatePages: false,
 		swipeBackPage: false,
+		reloadPages: true,
 		preloadPreviousPage: false
 	});
 
@@ -137,7 +138,7 @@
 	
 	// Comments
 	var allowCommentsInsert;
-	app.onPageAfterAnimation('item', function (page) {
+	function getComments(page) {
 		allowCommentsInsert = true;
 		var id = page.context.id;
 		var comments = [];
@@ -164,6 +165,12 @@
 		} else {
 			$$(page.container).find('.story-comments .messages').html('<div class="preloader-label">No comment</div>');
 		}
+	}
+	app.onPageInit('item', function (page) {
+		if (page.view === mainView) getComments(page);
+	});
+	app.onPageAfterAnimation('item', function (page) {
+		if (page.view === leftView) getComments(page);
 	});
 	app.onPageBack('item', function () {
 		allowCommentsInsert = false;

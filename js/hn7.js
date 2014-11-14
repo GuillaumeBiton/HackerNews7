@@ -151,14 +151,15 @@
 		}
 		var commentsCount = 0;
 		if(story.kids) {
-			story.kids.forEach(function (child) {
+			story.kids.forEach(function (child, index) {
 				hnapi.item(child, function(data) {
 					var comment = JSON.parse(data);
-					if (comment.text && comment.text.length && !comment.deleted) comments.push(comment);
+					if (comment.text && comment.text.length && !comment.deleted) comments[index] = comment;
 					commentsCount ++;
 
 					$$(page.container).find('.preloader-progress').text(Math.floor(commentsCount/story.kids.length*100));
 					if (commentsCount === story.kids.length && allowCommentsInsert) {
+						comments = comments.filter(function(n){return n != undefined});
 						$$(page.container).find('.story-comments .messages').html(T7.templates.commentsTemplate(comments));
 					}
 				});
@@ -187,13 +188,14 @@
 		var parent = $$(element).parent();
 		parent.html('<div class="preloader"></div>');
 		var commentsCount = 0;
-		replies.forEach(function(reply) {
+		replies.forEach(function(reply, index) {
 			hnapi.item(reply, function(data) {
 				var comment = JSON.parse(data);
-				if (comment.text && comment.text.length && !comment.deleted) comments.push(comment);
+				if (comment.text && comment.text.length && !comment.deleted) comments[index] = comment;
 				commentsCount ++;
 				
 				if (commentsCount === replies.length) {
+					comments = comments.filter(function(n){return n != undefined});
 					parent.html(T7.templates.repliesTemplate(comments));
 				}
 			});

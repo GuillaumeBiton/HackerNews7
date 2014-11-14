@@ -1,42 +1,43 @@
 {
-  "name": "HackerNews7",
-  "version": "0.0.1",
-  "description": "Framework7 HackerNews web app",
-  "main": "index.html",
-  "repository": {
-    "type": "git",
-    "url": "https://guillaumebiton.github.com/HackerNews7.git"
-  },
-  "keywords": [
+	"name": "HackerNews7",
+	"version": "0.0.1",
+	"description": "Framework7 HackerNews web app",
+	"main": "index.html",
+	"repository": {
+		"type": "git",
+		"url": "https://guillaumebiton.github.com/HackerNews7.git"
+	},
+	"keywords": [
     "Hackernews",
     "Framework7",
     "webapp",
     "html5"
   ],
-  "author": "guillaumebiton <guillaume.biton@free.fr>",
-  "license": [
+	"author": "guillaumebiton <guillaume.biton@free.fr>",
+	"license": [
     "MIT"
   ],
-  "bugs": {
-    "url": "https://guillaumebiton.github.com/HackerNews7/issues"
-  },
-  "homepage": "https://guillaumebiton.github.com/HackerNews7",
-  "engines": {
-    "node": ">= 0.10.0"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.5",
-    "load-grunt-tasks": "~0.6.0",
-    "grunt-contrib-connect": "~0.8.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-open": "~0.2.3"
-  },
+	"bugs": {
+		"url": "https://guillaumebiton.github.com/HackerNews7/issues"
+	},
+	"homepage": "https://guillaumebiton.github.com/HackerNews7",
+	"engines": {
+		"node": ">= 0.10.0"
+	},
+	"devDependencies": {
+		"grunt": "~0.4.5",
+		"load-grunt-tasks": "~0.6.0",
+		"grunt-contrib-connect": "~0.8.0",
+		"grunt-contrib-watch": "~0.6.1",
+		"grunt-open": "~0.2.3"
+	},
 	"window": {
 		"icon": "apple-touch-icon.png",
 		"toolbar": false,
-    "frame": true,
-    "width": 1024,
-    "height": 600,
-    "resizable": true
+		"frame": true,
+		"width": 1024,
+		"height": 600,
+		"min-width": 320,
+		"resizable": true
 	}
 }

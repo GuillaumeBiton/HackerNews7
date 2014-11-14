@@ -30,5 +30,13 @@
     "grunt-contrib-connect": "~0.8.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-open": "~0.2.3"
-  }
+  },
+	"window": {
+		"icon": "apple-touch-icon.png",
+		"toolbar": false,
+    "frame": true,
+    "width": 1024,
+    "height": 600,
+    "resizable": true
+	}
 }

@@ -143,6 +143,7 @@
 		
 		<!-- libraries -->
 		<script src="bower_components/moment/min/moment.min.js"></script>
+		<script> window.moment = (typeof moment !== 'undefined') ? moment : require('moment');</script>
 		<script src="bower_components/framework7/dist/js/framework7.js"></script>
 		<script src="js/hnapi.js"></script>
 		<script src="js/hn7.js"></script>

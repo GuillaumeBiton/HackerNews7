@@ -1,6 +1,6 @@
 /*global require */
 
-(function (gulp, connect, NWBuilder, open, del) {
+(function (gulp, connect, NWBuilder, open, del, deploy) {
 	'use strict';
 	
 	var paths = {
@@ -49,6 +49,11 @@
 		return nw.build();
 	});
 	
+	gulp.task('deploy', function () {
+		return gulp.src('./www/**/*')
+			.pipe(deploy());
+	});
+	
 	gulp.task('default', [ 'watch', 'dependencies', 'html', 'server', 'open' ]);
 	
-}(require('gulp'), require('gulp-connect'), require('node-webkit-builder'), require('gulp-open'), require('del')));
+}(require('gulp'), require('gulp-connect'), require('node-webkit-builder'), require('gulp-open'), require('del'), require('gulp-gh-pages')));

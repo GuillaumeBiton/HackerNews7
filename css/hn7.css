@@ -181,6 +181,9 @@ a {
 .message-kids {
 	text-align: right;
 }
+.message-kids .message {
+	text-align: left;
+}
 .story-comments .message pre {
 	white-space: normal;
 }

@@ -1,4 +1,5 @@
-/*global require */
+/*jslint node: true */
+/*global */
 
 (function (gulp, connect, NWBuilder, open, del, deploy) {
 	'use strict';

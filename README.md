@@ -11,6 +11,8 @@ It is based on the [Official Hacker News API](https://github.com/HackerNews/API)
 
 Some of my work here are inspired by the work of Lim Chee Aun ([cheeaun](https://github.com/cheeaun)) and is project [hackerweb](https://github.com/cheeaun/hackerweb)
 
+This app is *multi-platform*. You can use it throw your web browser on your smartphone, tablet or desktop because it's responsive. You can also create a desktop app with [node-webkit](https://github.com/rogerwang/node-webkit).
+
 License
 -------
 

@@ -43,7 +43,7 @@
 	gulp.task('build', [ 'html' ], function () {
 		var nw = new NWBuilder({
 			files: paths.build + '/**',
-			macIcns: 'nw.icns',
+			macIcns: paths.build + '/img/nw.icns',
 			platforms: [ 'osx' ]
 		});
 		

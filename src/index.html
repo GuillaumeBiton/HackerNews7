@@ -94,97 +94,53 @@
 
 	<!-- template7 templates -->
 	<script type="text/template7" id="storiesTemplate">
-		< ul > {
-			{#
-				each this
-			}
-		} < li class = "swipeout" >
-			< div class = "swipeout-content" >
-			< a href = "item.html?id={{id}}"
-		data - contextName = "stories.{{@index}}"
-		class = "item-content item-link" >
-			< div class = "item-inner" >
-			< div class = "item-title-row" >
-			< div class = "item-title" > {
-				{
-					title
-				}
-		} < /div>
-								<div class="item-after"><span class="badge">{{array_length kids}}</span > < /div>
-                        </div >
-			< div class = "item-subtitle" > {
-				{
-					domain
-				}
-		} < /div>
-				        <div class="item-text">{{score}} points by {{by}} {{time_ago time}}</div >
-			< /div>
-				    </a >
-			< /div>
-					<div class="swipeout-actions-left">
-		        		<a href="{{url}}" target="_blank" class="external"><i class="icon icon-watch"></i > < /a>
-		      		</div >
-			< /li>
-			{{/each
-		}
-		} < /ul>
+		<ul>
+		{{#each this}}
+			<li class="swipeout">
+				<div class="swipeout-content">
+					<a href="item.html?id={{id}}" data-contextName="stories.{{@index}}" class="item-content item-link">
+						<div class="item-inner">
+							<div class="item-title-row">
+								<div class="item-title">{{title}}</div>
+								<div class="item-after"><span class="badge">{{array_length kids}}</span></div>
+                        	</div>
+							<div class="item-subtitle">{{domain}}</div>
+				        	<div class="item-text">{{score}} points by {{by}} {{time_ago time}}</div>
+						</div>
+					</a>
+				</div>
+				<div class="swipeout-actions-left">
+		        	<a href="{{url}}" target="_blank" class="external"><i class="icon icon-watch"></i></a>
+		      	</div >
+			</li>
+		{{/each}}
+		</ul>
 	</script>
 	<script type="text/template7" id="commentsTemplate">
-		{
-			{#
-				each this
-			}
-		} < div class = "message message-received message-with-tail message-last" >
-			< div class = "message-name" > < span class = "comment-name" > {
-				{
-					by
-				}
-		} < /span> <span class="comment-time">{{time_ago time}}</span > < /div>
-					<div class="message-text">{{text}}</div >
-			< /div>
-
-				{{#if kids}}
-					<div class="message-kids">
-						<a href="#" data-context="{{kids}}"><i></i > show {
-				{
-					pluralize kids single = "reply"
-					multiple = "replies"
-				}
-		} < /a>
-					</div > {
-			{
-				/if}}
-			{{/each
-			}
-		}
+		{{#each this}}
+			<div class="message message-received message-with-tail message-last">
+				<div class="message-name"><span class="comment-name">{{by}}</span><span class="comment-time">{{time_ago time}}</span></div>
+				<div class="message-text">{{text}}</div>
+			</div>
+			{{#if kids}}
+			<div class="message-kids">
+				<a href="#" data-context="{{kids}}"><i></i> show {{pluralize kids single="reply" multiple="replies"}}</a>
+			</div>
+			{{/if}}
+		{{/each}}
 	</script>
 	<script type="text/template7" id="repliesTemplate">
-		{
-			{#
-				each this
-			}
-		} < div class = "message message-received message-with-tail message-last" >
-			< div class = "message-name" > < span class = "comment-name" > {
-				{
-					by
-				}
-		} < /span> <span class="comment-time">{{time_ago time}}</span > < /div>
-					<div class="message-text">{{text}}</div >
-			< /div>
-				{{#if kids}}
-					<div class="message-kids">
-						<a href="#" data-context="{{kids}}"><i></i > show {
-				{
-					pluralize kids single = "reply"
-					multiple = "replies"
-				}
-		} < /a>
-					</div > {
-			{
-				/if}}
-			{{/each
-			}
-		}
+		{{#each this}}
+			<div class="message message-received message-with-tail message-last">
+				<div class="message-name"><span class="comment-name">{{by}}</span> <span class="comment-time">{{time_ago time}}</span></div>
+				<div class="message-text">{{text}}</div>
+			</div>
+			{{#if kids}}
+				<div class="message-kids">
+					<a href="#" data-context="{{kids}}"><i></i > show {{pluralize kids single="reply" multiple="replies"}}</a>
+				</div>
+			{{/if}}
+		{{/each}}
 	</script>
 
 	<!-- libraries -->

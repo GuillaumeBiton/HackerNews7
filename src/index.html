@@ -119,7 +119,7 @@
 	<script type="text/template7" id="commentsTemplate">
 		{{#each this}}
 			<div class="message message-received message-with-tail message-last">
-				<div class="message-name"><span class="comment-name">{{by}}</span><span class="comment-time">{{time_ago time}}</span></div>
+				<div class="message-name"><span class="comment-name">{{by}}</span>, <span class="comment-time">{{time_ago time}}</span></div>
 				<div class="message-text">{{text}}</div>
 			</div>
 			{{#if kids}}
@@ -132,12 +132,12 @@
 	<script type="text/template7" id="repliesTemplate">
 		{{#each this}}
 			<div class="message message-received message-with-tail message-last">
-				<div class="message-name"><span class="comment-name">{{by}}</span> <span class="comment-time">{{time_ago time}}</span></div>
+				<div class="message-name"><span class="comment-name">{{by}}</span>, <span class="comment-time">{{time_ago time}}</span></div>
 				<div class="message-text">{{text}}</div>
 			</div>
 			{{#if kids}}
 				<div class="message-kids">
-					<a href="#" data-context="{{kids}}"><i></i > show {{pluralize kids single="reply" multiple="replies"}}</a>
+					<a href="#" data-context="{{kids}}"><i></i> show {{pluralize kids single="reply" multiple="replies"}}</a>
 				</div>
 			{{/if}}
 		{{/each}}

@@ -1,3 +1,5 @@
+/*global Framework7, Dom7, Template7, moment, hnapi */
+
 (function (Framework7, $$, T7, moment, hnapi) {
 	'use strict';
 
@@ -12,8 +14,10 @@
 		return (arr.length === 1) ? options.hash.single : arr.length + " " + options.hash.multiple;
 	});
 	
+	var app, mainView, leftView, splitView, allowCommentsInsert;
+	
 	// Init App
-	var app = new Framework7({
+	app = new Framework7({
 		modalTitle: 'HackerNews7',
 		animateNavBackIcon: true,
 		precompileTemplates: true,
@@ -23,7 +27,7 @@
 	});
 
 	// Add Right/Main View
-	var mainView = app.addView('.view-main', {
+	mainView = app.addView('.view-main', {
 		dynamicNavbar: true,
 		animatePages: false,
 		swipeBackPage: false,
@@ -32,14 +36,13 @@
 	});
 
 	// Add Left View
-	var leftView = app.addView('.view-left', {
-		dynamicNavbar: true,
+	leftView = app.addView('.view-left', {
+		dynamicNavbar: true
 	});
 
-	var splitView;
 	function checkSplitView() {
 		var activeStoryLink;
-		if ($$(window).width()<767) {
+		if ($$(window).width() < 767) {
 			delete leftView.params.linksView;
 			if (splitView) {
 				// Need to check main view history and load same page into left view
@@ -53,8 +56,7 @@
 				}
 			}
 			splitView = false;
-		}
-		else {
+		} else {
 			if (!splitView) {
 				// Need to check left view history and go back
 				if (leftView.history.length === 2) {
@@ -63,7 +65,7 @@
 					// Need to load same page in main view on the right
 					mainView.router.load({
 						url: activeStoryLink.attr('href'),
-						contextName: activeStoryLink.attr('data-contextName'),
+						contextName: activeStoryLink.attr('data-contextName')
 					});
 				}
 			}
@@ -78,7 +80,7 @@
 	$$(document).on('click', '.view-left .stories-list a.item-link', function (e) {
 		$$('.stories-list a.item-link.active-story').removeClass('active-story');
 		$$(this).addClass('active-story');
-		if (splitView) app.closePanel();
+		if (splitView) { app.closePanel(); }
 	}, true);
 	
 	// Update data
@@ -88,21 +90,21 @@
 	}
 	// Fetch Stories
 	function getStories(refresh) {
-		var results = refresh ? [] : JSON.parse(window.localStorage.getItem('stories')) || [];
-		if (results.length === 0) {		
-			if (!refresh) app.showPreloader('Loading top stories : <span class="preloader-progress">0</span> %');
-			var storiesCount = 0;
+		var results = refresh ? [] : JSON.parse(window.localStorage.getItem('stories')) || [],
+			storiesCount = 0;
+		if (results.length === 0) {
+			if (!refresh) { app.showPreloader('Loading top stories : <span class="preloader-progress">0</span> %'); }
 			hnapi.topStories(function (data) {
 				data = JSON.parse(data);
-				data.forEach(function(id, index) {
-					hnapi.item(id, function(data) {
+				data.forEach(function (id, index) {
+					hnapi.item(id, function (data) {
 						data = JSON.parse(data);
 						data.domain = (data.url) ? data.url.split('/')[2] : '';
 						results[index] = data;
-						storiesCount++;
-						$$('.preloader-progress').text(Math.floor(storiesCount/100*100));
+						storiesCount += 1;
+						$$('.preloader-progress').text(Math.floor(storiesCount / 100 * 100));
 						if (results.length === 100) {
-							if (!refresh) app.hidePreloader();
+							if (!refresh) { app.hidePreloader(); }
 							// Update local storage data
 							window.localStorage.setItem('stories', JSON.stringify(results));
 							// PTR Done
@@ -117,8 +119,7 @@
 					});
 				});
 			});
-		}
-		else {
+		} else {
 			// Update T7 data and render home page stories
 			updateStories(results);
 		}
@@ -132,34 +133,34 @@
 	});
 	$$('.refresh-link.refresh-home').on('click', function () {
 		var clicked = $$(this);
-		if (clicked.hasClass('refreshing')) return;
+		if (clicked.hasClass('refreshing')) { return; }
 		clicked.addClass('refreshing');
 		getStories(true);
 	});
 	
 	// Comments
-	var allowCommentsInsert;
 	function getComments(page) {
 		allowCommentsInsert = true;
-		var id = page.context.id;
-		var comments = [];
-		var story;
-		for (var i = 0; i < app.template7Data.stories.length; i++) {
+		var id = page.context.id,
+			comments = [],
+			story,
+			commentsCount = 0,
+			i;
+		for (i = 0; i < app.template7Data.stories.length; i += 1) {
 			if (app.template7Data.stories[i].id === parseInt(id, 10)) {
 				story = app.template7Data.stories[i];
 			}
 		}
-		var commentsCount = 0;
-		if(story.kids) {
+		if (story.kids) {
 			story.kids.forEach(function (child, index) {
-				hnapi.item(child, function(data) {
+				hnapi.item(child, function (data) {
 					var comment = JSON.parse(data);
-					if (comment.text && comment.text.length && !comment.deleted) comments[index] = comment;
-					commentsCount ++;
+					if (comment.text && comment.text.length && !comment.deleted) { comments[index] = comment; }
+					commentsCount += 1;
 
-					$$(page.container).find('.preloader-progress').text(Math.floor(commentsCount/story.kids.length*100));
+					$$(page.container).find('.preloader-progress').text(Math.floor(commentsCount / story.kids.length * 100));
 					if (commentsCount === story.kids.length && allowCommentsInsert) {
-						comments = comments.filter(function(n){return n != undefined});
+						comments = comments.filter(function (n) { return n !== undefined; });
 						$$(page.container).find('.story-comments .messages').html(T7.templates.commentsTemplate(comments));
 					}
 				});
@@ -169,10 +170,10 @@
 		}
 	}
 	app.onPageInit('item', function (page) {
-		if (page.view === mainView) getComments(page);
+		if (page.view === mainView) { getComments(page); }
 	});
 	app.onPageAfterAnimation('item', function (page) {
-		if (page.view === leftView) getComments(page);
+		if (page.view === leftView) { getComments(page); }
 	});
 	app.onPageBack('item', function () {
 		allowCommentsInsert = false;
@@ -184,18 +185,18 @@
 	
 	// Replies
 	function getReplies(replies, element) {
-		var comments = [];
-		var parent = $$(element).parent();
+		var comments = [],
+			parent = $$(element).parent(),
+			commentsCount = 0;
 		parent.html('<div class="preloader"></div>');
-		var commentsCount = 0;
-		replies.forEach(function(reply, index) {
-			hnapi.item(reply, function(data) {
+		replies.forEach(function (reply, index) {
+			hnapi.item(reply, function (data) {
 				var comment = JSON.parse(data);
-				if (comment.text && comment.text.length && !comment.deleted) comments[index] = comment;
-				commentsCount ++;
+				if (comment.text && comment.text.length && !comment.deleted) { comments[index] = comment; }
+				commentsCount += 1;
 				
 				if (commentsCount === replies.length) {
-					comments = comments.filter(function(n){return n != undefined});
+					comments = comments.filter(function (n) { return n !== undefined; });
 					parent.html(T7.templates.repliesTemplate(comments));
 				}
 			});
@@ -206,10 +207,23 @@
 		getReplies(replies, this);
 	});
 
+	$$(document).on('click', '.story-info > a', function (e) {
+		var id = $$('.story-info > a').html();
+		hnapi.user(id, function (data) {
+			var user = JSON.parse(data);
+			app.addNotification({
+				title: user.id,
+				subtitle: "HN user since " + moment.unix(user.created).fromNow(),
+				message: user.about,
+				media: '<img width="44" height="44" style="border-radius:100%" src="http://placehold.it/44&text=' + user.karma + '">'
+			});
+		});
+	});
+	
 	// Get and parse stories on app load
 	getStories();
 	
 	// Export app to global
 	window.app = app;
 	
-})(Framework7, Dom7, Template7, moment, hnapi);
+}(Framework7, Dom7, Template7, moment, hnapi));

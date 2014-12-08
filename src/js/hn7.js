@@ -207,6 +207,19 @@
 		getReplies(replies, this);
 	});
 
+	$$(document).on('click', '.story-info > a', function (e) {
+		var id = $$('.story-info > a').html();
+		hnapi.user(id, function (data) {
+			var user = JSON.parse(data);
+			app.addNotification({
+				title: user.id,
+				subtitle: "HN user since " + moment.unix(user.created).fromNow(),
+				message: user.about,
+				media: '<img width="44" height="44" style="border-radius:100%" src="http://placehold.it/44&text=' + user.karma + '">'
+			});
+		});
+	});
+	
 	// Get and parse stories on app load
 	getStories();
 	

@@ -346,3 +346,6 @@ html.with-statusbar-overlay body .panel {
 		display: none;
 	}
 }
+.notifications .item-text {
+	display: block;
+}

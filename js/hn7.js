@@ -98,13 +98,17 @@
 				data = JSON.parse(data);
 				data.forEach(function (id, index) {
 					hnapi.item(id, function (data) {
-						data = JSON.parse(data) || {};
-						data.domain = data.url ? data.url.split('/')[2] : '';
+						data = JSON.parse(data);
+                        if (data) {
+                            data.domain = data.url ? data.url.split('/')[2] : '';
+                        }
 						results[index] = data;
 						storiesCount += 1;
 						$$('.preloader-progress').text(Math.floor(storiesCount / 100 * 100));
 						if (results.length === 100) {
 							if (!refresh) { app.hidePreloader(); }
+                            // Clear Empty Object in list
+                            results = results.filter(function (n) { return n !== null; });
 							// Update local storage data
 							window.localStorage.setItem('stories', JSON.stringify(results));
 							// PTR Done
@@ -113,8 +117,6 @@
 							$$('.refresh-link.refresh-home').removeClass('refreshing');
 							// Clear searchbar
 							$$('.searchbar-input input')[0].value = '';
-                            // Clear Null Object in list
-                            results = results.filter(function (n) { return n !== undefined; });
 							// Update T7 data and render home page stories
 							updateStories(results);
 						}
@@ -157,7 +159,9 @@
 			story.kids.forEach(function (child, index) {
 				hnapi.item(child, function (data) {
 					var comment = JSON.parse(data);
-					if (comment.text && comment.text.length && !comment.deleted) { comments[index] = comment; }
+                    if (comment) {
+                        if (comment.text && comment.text.length && !comment.deleted) { comments[index] = comment; }
+                    }
 					commentsCount += 1;
 
 					$$(page.container).find('.preloader-progress').text(Math.floor(commentsCount / story.kids.length * 100));

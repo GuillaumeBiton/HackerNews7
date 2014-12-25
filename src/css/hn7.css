@@ -3,6 +3,9 @@
 	border-bottom: none;
 	color: #fff;
 }
+.navbar .center {
+    max-width: 50%;
+}
 .statusbar-overlay {
 	background: #ff6600;
 }

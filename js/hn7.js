@@ -99,7 +99,7 @@
 				data.forEach(function (id, index) {
 					hnapi.item(id, function (data) {
 						data = JSON.parse(data);
-						data.domain = (data.url) ? data.url.split('/')[2] : '';
+						data.domain = data.url || data.url !== '' ? data.url.split('/')[2] : '';
 						results[index] = data;
 						storiesCount += 1;
 						$$('.preloader-progress').text(Math.floor(storiesCount / 100 * 100));

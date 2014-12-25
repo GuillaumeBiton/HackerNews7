@@ -113,6 +113,8 @@
 							$$('.refresh-link.refresh-home').removeClass('refreshing');
 							// Clear searchbar
 							$$('.searchbar-input input')[0].value = '';
+                            // Clear Null Object in list
+                            results = results.filter(function (n) { return n !== undefined; });
 							// Update T7 data and render home page stories
 							updateStories(results);
 						}

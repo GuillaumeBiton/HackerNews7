@@ -5,7 +5,7 @@
 	'use strict';
 	
 	var paths = {
-		dependencies : [ "bower_components/framework7/dist/js/framework7.js", "bower_components/framework7/dist/js/framework7.js.map", "bower_components/framework7/dist/css/framework7.css", "bower_components/moment/moment.js" ],
+		dependencies : [ "node_modules/framework7/dist/js/framework7.js", "node_modules/framework7/dist/js/framework7.js.map", "node_modules/framework7/dist/css/framework7.css", "node_modules/moment/moment.js" ],
 		source : 'src/**/*',
 		build : 'www'
 	};

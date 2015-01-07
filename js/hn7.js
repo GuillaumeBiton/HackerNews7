@@ -226,6 +226,42 @@
 		});
 	});
 	
+	// Search HN
+	$$('.page[data-page="index"] input[type="search"]').on('keyup', function (e) {
+		if (e.keyCode === 13) {
+			$$('.refresh-link.refresh-home').addClass('refreshing');
+			$$('.page[data-page="index"]').find('.searchbar-not-found').html("Searching throw HN...");
+			hnapi.search(this.value, function (data) {
+				var results = [];
+				data = JSON.parse(data);
+				data.hits.forEach(function (item, i) {
+					hnapi.item(item.objectID, function (data) {
+						data = JSON.parse(data);
+						if (data) {
+                            data.domain = data.url ? data.url.split('/')[2] : '';
+                        }
+						results[i] = data;
+						if (results.length === 20) {
+							// Reset search filter
+							$$('.page[data-page="index"]').find('.searchbar-not-found').hide();
+							$$('.page[data-page="index"]').find('.searchbar-not-found').html("Not Found");
+							$$('.page[data-page="index"]').find('.searchbar-found').show();
+							// Clear Empty Object in list
+                            results = results.filter(function (n) { return n !== null; });
+							// reset .refresh-icon if necessary
+							$$('.refresh-link.refresh-home').removeClass('refreshing');
+							// Render page stories
+							updateStories(results);
+						}
+					});
+				});
+			});
+		}
+	});
+	$$('.page[data-page="index"] .searchbar-cancel').on('click', function () {
+		updateStories(JSON.parse(window.localStorage.getItem('stories')) || []);
+	});
+	
 	// Get and parse stories on app load
 	getStories();
 	

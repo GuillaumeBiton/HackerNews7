@@ -44,6 +44,15 @@
 
 		updates: function (success, error) {
 			return req('updates.json', success, error);
+		},
+		
+		search: function (query, success, error) {
+			var url = (typeof query === "string") ? "http://hn.algolia.com/api/v1/search?query=" +  encodeURIComponent(query) + "&tags=story" : null;
+			return $$.ajax({
+				url: url,
+				success: success,
+				error: error
+			});
 		}
 	};
 

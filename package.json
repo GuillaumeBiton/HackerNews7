@@ -45,8 +45,8 @@
 		"transparent": false
 	},
 	"dependencies": {
-		"framework7": "^0.10.0",
-		"moment": "^2.8.4"
+		"framework7": "^1.0.1",
+		"moment": "^2.9.0"
 	},
 	"scripts": {
 		"start": "gulp",

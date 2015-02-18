@@ -47,5 +47,9 @@
 	"dependencies": {
 		"framework7": "^0.10.0",
 		"moment": "^2.8.4"
+	},
+	"scripts": {
+		"start": "gulp",
+		"stop": "gulp clean"
 	}
 }

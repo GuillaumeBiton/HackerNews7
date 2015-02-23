@@ -45,7 +45,7 @@
 		"transparent": false
 	},
 	"dependencies": {
-		"framework7": "^1.0.1",
+		"framework7": "^1.0.2",
 		"moment": "^2.9.0"
 	},
 	"scripts": {

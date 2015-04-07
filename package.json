@@ -8,18 +8,18 @@
 		"url": "https://guillaumebiton.github.com/HackerNews7.git"
 	},
 	"keywords": [
-    "Hackernews",
-    "Framework7",
-    "webapp",
-    "html5"
-  ],
+		"Hackernews",
+		"Framework7",
+		"webapp",
+		"html5"
+	],
 	"authors": [
-    "guillaumebiton <guillaume.biton@free.fr>",
-    "Vladimir Kharlampidi"
-  ],
+		"guillaumebiton <guillaume.biton@free.fr>",
+		"Vladimir Kharlampidi"
+	],
 	"license": [
-    "MIT"
-  ],
+		"MIT"
+	],
 	"bugs": {
 		"url": "https://guillaumebiton.github.com/HackerNews7/issues"
 	},
@@ -32,7 +32,7 @@
 		"gulp": "^3.8.11",
 		"gulp-connect": "^2.2.0",
 		"gulp-open": "^0.3.2",
-		"node-webkit-builder": "^1.0.8"
+		"node-webkit-builder": "^1.1.0"
 	},
 	"window": {
 		"icon": "apple-touch-icon.png",
@@ -45,8 +45,8 @@
 		"transparent": false
 	},
 	"dependencies": {
-		"framework7": "^1.0.2",
-		"moment": "^2.9.0"
+		"framework7": "^1.0.5",
+		"moment": "^2.10.0"
 	},
 	"scripts": {
 		"start": "gulp",

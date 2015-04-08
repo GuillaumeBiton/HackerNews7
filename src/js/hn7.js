@@ -97,7 +97,7 @@
 			hnapi.topStories(function (data) {
 				data = JSON.parse(data);
 				var limit = 100;
-				data.splice(0, data.length - 100);
+				data.splice(0, data.length - limit);
 				data.forEach(function (id, index) {
 					hnapi.item(id, function (data) {
 						data = JSON.parse(data);

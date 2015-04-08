@@ -9,6 +9,7 @@
 		connect = require('gulp-connect'),
 		open = require('gulp-open'),
 		NWBuilder = require('node-webkit-builder'),
+		deploy = require('gulp-gh-pages'),
 		
 		paths = {
 			libraries: {
@@ -95,6 +96,11 @@
 		
 		return nw.build();
 	});
+	
+	gulp.task('deploy', ['dist'], function () {
+        return gulp.src(paths.dist.root + '/**/*')
+            .pipe(deploy());
+    });
 	
 	gulp.task('default', [ 'watch', 'server', 'open' ]);
 	

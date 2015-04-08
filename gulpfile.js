@@ -62,6 +62,7 @@
 	});
 	
 	gulp.task('images', function () {
+		gulp.src(paths.source.root + '/apple-touch-icon.png').pipe(gulp.dest(paths.dist.root));
 		return gulp.src(paths.source.images)
 			.pipe(gulp.dest(paths.dist.images));
 	});

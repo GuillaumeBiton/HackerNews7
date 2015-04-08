@@ -169,6 +169,8 @@
 						comments = comments.filter(function (n) { return n !== undefined; });
 						$$(page.container).find('.story-comments .messages').html(T7.templates.commentsTemplate(comments));
 					}
+				}, function (err) {
+					commentsCount += 1;
 				});
 			});
 		} else {

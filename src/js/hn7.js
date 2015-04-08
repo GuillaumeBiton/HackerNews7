@@ -96,6 +96,7 @@
 			if (!refresh) { app.showPreloader('Loading top stories : <span class="preloader-progress">0</span> %'); }
 			hnapi.topStories(function (data) {
 				data = JSON.parse(data);
+				var topStoriesLength = data.length;
 				data.forEach(function (id, index) {
 					hnapi.item(id, function (data) {
 						data = JSON.parse(data);
@@ -104,8 +105,8 @@
                         }
 						results[index] = data;
 						storiesCount += 1;
-						$$('.preloader-progress').text(Math.floor(storiesCount / 100 * 100));
-						if (results.length === 100) {
+						$$('.preloader-progress').text(Math.floor(storiesCount / topStoriesLength * 100));
+						if (results.length === topStoriesLength) {
 							if (!refresh) { app.hidePreloader(); }
                             // Clear Empty Object in list
                             results = results.filter(function (n) { return n !== null; });

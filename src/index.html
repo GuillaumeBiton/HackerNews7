@@ -21,6 +21,9 @@
 	<!-- Status bar overlay for fullscreen mode -->
 	<div class="statusbar-overlay"></div>
 
+    <!-- Right Panel for user information -->
+    <div class="panel panel-right panel-reveal"></div>
+    
 	<!-- views -->
 	<div class="views">
 		<!-- Put panels-overlay and left-panel with view inside of views-->
@@ -141,6 +144,13 @@
 				</div>
 			{{/if}}
 		{{/each}}
+	</script>
+    <script type="text/template7" id="userTemplate">
+        <div class="content-block">
+		  <img width="128" height="128" style="border-radius:100%" src="http://placehold.it/128&text={{karma}}" />
+          <p>{{id}}</p>
+          <p>{{about}}</p>
+        </div>
 	</script>
 
 	<!-- libraries -->

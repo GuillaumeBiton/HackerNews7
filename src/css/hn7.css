@@ -352,3 +352,6 @@ html.with-statusbar-overlay body .panel {
 .notifications .item-text {
 	display: block;
 }
+.panel.panel-right {
+    text-align: center;
+}

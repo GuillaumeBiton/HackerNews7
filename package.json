@@ -37,7 +37,7 @@
     "icon": "apple-touch-icon.png",
     "toolbar": false,
     "frame": true,
-    "width": 1024,
+    "width": 1440,
     "height": 600,
     "min-width": 320,
     "resizable": true,

@@ -13,6 +13,9 @@
     T7.registerHelper('pluralize', function (arr, options) {
         return (arr.length === 1) ? options.hash.single : arr.length + " " + options.hash.multiple;
     });
+    T7.registerHelper('notEmpty', function (value) {
+        return value || 0;
+    });
 
     var app, mainView, leftView, splitView, allowCommentsInsert;
 

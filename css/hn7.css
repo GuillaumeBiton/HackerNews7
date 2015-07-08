@@ -328,7 +328,7 @@ html.with-statusbar-overlay body .panel {
 		text-align: center;
 	}
 }
-@media (min-width: 1024px) {
+@media (min-width: 1024px) and (max-width: 1279px) {
 	.panel.panel-left.panel-cover {
 		display: block;
 		left: 0%;
@@ -346,6 +346,25 @@ html.with-statusbar-overlay body .panel {
 		width: calc(100% - 320px);
 	}
 	.view-main .navbar .open-panel {
+		display: none;
+	}
+}
+@media (min-width: 1280px) {
+    .panel.panel-left.panel-cover {
+		display: block;
+		left: 0%;
+	}
+    .view-main {
+        box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
+        left: 320px;
+        width: calc(100% - 320px - 320px);
+    }
+    .panel.panel-right.panel-reveal {
+        width: 320px;
+        z-index: 6000;
+        display: block;
+    }
+    .view-main .navbar .open-panel {
 		display: none;
 	}
 }

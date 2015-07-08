@@ -345,7 +345,7 @@ html.with-statusbar-overlay body .panel {
 		width: -ms-calc(100% - 320px);
 		width: calc(100% - 320px);
 	}
-	.view-main .navbar .open-panel {
+	.view-main .navbar .left .open-panel {
 		display: none;
 	}
 }

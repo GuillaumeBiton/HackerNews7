@@ -7,6 +7,10 @@
       <a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a>
     </div>
     <div class="center sliding">{{title}}</div>
+    <div class="right sliding">
+      <!-- User link for small screen -->
+      <a href="#" data-panel="right" class="open-panel link icon-only"> <img src="img/avatar.svg" width="28px" /></a>
+    </div>
   </div>
 </div>
 <div class="pages">
@@ -14,7 +18,7 @@
     <div class="page-content">
       <div class="story-header">
         <div class="story-title">{{title}}</div>
-        <div class="story-info">{{score}} points by <a href="#" data-panel="right" class="open-panel">{{by}}</a> {{time_ago time}}</div>
+        <div class="story-info">{{score}} points by {{by}} - {{time_ago time}}</div>
         <div class="story-link"><a href="{{url}}" target="_blank" class="external">{{domain}}</a></div>
       </div>
 			<div class="story-comments">

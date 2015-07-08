@@ -200,7 +200,6 @@
     function getUserInfo(page) {
         hnapi.user(page.context.by, function (data) {
             var user = JSON.parse(data);
-            console.log(user);
             $$(".panel.panel-right").html(T7.templates.userTemplate(user));
         });
     }

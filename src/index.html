@@ -146,10 +146,12 @@
 		{{/each}}
 	</script>
     <script type="text/template7" id="userTemplate">
-        <div class="content-block">
-		  <img width="128" height="128" style="border-radius:100%" src="http://placehold.it/128&text={{karma}}" />
-          <p>{{id}}</p>
-          <p>{{about}}</p>
+        <div class="content-block user">
+		  <img class="user-avatar" src="img/avatar.png" />
+          <h1 class="user-name">{{id}}</h1>
+          <p>HN user since {{time_ago created}}</p>
+          <h3 class="user-karma">karma : {{karma}}</h3>
+          <div class="user-about">{{about}}</div>
         </div>
 	</script>
 

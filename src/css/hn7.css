@@ -5,6 +5,7 @@
 }
 .navbar .center {
     max-width: 50%;
+    display: block;
 }
 .statusbar-overlay {
 	background: #ff6600;

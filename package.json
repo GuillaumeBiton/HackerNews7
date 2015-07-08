@@ -1,56 +1,56 @@
 {
-	"name": "HackerNews7",
-	"version": "0.8.0",
-	"description": "Framework7 HackerNews web app",
-	"main": "index.html",
-	"repository": {
-		"type": "git",
-		"url": "https://guillaumebiton.github.com/HackerNews7.git"
-	},
-	"keywords": [
-		"Hackernews",
-		"Framework7",
-		"webapp",
-		"html5"
-	],
-	"authors": [
-		"guillaumebiton <guillaume.biton@free.fr>",
-		"Vladimir Kharlampidi"
-	],
-	"license": [
-		"MIT"
-	],
-	"bugs": {
-		"url": "https://guillaumebiton.github.com/HackerNews7/issues"
-	},
-	"homepage": "https://guillaumebiton.github.com/HackerNews7",
-	"engines": {
-		"node": ">= 0.10.0"
-	},
-	"devDependencies": {
-		"del": "^1.1.1",
-		"gulp": "^3.8.11",
-		"gulp-connect": "^2.2.0",
-		"gulp-gh-pages": "^0.5.0",
-		"gulp-open": "^0.3.2",
-		"node-webkit-builder": "^1.1.0"
-	},
-	"window": {
-		"icon": "apple-touch-icon.png",
-		"toolbar": false,
-		"frame": true,
-		"width": 1024,
-		"height": 600,
-		"min-width": 320,
-		"resizable": true,
-		"transparent": false
-	},
-	"dependencies": {
-		"framework7": "^1.0.5",
-		"moment": "^2.10.0"
-	},
-	"scripts": {
-		"start": "gulp",
-		"stop": "gulp clean"
-	}
+  "name": "HackerNews7",
+  "version": "0.8.0",
+  "description": "Framework7 HackerNews web app",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "https://guillaumebiton.github.com/HackerNews7.git"
+  },
+  "keywords": [
+    "Hackernews",
+    "Framework7",
+    "webapp",
+    "html5"
+  ],
+  "authors": [
+    "guillaumebiton <guillaume.biton@free.fr>",
+    "Vladimir Kharlampidi"
+  ],
+  "license": [
+    "MIT"
+  ],
+  "bugs": {
+    "url": "https://guillaumebiton.github.com/HackerNews7/issues"
+  },
+  "homepage": "https://guillaumebiton.github.com/HackerNews7",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "devDependencies": {
+    "del": "^1.2.0",
+    "gulp": "^3.8.11",
+    "gulp-connect": "^2.2.0",
+    "gulp-gh-pages": "^0.5.2",
+    "gulp-open": "^0.3.2",
+    "node-webkit-builder": "^1.1.0"
+  },
+  "window": {
+    "icon": "apple-touch-icon.png",
+    "toolbar": false,
+    "frame": true,
+    "width": 1024,
+    "height": 600,
+    "min-width": 320,
+    "resizable": true,
+    "transparent": false
+  },
+  "dependencies": {
+    "framework7": "^1.0.7",
+    "moment": "^2.10.3"
+  },
+  "scripts": {
+    "start": "gulp",
+    "stop": "gulp clean"
+  }
 }

@@ -89,10 +89,10 @@
 
     // Update data
     function updateStories(stories) {
-            app.template7Data.stories = stories;
-            $$('.page[data-page="index"] .page-content .list-block').html(T7.templates.storiesTemplate(stories));
-        }
-        // Fetch Stories
+        app.template7Data.stories = stories;
+        $$('.page[data-page="index"] .page-content .list-block').html(T7.templates.storiesTemplate(stories));
+    }
+    // Fetch Stories
     function getStories(refresh) {
         var results = refresh ? [] : JSON.parse(window.localStorage.getItem('stories')) || [],
             storiesCount = 0;
@@ -195,10 +195,19 @@
             $$(page.container).find('.story-comments .messages').html('<div class="preloader-label">No comments</div>');
         }
     }
+    
+    //user information
+    function getUserInfo(page) {
+        hnapi.user(page.context.by, function (data) {
+            var user = JSON.parse(data);
+            $$(".panel.panel-right").html(T7.templates.userTemplate(user));
+        });
+    }
     app.onPageInit('item', function (page) {
         if (page.view === mainView) {
             getComments(page);
         }
+        getUserInfo(page);
     });
     app.onPageAfterAnimation('item', function (page) {
         if (page.view === leftView) {
@@ -241,18 +250,18 @@
         getReplies(replies, this);
     });
 
-    $$(document).on('click', '.story-info > a', function (e) {
-        var id = $$('.story-info > a').html();
-        hnapi.user(id, function (data) {
-            var user = JSON.parse(data);
-            app.addNotification({
-                title: user.id,
-                subtitle: "HN user since " + moment.unix(user.created).fromNow(),
-                message: user.about,
-                media: '<img width="44" height="44" style="border-radius:100%" src="http://placehold.it/44&text=' + user.karma + '">'
-            });
-        });
-    });
+//    $$(document).on('click', '.story-info > a', function (e) {
+//        var id = $$('.story-info > a').html();
+//        hnapi.user(id, function (data) {
+//            var user = JSON.parse(data);
+//            app.addNotification({
+//                title: user.id,
+//                subtitle: "HN user since " + moment.unix(user.created).fromNow(),
+//                message: user.about,
+//                media: '<img width="44" height="44" style="border-radius:100%" src="http://placehold.it/44&text=' + user.karma + '">'
+//            });
+//        });
+//    });
 
     // Search HN
     function updateOnSearch(results, limit) {

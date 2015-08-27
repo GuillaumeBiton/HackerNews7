@@ -19,7 +19,7 @@
 					'node_modules/moment/moment.js'
 				],
 				styles: [
-					'node_modules/framework7/dist/css/framework7.css'
+					'node_modules/framework7/dist/css/framework7.ios.css'
 				]
 			},
 			source: {

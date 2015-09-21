@@ -8,7 +8,7 @@
 		del = require('del'),
 		connect = require('gulp-connect'),
 		open = require('gulp-open'),
-		NWBuilder = require('node-webkit-builder'),
+		NWBuilder = require('nw-builder'),
 		deploy = require('gulp-gh-pages'),
 		
 		paths = {

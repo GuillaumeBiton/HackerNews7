@@ -23,7 +23,7 @@
   },
   "homepage": "https://guillaumebiton.github.com/HackerNews7",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": "*"
   },
   "devDependencies": {
     "del": "^1.2.1",

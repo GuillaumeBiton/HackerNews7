@@ -93,7 +93,7 @@
 		var nw = new NWBuilder({
 			files: paths.dist.root + '/**',
 			macIcns: paths.dist.root + '/img/nw.icns',
-			platforms: [ 'osx' ]
+			platforms: [ 'osx64' ]
 		});
 		
 		return nw.build();

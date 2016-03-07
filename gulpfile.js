@@ -38,7 +38,7 @@
 		};
 	
 	gulp.task('clean', function (cb) {
-		del([paths.dist.root, 'build', 'cache' ], cb);
+		del([paths.dist.root, 'build', 'cache', 'node_modules', '.publish' ], cb);
 	});
 	
 	gulp.task('libraries', function () {

@@ -28,10 +28,10 @@
   "devDependencies": {
     "del": "^2.2.0",
     "gulp": "^3.8.11",
-    "gulp-connect": "^3.1.0",
+    "gulp-connect": "^5.0.0",
     "gulp-gh-pages": "^0.5.4",
-    "gulp-open": "^1.0.0",
-    "nw-builder": "^2.1.0"
+    "gulp-open": "^2.0.0",
+    "nw-builder": "^3.1.2"
   },
   "window": {
     "icon": "apple-touch-icon.png",
@@ -44,8 +44,8 @@
     "transparent": false
   },
   "dependencies": {
-    "framework7": "^1.4.0",
-    "moment": "^2.10.6"
+    "framework7": "*",
+    "moment": "*"
   },
   "scripts": {
     "start": "gulp",

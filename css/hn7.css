@@ -1,0 +1,385 @@
+.navbar {
+	background: #ff6600;
+	border-bottom: none;
+	color: #fff;
+}
+.navbar .center {
+    max-width: 60%;
+    display: block;
+}
+.statusbar-overlay {
+	background: #ff6600;
+}
+a {
+	color: #ff6600;
+}
+.page {
+	background: #f6f6ef;
+}
+.stories-list {
+	margin: 0;
+}
+.stories-list ul {
+	border: none;
+}
+.stories-list .item-title {
+	font-weight: normal;
+}
+.stories-list .item-subtitle {
+	font-size: 14px;
+	color: #555;
+}
+.stories-list .item-text {
+	font-size: 14px;
+	height: auto;
+	-webkit-line-clamp: auto;
+	white-space: nowrap;
+}
+.stories-list .badge {
+	border: 1px solid #ff6600;
+	color: #ff6600;
+	background: none;
+	min-width: 30px;
+	text-align: center;
+	line-height: 20px;
+	display: block;
+	position: relative;
+}
+.stories-list .badge:before {
+	content: '';
+	width: 0;
+	height: 0;
+	position: absolute;
+	left: 50%;
+	margin-left: -8px;
+	bottom: -3px;
+	border-left: 0px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 3px solid #ff6600;
+}
+.stories-list .item-link.active-state {
+	background: #e7e7e7;
+}
+.stories-list.media-list .item-link .item-title-row {
+	padding-right: 0;
+	background: none;
+}
+.story-header {
+	height: 130px;
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+	position: relative;
+	z-index: 10;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 20px 15px;
+	background: #fff;
+}
+.story-title {
+	font-size: 17px;
+	font-weight: 500;
+	line-height: 22px;
+	max-height: 44px;
+	-webkit-line-clamp: 2;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+.story-info {
+	color: #8e8e93;
+}
+.story-comments {
+	position: relative;
+	height: -moz-calc(100% - 130px);
+	height: -ms-calc(100% - 130px);
+	height: -webkit-calc(100% - 130px);
+	height: calc(100% - 130px);
+	overflow: auto;
+	box-sizing: border-box;
+	-webkit-overflow-scrolling: touch;
+}
+.story-comments .messages {
+	padding-bottom: 20px;
+}
+.story-comments .messages > .preloader {
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	left: 50%;
+	margin-left: -16px;
+	top: 20px;
+}
+.story-comments .preloader-label {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+.story-comments .message {
+	max-width: 98%;
+}
+.story-comments .message-name .comment-name {
+	font-weight: 500;
+	color: #333;
+}
+.story-comments .message-text {
+	font-size: 14px;
+	background: #fff;
+	color: #000;
+	line-height: 1.3;
+}
+.story-comments .message-sent .message-text {
+	font-size: 14px;
+	background: #ff6600;
+	color: #fff;
+	line-height: 1.3;
+}
+.story-comments .message-sent .message-text a {
+	color: #555;
+}
+.story-comments .message-kids {
+	margin: 0 20px 0 15px;
+}
+.story-comments .message-kids > a,
+.story-comments .message-kids > .preloader {
+	margin-left: 12px;
+	position: relative;
+	top: -2px;
+	display: inline-block;
+}
+.story-comments .message-kids > a {
+	font-size: 12px;
+	margin-bottom: 10px;
+	height: 16px;
+}
+.story-comments .message-kids > .preloader {
+	width: 16px;
+	height: 16px;
+	margin-bottom: 7px;
+}
+.story-comments .message-kids > a i {
+	border: 1px solid #ff6600;
+	width: 15px;
+	height: 12px;
+	display: inline-block;
+	position: relative;
+	border-radius: 10px;
+	vertical-align: top;
+}
+.story-comments .message-kids > a i:before {
+	content: '';
+	width: 0;
+	height: 0;
+	position: absolute;
+	left: 50%;
+	margin-left: -5px;
+	bottom: -3px;
+	border-left: 0px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 3px solid #ff6600;
+}
+.message-kids {
+	text-align: right;
+}
+.message-kids .message {
+	text-align: left;
+}
+.story-comments .message pre {
+	white-space: normal;
+}
+.icon-refresh {
+	background: url(../img/icon-reload.png) no-repeat center;
+	width: 25px;
+	height: 25px;
+	background-size: 25px auto;
+}
+.icon-watch {
+	background: url(../img/icon-watch.png) no-repeat center;
+	width: 25px;
+	height: 25px;
+	background-size: 25px auto;
+}
+.refresh-link.refreshing .icon-refresh {
+	-webkit-animation-name: rotate;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-name: rotate;
+	-moz-animation-duration: 1s;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-timing-function: linear;
+	animation-name: rotate;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+@-webkit-keyframes rotate {
+	from {
+		-webkit-transform: rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(360deg);
+	}
+}
+@-moz-keyframes rotate {
+	from {
+		-moz-transform: rotate(0deg);
+	}
+	to {
+		-moz-transform: rotate(360deg);
+	}
+}
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+/* This will fix flicker navbar in left panel view */
+
+.panel-left .navbar {
+	-webkit-transform: translate3d(0, 0, 0);
+}
+/* Because we have panels-overlay inside of .views we need to fix its open position for right panel */
+
+body.with-panel-right-reveal .panel-overlay {
+	margin-left: 0;
+}
+html.with-statusbar-overlay body .panel {
+	padding-top: 0;
+}
+.navbar .left a + a {
+	margin-left: 0;
+}
+.view-left .navbar .left .open-panel {
+	display: none;
+}
+.choose-story {
+	display: none;
+}
+@media (max-width: 767px) {
+	.navbar .left .open-panel {
+		display: none;
+	}
+	.view-main {
+		display: none;
+	}
+	.panel.panel-left.panel-cover {
+		display: block;
+		left: 0%;
+		width: 100%;
+		-webkit-transition: 0ms;
+		transition: 0ms;
+	}
+	body.with-panel-left-cover .panel-left {
+		-webkit-transform: translate3d(0%, 0, 0);
+		-ms-transform: translate3d(0%, 0, 0);
+		transform: translate3d(0%, 0, 0);
+		-webkit-transition: 0ms;
+		transition: 0ms;
+	}
+	.view-left .tablet-title {
+		display: none;
+	}
+}
+@media (min-width: 768px) {
+	.panel.panel-left.panel-cover {
+		box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
+		width: 320px;
+	}
+	.stories-list a.active-story {
+		background: rgba(0, 0, 0, 0.1);
+	}
+	.view-main .navbar .back {
+		display: none;
+	}
+	.view-left .mobile-title {
+		display: none;
+	}
+	.view-left .tablet-title {
+		display: block;
+	}
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+	body.with-panel-left-cover .panel-left {
+		-webkit-transform: translate3d(100%, 0, 0);
+		-ms-transform: translate3d(100%, 0, 0);
+		transform: translate3d(100%, 0, 0);
+	}
+	.panel.panel-left.panel-cover {
+		left: -320px;
+	}
+	.choose-story {
+		display: block;
+		text-align: center;
+		font-size: 21px;
+		line-height: 30px;
+		font-weight: 300;
+		position: absolute;
+		left: 0;
+		width: 100%;
+		top: 50%;
+		margin-top: -15px;
+		text-align: center;
+	}
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+	.panel.panel-left.panel-cover {
+		display: block;
+		left: 0%;
+	}
+	body.with-panel-left-cover .panel-left {
+		-webkit-transform: translate3d(0%, 0, 0);
+		-ms-transform: translate3d(0%, 0, 0);
+		transform: translate3d(0%, 0, 0);
+	}
+	.view-main {
+		float: right;
+		width: -webkit-calc(100% - 320px);
+		width: -moz-calc(100% - 320px);
+		width: -ms-calc(100% - 320px);
+		width: calc(100% - 320px);
+	}
+	.view-main .navbar .left .open-panel {
+		display: none;
+	}
+}
+@media (min-width: 1280px) {
+    .panel.panel-left.panel-cover {
+		display: block;
+		left: 0%;
+	}
+    .view-main {
+        box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);
+        left: 320px;
+        width: calc(100% - 320px - 320px);
+    }
+    .panel.panel-right.panel-reveal {
+        width: 320px;
+        z-index: 6000;
+        display: block;
+    }
+    .view-main .navbar .open-panel {
+		display: none;
+	}
+}
+.notifications .item-text {
+	display: block;
+}
+.user {
+    text-align: center;
+}
+.user .user-about{
+    display: block;
+    text-align: left;
+}
+body.with-panel-right-reveal .panel-overlay {
+    margin-left: 0;
+    z-index: 10000;
+}

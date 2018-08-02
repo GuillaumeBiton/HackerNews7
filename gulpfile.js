@@ -67,7 +67,7 @@
   });
 
   gulp.task('fonts', function () {
-    return gulp.src(paths.source.fonts)
+    return gulp.src(paths.libraries.fonts)
       .pipe(gulp.dest(paths.dist.fonts));
   });
 

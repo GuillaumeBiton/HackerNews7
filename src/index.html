@@ -18,156 +18,81 @@
     
 	<title>HackerNews7</title>
 
-	<link rel="stylesheet" href="lib/framework7.ios.css">
-	<link rel="stylesheet" href="lib/framework7.ios.colors.css">
+	<link rel="stylesheet" href="lib/framework7.css">
 	<link rel="stylesheet" href="css/hn7.css">
 </head>
 
 <body>
-	<!-- Status bar overlay for fullscreen mode -->
-	<div class="statusbar-overlay"></div>
-
-    <!-- Right Panel for user information -->
-    <div class="panel panel-right panel-reveal"></div>
-    
-	<!-- views -->
-	<div class="views">
-		<!-- Put panels-overlay and left-panel with view inside of views-->
-		<!-- Panels overlay-->
-		<div class="panel-overlay"></div>
-		<!-- Left panel with reveal effect-->
-		<div class="panel panel-left panel-cover">
-			<!-- Left view-->
-			<div class="view view-left navbar-through">
-				<div class="navbar theme-white">
-					<div class="navbar-inner">
-						<div class="left"><a href="#" class="link icon-only refresh-link refresh-home"><i class="icon icon-refresh"></i></a>
-						</div>
-						<div class="center sliding">
-							<span class="mobile-title">HackerNews7</span>
-							<span class="tablet-title">Top Stories</span>
+	<div id="app">
+		<!-- Status bar overlay for fullscreen mode-->
+		<div class="statusbar"></div>
+		
+		<!-- Left panel with cover effect-->
+		<div class="panel panel-left panel-cover theme-dark">
+			<div class="view">
+				<div class="page">
+					<div class="navbar">
+						<div class="navbar-inner">
+							<div class="title">Left Panel</div>
 						</div>
 					</div>
-				</div>
-				<div class="pages">
-					<div class="page" data-page="index">
-						<!-- Search bar -->
-						<form class="searchbar searchbar-init" data-search-list=".list-block-search" data-search-in=".item-title" data-searchbar-found=".searchbar-found" data-searchbar-not-found=".searchbar-not-found">
-							<div class="searchbar-input">
-								<input type="search" placeholder="Search">
-								<a href="#" class="searchbar-clear"></a>
-							</div>
-							<a href="#" class="searchbar-cancel">Cancel</a>
-						</form>
-						<div class="page-content pull-to-refresh-content">
-							<div class="pull-to-refresh-layer">
-								<div class="preloader"></div>
-								<div class="pull-to-refresh-arrow"></div>
-							</div>
-
-							<!-- Search bar overlay-->
-							<div class="searchbar-overlay"></div>
-
-							<!-- no result -->
-							<div class="content-block searchbar-not-found">
-								Nothing found
-							</div>
-
-							<div class="list-block media-list stories-list list-block-search searchbar-found"></div>
-						</div>
+					<div class="page-content">
+						<div class="block">Left panel content goes here</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- main view -->
-		<div class="view view-main navbar-through">
-			<div class="navbar theme-white">
-				<div class="navbar-inner">
-					<div class="left">
-						<a href="#" class="link open-panel icon-only">
-							<i class="icon icon-bars"></i>
-						</a>
+			
+		<!-- Your main view, should have "view-main" class -->
+		<div class="view view-main ios-edges">
+			<!-- Page, data-name contains page name which can be used in callbacks -->
+			<div class="page" data-name="home">
+				<!-- Top Navbar -->
+				<div class="navbar">
+					<div class="navbar-inner">
+						<div class="left">
+							<a href="#" class="link icon-only panel-open" data-panel="left">
+								<i class="icon f7-icons ios-only">menu</i>
+								<i class="icon material-icons md-only">menu</i>
+							</a>
+						</div>
+						<div class="title sliding">HackerNews7</div>
 					</div>
-					<div class="center">HackerNews7</div>
 				</div>
-			</div>
-			<div class="pages">
-				<div class="page" data-page="main">
-					<div class="choose-story">
-						<a href="#" class="open-panel">Choose Story</a>
+					
+				<!-- Scrollable page content-->
+				<div class="page-content">
+					<div class="block-title">Navigation</div>
+					<div class="list">
+						<ul>
+							<li>
+								<a href="/about/" class="item-content item-link">
+								<div class="item-inner">
+									<div class="item-title">About</div>
+								</div>
+								</a>
+							</li>
+							<li>
+								<a href="/stories/" class="item-content item-link">
+								<div class="item-inner">
+									<div class="item-title">Stories</div>
+								</div>
+								</a>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!-- template7 templates -->
-	<script type="text/template7" id="storiesTemplate">
-		<ul>
-		{{#each this}}
-			<li class="swipeout">
-				<div class="swipeout-content">
-					<a href="item.html?id={{id}}" data-context-name="stories.{{@index}}" class="item-content item-link">
-						<div class="item-inner">
-							<div class="item-title-row">
-								<div class="item-title">{{title}}</div>
-								<div class="item-after"><span class="badge">{{notEmpty descendants}}</span></div>
-                        	</div>
-							<div class="item-subtitle">{{domain}}</div>
-				        	<div class="item-text">{{score}} points by {{by}} {{time_ago time}}</div>
-						</div>
-					</a>
-				</div>
-				<div class="swipeout-actions-left">
-		        	<a href="{{url}}" target="_blank" class="external"><i class="icon icon-watch"></i></a>
-		      	</div >
-			</li>
-		{{/each}}
-		</ul>
-	</script>
-	<script type="text/template7" id="commentsTemplate">
-		{{#each this}}
-			<div class="message message-received message-with-tail message-last">
-				<div class="message-name"><span class="comment-name">{{by}}</span>, <span class="comment-time">{{time_ago time}}</span></div>
-				<div class="message-text">{{text}}</div>
-			</div>
-			{{#if kids}}
-			<div class="message-kids">
-				<a href="#" data-context="{{kids}}"><i></i> show {{pluralize kids single="reply" multiple="replies"}}</a>
-			</div>
-			{{/if}}
-		{{/each}}
-	</script>
-	<script type="text/template7" id="repliesTemplate">
-		{{#each this}}
-			<div class="message message-received message-with-tail message-last">
-				<div class="message-name"><span class="comment-name">{{by}}</span>, <span class="comment-time">{{time_ago time}}</span></div>
-				<div class="message-text">{{text}}</div>
-			</div>
-			{{#if kids}}
-				<div class="message-kids">
-					<a href="#" data-context="{{kids}}"><i></i> show {{pluralize kids single="reply" multiple="replies"}}</a>
-				</div>
-			{{/if}}
-		{{/each}}
-	</script>
-    <script type="text/template7" id="userTemplate">
-        <div class="content-block user">
-		  <img class="user-avatar" src="img/avatar.svg" width="128px"/>
-          <h1 class="user-name">{{id}}</h1>
-          <p>HN user since {{time_ago created}}</p>
-          <h3 class="user-karma">karma : {{karma}}</h3>
-          <div class="user-about">{{about}}</div>
-        </div>
-	</script>
+	<!-- Cordova -->
+	<!--
+	<script src="cordova.js"></script>
+	-->
 
 	<!-- libraries -->
-	<script src="lib/moment.js"></script>
-	<script>
-		window.moment = (typeof moment !== 'undefined') ? moment : require('moment');
-	</script>
 	<script src="lib/framework7.js"></script>
-	<script src="js/hnapi.js"></script>
+	<script src="js/routes.js"></script>
 	<script src="js/hn7.js"></script>
 </body>
 

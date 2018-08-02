@@ -21,7 +21,7 @@
           'node_modules/framework7/css/framework7.css'
         ],
         fonts: [
-          'node_modules/framework7-icons/fonts/*.*',
+          'node_modules/framework7-icons/fonts/*',
           'node_modules/material-design-icons/iconfont/*.{eot,ttf,woff,woff2}'
         ]
       },
@@ -84,7 +84,7 @@
     gulp.watch(paths.source.templates, ['templates']);
     gulp.watch(paths.source.scripts, ['scripts']);
     gulp.watch(paths.source.styles, ['styles']);
-    gulp.watch(paths.source.styles, ['fonts']);
+    gulp.watch(paths.source.fonts, ['fonts']);
     gulp.watch(paths.source.images, ['images']);
   });
 

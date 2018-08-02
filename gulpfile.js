@@ -14,25 +14,29 @@
     paths = {
       libraries: {
         scripts: [
-					'node_modules/framework7/dist/js/framework7.js',
-					'node_modules/framework7/dist/js/framework7.js.map',
-					'node_modules/moment/moment.js'
+					'node_modules/framework7/js/framework7.js',
+					'node_modules/framework7/js/framework7.js.map'
 				],
         styles: [
-					'node_modules/framework7/dist/css/framework7.ios.css',
-					'node_modules/framework7/dist/css/framework7.ios.colors.css'
-				]
+          'node_modules/framework7/css/framework7.css'
+        ],
+        fonts: [
+          'node_modules/framework7-icons/fonts/*.*',
+          'node_modules/material-design-icons/iconfont/*.{eot,ttf,woff,woff2}'
+        ]
       },
       source: {
         root: 'src',
         templates: 'src/**/*.html',
         scripts: 'src/**/*.js',
         styles: 'src/**/*.css',
+        fonts: 'src/fonts/**/*',
         images: 'src/img/**/*'
       },
       dist: {
         root: 'www',
         libraries: 'www/lib',
+        fonts: 'www/fonts',
         images: 'www/img'
       }
     };
@@ -62,19 +66,25 @@
       .pipe(gulp.dest(paths.dist.root));
   });
 
+  gulp.task('fonts', function () {
+    return gulp.src(paths.source.fonts)
+      .pipe(gulp.dest(paths.dist.fonts));
+  });
+
   gulp.task('images', function () {
     gulp.src(paths.source.root + '/apple-touch-icon.png').pipe(gulp.dest(paths.dist.root));
     return gulp.src(paths.source.images)
       .pipe(gulp.dest(paths.dist.images));
   });
 
-  gulp.task('dist', ['libraries', 'templates', 'scripts', 'styles', 'images']);
+  gulp.task('dist', ['libraries', 'templates', 'scripts', 'styles', 'fonts', 'images']);
 
   gulp.task('watch', function () {
     gulp.watch(paths.libraries.scripts.concat(paths.libraries.styles), ['libraries']);
     gulp.watch(paths.source.templates, ['templates']);
     gulp.watch(paths.source.scripts, ['scripts']);
     gulp.watch(paths.source.styles, ['styles']);
+    gulp.watch(paths.source.styles, ['fonts']);
     gulp.watch(paths.source.images, ['images']);
   });
 

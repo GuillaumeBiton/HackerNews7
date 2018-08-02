@@ -1,6 +1,6 @@
 {
-  "name": "HackerNews7",
-  "version": "0.8.0",
+  "name": "hackernews7",
+  "version": "3.0.0-beta.1",
   "description": "Framework7 HackerNews web app",
   "main": "index.html",
   "repository": {
@@ -26,11 +26,11 @@
     "node": "*"
   },
   "devDependencies": {
-    "del": "^2.2.0",
+    "del": "^3.0.0",
     "gulp": "^3.8.11",
     "gulp-connect": "^5.0.0",
     "gulp-gh-pages": "^0.5.4",
-    "gulp-open": "^2.0.0",
+    "gulp-open": "^3.0.1",
     "nw-builder": "^3.1.2"
   },
   "window": {
@@ -45,7 +45,8 @@
   },
   "dependencies": {
     "framework7": "*",
-    "moment": "*"
+    "framework7-icons": "^0.9.1",
+    "material-design-icons": "^3.0.1"
   },
   "scripts": {
     "start": "gulp",

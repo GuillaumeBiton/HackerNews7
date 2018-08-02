@@ -3,6 +3,13 @@
 (function (Framework7, $$, T7, routes) {
     'use strict';
 
+    // Template7 helpers
+    T7.registerHelper('pluralize', function (arr, options) {
+        if (!arr) return '';
+        if (typeof arr === "number") return (arr < 2) ? options.hash.single : options.hash.multiple;
+        return (arr.length === 1) ? options.hash.single : arr.length + " " + options.hash.multiple;
+    });
+
     var app, mainView;
 
     // Init App

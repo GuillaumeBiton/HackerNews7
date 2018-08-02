@@ -3,10 +3,10 @@
             <div class="navbar">
               <div class="navbar-inner">
                 <div class="left">
-                  <a href="#" class="link icon-only panel-open" data-panel="left">
-                    <i class="icon f7-icons ios-only">menu</i>
-                    <i class="icon material-icons md-only">menu</i>
-                  </a>
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="ios-only">Back</span>
+                    </a>
                 </div>
                 <div class="title sliding">HackerNews7</div>
               </div>
@@ -14,22 +14,29 @@
             <div class="toolbar tabbar">
               <div class="toolbar-inner">
                 {{#each endpoints}}
-                    <a href="#tab-{{this.label}}" class="tab-link {{#js_if '@root.currentTab === @index'}}tab-link-active{{/js_if}}" @click="loadStories({{@index}})">{{this.label}}</a>
+                    <a href="#tab-{{@index}}" class="tab-link{{#js_if '@root.currentTab === @index'}} tab-link-active{{/js_if}}" @click="loadStories({{@index}})">{{this.label}}</a>
                 {{/each}}
               </div>
             </div>
-            <div class="page-content">
-                <div class="list">
-                    <ul>
-                    {{#stories}}
-                        <li class="item-content">
-                            <div class="item-inner">
-                                <div class="item-title">{{title}}</div>
-                            </div>
-                        </li>
-                    {{/stories}}
-                    </ul>
+            <div class="tabs">
+            {{#each endpoints}}
+                <div id="tab-{{@index}}" class="tab page-content{{#js_if '@root.currentTab === @index'}} tab-active{{/js_if}}">
+                    <div class="list">
+                        <ul>
+                        {{#each @root.stories}}
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        {{title}}
+                                        <div class="item-footer">{{points}} {{pluralize points single="point" multiple="points"}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
+                                    </div>
+                                </div>
+                            </li>
+                        {{/each}}
+                        </ul>
+                    </div>
                 </div>
+                {{/each}}
             </div>
     </template>
     <script>
@@ -63,13 +70,13 @@
                 }
             },
             methods: {
-                loadStories(endpointIndex) {
+                loadStories(index) {
                     var self = this;
                     var app = self.$app;
-                    app.request.json('https://api.hnpwa.com/v0/' + this.endpoints[endpointIndex].endpoint + '.json', (stories) => {
+                    app.request.json('https://api.hnpwa.com/v0/' + this.endpoints[index].endpoint + '.json', (stories) => {
                         self.$setState({
                             stories: stories,
-                            currentTab: endpointIndex,
+                            currentTab: index,
                         })
                     })
                 }

@@ -14,7 +14,7 @@
             <div class="toolbar tabbar">
               <div class="toolbar-inner">
                 {{#each endpoints}}
-                    <a href="#{{this.label}}" class="tab-link {{#if @first}}tab-link-active{{/if}}">{{this.label}}</a>
+                    <a href="#tab-{{this.label}}" class="tab-link" @click="loadStories({{@index}})">{{this.label}}</a>
                 {{/each}}
               </div>
             </div>
@@ -36,6 +36,7 @@
         return {
             data() {
                 return {
+                    currentTab: 0,
                     stories: null,
                     endpoints: [
                         {
@@ -61,15 +62,22 @@
                     ],
                 }
             },
+            methods: {
+                loadStories(endpointIndex) {
+                    var self = this;
+                    var app = self.$app;
+                    app.request.json('https://api.hnpwa.com/v0/' + this.endpoints[endpointIndex].endpoint + '.json', (stories) => {
+                        self.$setState({
+                            stories: stories,
+                            currentTab: endpointIndex,
+                        })
+                    })
+                }
+            },
             on: {
                 pageInit() {
                     var self = this;
-                    var app = self.$app;
-                    app.request.json('https://api.hnpwa.com/v0/news.json', (stories) => {
-                        self.$setState({
-                            stories: stories,
-                        })
-                    })
+                    self.loadStories(0);
                 },
             },
         }

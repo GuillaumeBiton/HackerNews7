@@ -372,13 +372,6 @@ html.with-statusbar-overlay body .panel {
 .notifications .item-text {
 	display: block;
 }
-.user {
-    text-align: center;
-}
-.user .user-about{
-    display: block;
-    text-align: left;
-}
 body.with-panel-right-reveal .panel-overlay {
     margin-left: 0;
     z-index: 10000;

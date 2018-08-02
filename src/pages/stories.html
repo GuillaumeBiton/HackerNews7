@@ -11,10 +11,10 @@
                 <div class="title sliding">HackerNews7</div>
               </div>
             </div>
-            <div class="toolbar">
+            <div class="toolbar tabbar">
               <div class="toolbar-inner">
                 {{#each endpoints}}
-                    <a href="#" class="link">{{@key}}</a>
+                    <a href="#{{this.label}}" class="tab-link {{#if @first}}tab-link-active{{/if}}">{{this.label}}</a>
                 {{/each}}
               </div>
             </div>
@@ -37,22 +37,37 @@
             data() {
                 return {
                     stories: null,
-                    endpoints: {
-                        top: 'news',
-                        new: 'newest',
-                        ask: 'ask',
-                        jobs: 'jobs',
-                        show: 'show'
-                    },
+                    endpoints: [
+                        {
+                            label: 'top',
+                            endpoint: 'news',
+                        },
+                        {
+                            label: 'new',
+                            endpoint: 'newest',
+                        },
+                        {
+                            label: 'ask',
+                            endpoint: 'ask',
+                        },
+                        {
+                            label: 'jobs',
+                            endpoint: 'jobs',
+                        },
+                        {
+                            label: 'show',
+                            endpoint: 'show',
+                        },
+                    ],
                 }
             },
             on: {
                 pageInit() {
                     var self = this;
                     var app = self.$app;
-                    app.request.get('https://api.hnpwa.com/v0/news.json', (stories) => {
+                    app.request.json('https://api.hnpwa.com/v0/news.json', (stories) => {
                         self.$setState({
-                            stories: JSON.parse(stories),
+                            stories: stories,
                         })
                     })
                 },

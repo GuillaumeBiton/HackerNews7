@@ -84,7 +84,6 @@
     gulp.watch(paths.source.templates, ['templates']);
     gulp.watch(paths.source.scripts, ['scripts']);
     gulp.watch(paths.source.styles, ['styles']);
-    gulp.watch(paths.source.fonts, ['fonts']);
     gulp.watch(paths.source.images, ['images']);
   });
 

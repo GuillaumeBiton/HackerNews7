@@ -14,7 +14,7 @@
             <div class="toolbar tabbar">
               <div class="toolbar-inner">
                 {{#each endpoints}}
-                    <a href="#tab-{{this.label}}" class="tab-link" @click="loadStories({{@index}})">{{this.label}}</a>
+                    <a href="#tab-{{this.label}}" class="tab-link {{#js_if '@root.currentTab === @index'}}tab-link-active{{/js_if}}" @click="loadStories({{@index}})">{{this.label}}</a>
                 {{/each}}
               </div>
             </div>

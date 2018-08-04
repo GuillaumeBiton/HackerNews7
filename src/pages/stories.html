@@ -24,7 +24,9 @@
                     <div class="list">
                         <ul>
                         {{#each @root.stories}}
-                            <li class="item-content">
+                            <li>
+                                <a href="/storie/{{id}}/" class="item-link">
+                                <div class="item-content">
                                 <div class="item-inner">
                                     <div class="item-title">
                                         {{title}} ({{domain}})
@@ -32,6 +34,8 @@
                                     </div>
                                     {{#if comments_count}}<div class="item-after"><span class="badge">{{comments_count}}</span></div>{{/if}}
                                 </div>
+                                </div>
+                                </a>
                             </li>
                         {{/each}}
                         </ul>

@@ -11,6 +11,10 @@ routes = [
       path: '/stories/',
       componentUrl: './pages/stories.html',
     },
+    {
+      path: '/storie/:id/',
+      componentUrl: './pages/storie.html',
+    },
     // Default route (404 page). MUST BE THE LAST
     {
       path: '(.*)',

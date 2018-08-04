@@ -1,15 +1,11 @@
 routes = [
     {
       path: '/',
-      url: './index.html',
+      componentUrl: './pages/stories.html',
     },
     {
       path: '/about/',
       url: './pages/about.html',
-    },
-    {
-      path: '/stories/',
-      componentUrl: './pages/stories.html',
     },
     {
       path: '/storie/:id/',

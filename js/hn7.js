@@ -18,6 +18,10 @@
         id: 'io.framework7.hackernews7', // App bundle ID
         name: 'HackerNews7', // App name
         theme: 'auto', // Automatic theme detection
+        // Fix for iPhone X notch
+        statusbar: {
+            overlay: Framework7.device.ios ? Framework7.device.webView || Framework7.device.cordova : 'auto',
+        },
         routes: routes, // App routes
     });
 

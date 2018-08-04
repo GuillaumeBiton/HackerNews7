@@ -14,7 +14,7 @@
             <div class="toolbar tabbar">
               <div class="toolbar-inner">
                 {{#each endpoints}}
-                    <a href="#tab-{{@index}}" class="tab-link{{#js_if '@root.currentTab === @index'}} tab-link-active{{/js_if}}" @click="loadStories({{@index}})">{{this.label}}</a>
+                    <a href="#tab-{{@index}}" class="tab-link{{#js @first}} tab-link-active{{/if}}" @click="loadStories({{@index}})">{{this.label}}</a>
                 {{/each}}
               </div>
             </div>
@@ -27,9 +27,10 @@
                             <li class="item-content">
                                 <div class="item-inner">
                                     <div class="item-title">
-                                        {{title}}
+                                        {{title}} ({{domain}})
                                         <div class="item-footer">{{points}} {{pluralize points single="point" multiple="points"}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
                                     </div>
+                                    {{#if comments_count}}<div class="item-after"><span class="badge">{{comments_count}}</span></div>{{/if}}
                                 </div>
                             </li>
                         {{/each}}

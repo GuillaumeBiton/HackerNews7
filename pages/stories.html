@@ -14,7 +14,7 @@
             </div>
             <div class="tabs">
             {{#each endpoints}}
-                <div id="tab-{{@index}}" class="tab page-content{{#js_if '@root.currentTab === @index'}} tab-active{{/js_if}}">
+                <div id="tab-{{@index}}" class="tab page-content{{#js_if '@root.currentTab === @index'}} tab-active{{/js_if}}" @infinite="loadMore">
                     <div class="list">
                         <ul>
                         {{#each @root.stories}}

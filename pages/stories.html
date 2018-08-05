@@ -78,7 +78,7 @@
                 fetchStories(index, page) {
                     var self = this;
                     var app = self.$app;
-                    app.request.json('https://api.hnpwa.com/v0/' + this.endpoints[index].endpoint + '.json', (stories) => {
+                    app.request.json('https://api.hnpwa.com/v0/' + this.endpoints[index].endpoint + '/' + page + '.json', (stories) => {
                         self.$setState({
                             stories: stories,
                             currentTab: index,

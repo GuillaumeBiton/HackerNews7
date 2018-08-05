@@ -1,0 +1,132 @@
+<template>
+    <div class="page">
+      <div class="navbar">
+        <div class="navbar-inner sliding">
+          <div class="left">
+            <a href="#" class="link back">
+              <i class="icon icon-back"></i>
+              <span class="ios-only">Back</span>
+            </a>
+          </div>
+          {{#storie}}
+          <div class="title">{{title}}</div>
+          {{/storie}}
+        </div>
+      </div>
+      <div class="page-content messages-content">
+        <div class="messages">
+        {{#storie}}
+          <div class="messages-title">{{title}}</div>
+        {{/storie}}
+          <div class="message message-sent">
+            <div class="message-content">
+              <div class="message-bubble">
+                <div class="message-text">Hi, Kate</div>
+              </div>
+            </div>
+          </div>
+          <div class="message message-sent">
+            <div class="message-content">
+              <div class="message-bubble">
+                <div class="message-text">How are you?</div>
+              </div>
+            </div>
+          </div>
+          <div class="message message-received">
+            <div class="message-avatar" style="background-image:url(http://lorempixel.com/100/100/people/9)"></div>
+            <div class="message-content">
+              <div class="message-name">Kate</div>
+              <div class="message-bubble">
+                <div class="message-text">Hi, I am good!</div>
+              </div>
+            </div>
+          </div>
+          <div class="message message-received">
+            <div class="message-avatar" style="background-image:url(http://lorempixel.com/100/100/people/7)"></div>
+            <div class="message-content">
+              <div class="message-name">Blue Ninja</div>
+              <div class="message-bubble">
+                <div class="message-text">Hi there, I am also fine, thanks! And how are you?</div>
+              </div>
+            </div>
+          </div>
+          <div class="message message-sent">
+            <div class="message-content">
+              <div class="message-bubble">
+                <div class="message-text">Hey, Blue Ninja! Glad to see you ;)</div>
+              </div>
+            </div>
+          </div>
+          <div class="message message-sent">
+            <div class="message-content">
+              <div class="message-bubble">
+                <div class="message-text">Hey, look, cutest kitten ever!</div>
+              </div>
+            </div>
+          </div>
+          <div class="message message-sent">
+            <div class="message-content">
+              <div class="message-bubble">
+                <div class="message-image">
+                  <img src="http://lorempixel.com/200/260/cats/4/" style="width:200px; height: 260px">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="message message-received">
+            <div class="message-avatar" style="background-image:url(http://lorempixel.com/100/100/people/9)"></div>
+            <div class="message-content">
+              <div class="message-name">Kate</div>
+              <div class="message-bubble">
+                <div class="message-text">Nice!</div>
+              </div>
+            </div>
+          </div>
+          <div class="message message-received">
+            <div class="message-avatar" style="background-image:url(http://lorempixel.com/100/100/people/9)"></div>
+            <div class="message-content">
+              <div class="message-name">Kate</div>
+              <div class="message-bubble">
+                <div class="message-text">Like it very much!</div>
+              </div>
+            </div>
+          </div>
+          <div class="message message-received">
+            <div class="message-avatar" style="background-image:url(http://lorempixel.com/100/100/people/7)"></div>
+            <div class="message-content">
+              <div class="message-name">Blue Ninja</div>
+              <div class="message-bubble">
+                <div class="message-text">Awesome!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+  <script>
+    return {
+        data() {
+            return {
+                storie : null
+            }
+        },
+        methods: {
+            fetchStorie(id) {
+                var self = this;
+                var app = self.$app;
+                app.request.json('https://api.hnpwa.com/v0/item/' + id + '.json', (storie) => {
+                    self.$setState({
+                        storie: storie
+                    })
+                })
+            }
+        },
+        on: {
+            pageInit() {
+                var self = this;
+                self.fetchStorie(self.$route.params.id);
+            },
+        },
+    }
+  </script>

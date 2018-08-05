@@ -8,7 +8,7 @@
             <div class="toolbar tabbar">
               <div class="toolbar-inner">
                 {{#each endpoints}}
-                    <a href="#tab-{{@index}}" class="tab-link{{#js @first}} tab-link-active{{/if}}" @click="loadStories({{@index}})">{{this.label}}</a>
+                    <a href="#tab-{{@index}}" class="tab-link{{#js @first}} tab-link-active{{/if}}" @click="fetchStories({{@index}})">{{this.label}}</a>
                 {{/each}}
               </div>
             </div>
@@ -34,6 +34,9 @@
                         {{/each}}
                         </ul>
                     </div>
+                    {{#if hasMoreItems}}
+                    <div class="preloader infinite-scroll-preloader"></div>
+                    {{/if}}
                 </div>
                 {{/each}}
             </div>
@@ -42,6 +45,9 @@
         return {
             data() {
                 return {
+                    allowInfinite: true,
+                    hasMoreItems: true,
+                    lastPage: 1,
                     currentTab: 0,
                     stories: null,
                     endpoints: [
@@ -69,7 +75,7 @@
                 }
             },
             methods: {
-                loadStories(index) {
+                fetchStories(index, page) {
                     var self = this;
                     var app = self.$app;
                     app.request.json('https://api.hnpwa.com/v0/' + this.endpoints[index].endpoint + '.json', (stories) => {
@@ -78,12 +84,31 @@
                             currentTab: index,
                         })
                     })
+                },
+                loadMore: function () {
+                    var self = this;
+                    var $ = self.$$;
+                    if (!self.allowInfinite) return;
+                    self.allowInfinite = false;
+
+                    if (self.lastPage >= 10) {
+                        self.$setState({
+                            hasMoreItems: false,
+                        });
+                        return;
+                    }
+                    fetchStories(self.currentTab, self.lastPage + 1)
+                    self.allowInfinite = true;
+                    self.$setState({
+                        lastItem: self.lastPage + 1,
+                        stories: self.stories,
+                    })
                 }
             },
             on: {
                 pageInit() {
                     var self = this;
-                    self.loadStories(0);
+                    self.fetchStories(0, 1);
                 },
             },
         }

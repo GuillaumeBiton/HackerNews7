@@ -1,0 +1,81 @@
+    <template>
+      <div class="page" data-name="stories">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="title sliding">HackerNews7</div>
+          </div>
+        </div>
+          <div data-infinite-distance="50" class="page-content infinite-scroll-content" @infinite="loadMore">
+            <div class="list">
+              <ul>
+                {{#each stories}}
+                <li>
+                <a href="/storie/{{id}}/" class="item-link">
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title">
+                      {{title}} ({{domain}})
+                      <div class="item-footer">{{points}} {{pluralize points single="point" multiple="points"}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
+                      </div>
+                      {{#if comments_count}}<div class="item-after"><span class="badge">{{comments_count}}</span></div>{{/if}}
+                    </div>
+                  </div>
+                </a>
+                </li>
+              {{/each}}
+              </ul>
+            </div>
+            {{#if hasMoreItems}}
+            <div class="preloader infinite-scroll-preloader"></div>
+            {{/if}}
+          </div>
+        </div>
+      </template>
+      <script>
+        return {
+          data: function () {
+            return {
+              allowInfinite: true,
+              hasMoreItems: true,
+              lastPage: 1,
+              stories: [],
+            }
+          },
+          methods: {
+            fetchStories(page) {
+                var self = this;
+                var app = self.$app;
+                app.request.json('https://api.hnpwa.com/v0/news/' + page + '.json', (items) => {
+                    var stories = self.stories.concat(items);
+                    self.$setState({
+                        stories: stories,
+                        lastPage: page
+                    })
+                })
+            },
+            loadMore() {
+                var self = this;
+        
+                var $ = self.$$;
+                if (!self.allowInfinite) return;
+                self.allowInfinite = false;
+
+                if (self.lastPage >= 10) {
+                    self.$setState({
+                        hasMoreItems: false
+                    })
+                    return
+                }
+                
+                self.fetchStories(self.lastPage +1)
+                self.allowInfinite = true;
+            }
+          },
+          on: {
+            pageInit() {
+                var self = this;
+                self.fetchStories(self.lastPage);
+            }, 
+          }
+        }
+      </script>

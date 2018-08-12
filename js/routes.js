@@ -1,7 +1,7 @@
 routes = [
     {
       path: '/',
-      componentUrl: './pages/infinite.html',
+      componentUrl: './pages/stories.html',
     },
     {
       path: '/about/',

@@ -90,7 +90,8 @@
   gulp.task('server', ['dist'], function () {
     return connect.server({
       root: [paths.dist.root],
-      livereload: true
+      livereload: true,
+      host: '0.0.0.0'
     });
   });
 

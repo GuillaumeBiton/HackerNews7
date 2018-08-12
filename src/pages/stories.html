@@ -88,7 +88,7 @@
                 if (!self.allowInfinite) return;
                 self.allowInfinite = false;
 
-                if (self.lastPage >= self.endpoint.maxPages) {
+                if (self.lastPage > self.endpoint.maxPages) {
                     self.$setState({
                         hasMoreItems: false
                     })
@@ -109,7 +109,7 @@
                 hasMoreItems: true,
                 indexTopic: index
               });
-
+              
               self.fetchStories();
             },
           },

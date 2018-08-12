@@ -1,4 +1,4 @@
-    <template>
+<template>
       <div class="page" data-name="stories">
         <div class="navbar">
           <div class="navbar-inner">
@@ -14,16 +14,19 @@
         <div class="toolbar tabbar">
           <div class="toolbar-inner">
            {{#each endpoints}}
-            {{#if this.maxPages}}
-            <a href="#tab-{{@index}}" class="tab-link tab-{{@index}}" @click="selectTopic({{@index}})">{{this.topic}}</a>
+           {{#if this.maxPages}}
+            <a href="#tab-{{@index}}" class="tab-link{{#if @first}} tab-link-active{{/if}}" @click="selectTopic({{@index}})">{{this.topic}}</a>
             {{/if}}
             {{/each}}
           </div>
         </div>
-        <div data-infinite-distance="50" class="page-content infinite-scroll-content" @infinite="loadMore">
+        <div class="tabs">
+        {{#each endpoints}}
+        {{#if this.maxPages}}
+        <div id="tab-{{@index}}" data-infinite-distance="50" class="page-content infinite-scroll-content tab{{#if @first}} tab-active{{/if}}" @infinite="loadMore">
             <div class="list">
               <ul>
-                {{#each stories}}
+                {{#each @root.stories}}
                 <li>
                 <a href="/storie/{{id}}/" class="item-link">
                   <div class="item-content">
@@ -44,8 +47,10 @@
             <div class="preloader infinite-scroll-preloader"></div>
             {{/if}}
           </div>
+      {{/if}}
+      {{/each}}
         </div>
-      </template>
+</template>
       <script>
         return {
           data: function () {
@@ -60,6 +65,7 @@
               hasMoreItems: true,
               lastPage: 1,
               stories: [],
+              indexTopic: 0
             }
           },
           methods: {
@@ -94,15 +100,14 @@
             },
             selectTopic(index) {
               var self = this;
-            
-              self.$app.toolbar.setHighlight(".tab-" + index);
 
               self.$setState({
                 endpoint: self.endpoints[index],
                 stories: [],
                 lastPage: 1,
                 allowInfinite: true,
-                hasMoreItems: true
+                hasMoreItems: true,
+                indexTopic: index
               });
 
               self.fetchStories();

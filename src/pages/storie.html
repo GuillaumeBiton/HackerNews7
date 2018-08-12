@@ -1,48 +1,40 @@
 <template>
-    <div class="page" data-name="stories">
-        {{#storie}}
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="left">
-                <a href="#" class="link back">
-                    <i class="icon icon-back"></i>
-                    <span class="ios-only">Back</span>
-                </a>
-            </div>
-            <div class="title sliding">{{title}}</div>
+    <div class="page">
+      <div class="navbar">
+        <div class="navbar-inner sliding">
+          <div class="left">
+            <a href="#" class="link back">
+              <i class="icon icon-back"></i>
+              <span class="ios-only">Back</span>
+            </a>
           </div>
+          {{#storie}}
+          <div class="title">{{title}}</div>
+          {{/storie}}
         </div>
-        <div class="page-content messages-content">
-                <div class="messages messages-init">
-                    <div class="messages-title">{{title}}</div>
-                    <div class="messages-title">{{points}} {{pluralize points single="point" multiple="points"}} {{#if user}} by {{user}} {{/if}}- {{time_ago}}</div>
-                    <div class="messages-title">{{domain}}</div>
-                {{#comments}}
-                <div class="message message-received">
-                    <div class="message-content">
-                        <div class="message-name">{{user}}</div>
-                        <div class="message-bubble">
-                            <div class="message-text">{{content}}</div>
-                        </div>
-                    </div>
-                </div>
-                    {{#each comments}}
-                    <div class="message message-send">
-                        <div class="message-content">
-                            <div class="message-name">{{this.user}}</div>
-                            <div class="message-bubble">
-                                <div class="message-text">{{this.content}}</div>
-                            </div>
-                        </div>
-                    </div>
-                    {{/each}}  
-                {{/comments}}
-                </div>
+      </div>
+      <div class="page-content messages-content">
+        <div class="messages">
+        {{#storie}}
+          <div class="messages-title">{{title}}</div>
+          <div class="messages-title">{{points}} {{pluralize points single="point" multiple="points"}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
+          <div class="messages-title">{{domain}}</div>
+          {{#each comments}}
+          <div class="message message-sent">
+            <div class="message-content">
+                <div class="message-name">{{user}}</div>
+              <div class="message-bubble">
+                <div class="message-text">{{content}}</div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+          {{/storie}}
         </div>
-        {{/storie}}
+      </div>
     </div>
-</template>
-<script>
+  </template>
+  <script>
     return {
         data() {
             return {
@@ -61,10 +53,33 @@
             }
         },
         on: {
-            pageInit() {
+            pageInit(e, page) {
                 var self = this;
+                var app = self.$app;
                 self.fetchStorie(self.$route.params.id);
+                self.messagebar = app.messagebar.create({
+                  el: page.$el.find('.messagebar'),
+                  attachments: []
+                });
+                self.messages = app.messages.create({
+                  el: page.$el.find('.messages'),
+                  firstMessageRule: function (message, previousMessage, nextMessage) {
+                    if (message.isTitle) return false;
+                    if (!previousMessage || previousMessage.type !== message.type || previousMessage.name !== message.name) return true;
+                    return false;
+                  },
+                  lastMessageRule: function (message, previousMessage, nextMessage) {
+                    if (message.isTitle) return false;
+                    if (!nextMessage || nextMessage.type !== message.type || nextMessage.name !== message.name) return true;
+                    return false;
+                  },
+                  tailMessageRule: function (message, previousMessage, nextMessage) {
+                    if (message.isTitle) return false;
+                    if (!nextMessage || nextMessage.type !== message.type || nextMessage.name !== message.name) return true;
+                    return false;
+                  }
+                });
             },
         },
     }
-</script>
+  </script>

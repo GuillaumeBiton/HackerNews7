@@ -15,7 +15,7 @@
           <div class="toolbar-inner">
            {{#each endpoints}}
             {{#if this.maxPages}}
-            <a href="#tab-{{@index}}" class="tab-link" @click="selectTopic({{@index}})">{{this.topic}}</a>
+            <a href="#tab-{{@index}}" class="tab-link tab-{{@index}}" @click="selectTopic({{@index}})">{{this.topic}}</a>
             {{/if}}
             {{/each}}
           </div>
@@ -63,15 +63,15 @@
             }
           },
           methods: {
-            fetchStories(page) {
+            fetchStories() {
                 var self = this;
                 var app = self.$app;
                 var url = self.endpoint.url.substring(0, self.endpoint.url.lastIndexOf('/')+1);
-                app.request.json(url + page + '.json', (items) => {
+                app.request.json(url + self.lastPage + '.json', (items) => {
                     var stories = self.stories.concat(items);
                     self.$setState({
                         stories: stories,
-                        lastPage: page
+                        lastPage: self.lastPage + 1
                     })
                 })
             },
@@ -89,26 +89,29 @@
                     return
                 }
 
-                self.fetchStories(self.lastPage +1)
+                self.fetchStories()
                 self.allowInfinite = true;
             },
             selectTopic(index) {
               var self = this;
+            
+              self.$app.toolbar.setHighlight(".tab-" + index);
 
               self.$setState({
                 endpoint: self.endpoints[index],
                 stories: [],
                 lastPage: 1,
+                allowInfinite: true,
                 hasMoreItems: true
               });
 
-              self.fetchStories(self.lastPage);
+              self.fetchStories();
             },
           },
           on: {
             pageInit() {
                 var self = this;
-                self.fetchStories(self.lastPage);
+                self.fetchStories();
             }, 
           }
         }

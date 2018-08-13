@@ -29,3 +29,7 @@
     content: '';
     z-index: 6000;
   }
+
+  .panel-left {
+	  width: 320px;
+  }

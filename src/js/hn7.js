@@ -25,7 +25,7 @@
         '{{/each}}'
     );
 
-    var app, mainView, leftView, splitView;
+    var app, mainView, leftView;
 
     // Init App
     app = new Framework7({
@@ -49,7 +49,7 @@
                 self.request.json(self.data.apiUrl, (api) => {
                     self.data.api = api
                 })
-            }
+            },
         },
         // Enable panel left visibility breakpoint
         panel: {
@@ -60,52 +60,14 @@
     
     // Add Right/Main View
     mainView = app.views.create('.view-main', {
-        url: '/'
+        url: '/about/'
     });
 
     // Add Right/Main View
     leftView = app.views.create('.view-left', {
-        url: '/'
+        url: '/',
+        linksView: '.view-main'
     });
-
-    // Modify layout on splitview
-    function checkSplitView() {
-        var activeStoryLink;
-        if ($$(window).width() < 767) {
-            delete leftView.params.linksView;
-            if (splitView) {
-                // Need to check main view history and load same page into left view
-                activeStoryLink = $$('.stories-list a.item-link.active-story');
-                if (mainView.history.length > 1 && activeStoryLink.length > 0) {
-                    leftView.router.load({
-                        animatePages: false,
-                        url: activeStoryLink.attr('href'),
-                        contextName: activeStoryLink.attr('data-contextName')
-                    });
-                }
-            }
-            splitView = false;
-        } else {
-            if (!splitView) {
-                // Need to check left view history and go back
-                if (leftView.history.length === 2) {
-                    leftView.router.back({
-                        animatePages: false
-                    });
-                    activeStoryLink = $$('.stories-list a.item-link.active-story');
-                    // Need to load same page in main view on the right
-                    mainView.router.load({
-                        url: activeStoryLink.attr('href'),
-                        contextName: activeStoryLink.attr('data-contextName')
-                    });
-                }
-            }
-            splitView = true;
-            leftView.params.linksView = '.view-main';
-        }
-    }
-    $$(window).resize(checkSplitView);
-    checkSplitView();
 
     // Export app to global
     window.app = app;

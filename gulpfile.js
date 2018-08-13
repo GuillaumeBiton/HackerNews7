@@ -83,7 +83,8 @@
   
     swPrecache.write(`${rootDir}/service-worker.js`, {
       staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
-      stripPrefix: rootDir
+      stripPrefix: rootDir,
+      replacePrefix: '/HackerNews7'
     }, callback);
   });
 

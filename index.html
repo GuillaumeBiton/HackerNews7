@@ -8,6 +8,7 @@
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="theme-color" content="#ff9800">
 
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
@@ -15,7 +16,10 @@
     <link href="img/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
     <link href="img/apple-touch-startup-image-1536x2008.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
     <link href="img/apple-touch-startup-image-1496x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
-    
+	
+	<!-- Web manifest -->
+	<link rel="manifest" href="manifest.json">
+
 	<title>HackerNews7</title>
 
 	<link rel="stylesheet" href="lib/framework7.css">
@@ -24,6 +28,7 @@
 </head>
 
 <body>
+	<noscript>You have javascript disabled, but this app needs it to work =(</noscript>
 	<div id="app" class="color-theme-orange">
 		<!-- Status bar overlay for fullscreen mode-->
 		<div class="statusbar"></div>
@@ -41,6 +46,7 @@
 	<script src="lib/framework7.js"></script>
 	<script src="js/routes.js"></script>
 	<script src="js/hn7.js"></script>
+	<script src="js/service-worker-registration.js"></script>
 </body>
 
 </html>

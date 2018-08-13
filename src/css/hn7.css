@@ -244,6 +244,7 @@ a {
 /* This will fix flicker navbar in left panel view */
 
 .panel-left .navbar {
+	transform: translate3d(0, 0, 0);
 	-webkit-transform: translate3d(0, 0, 0);
 }
 /* Because we have panels-overlay inside of .views we need to fix its open position for right panel */
@@ -312,9 +313,7 @@ html.with-statusbar-overlay body .panel {
 		-ms-transform: translate3d(100%, 0, 0);
 		transform: translate3d(100%, 0, 0);
 	}
-	//.panel.panel-left.panel-cover {
-//		left: -320px;
-//	}
+
 	.choose-story {
 		display: block;
 		text-align: center;

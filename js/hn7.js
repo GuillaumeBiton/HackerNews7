@@ -33,6 +33,9 @@
         id: 'io.framework7.hackernews7', // App bundle ID
         name: 'HackerNews7', // App name
         theme: 'auto', // Automatic theme detection
+        clicks: {
+            externalLinks: '.external, .message a', //external links also in comments
+        },
         routes: routes, // App routes
         data() {
             return {

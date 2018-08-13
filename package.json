@@ -1,6 +1,6 @@
 {
   "name": "hackernews7",
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0-beta.2",
   "description": "Framework7 HackerNews web app",
   "main": "index.html",
   "repository": {

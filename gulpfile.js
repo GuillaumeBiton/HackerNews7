@@ -10,6 +10,7 @@
     open = require('gulp-open'),
     NWBuilder = require('nw-builder'),
     deploy = require('gulp-gh-pages'),
+    swPrecache = require('sw-precache'),
 
     paths = {
       libraries: {
@@ -77,7 +78,16 @@
       .pipe(gulp.dest(paths.dist.images));
   });
 
-  gulp.task('dist', ['libraries', 'templates', 'scripts', 'styles', 'fonts', 'images']);
+  gulp.task('generate-service-worker', function(callback) {
+    var rootDir = 'www';
+  
+    swPrecache.write(`${rootDir}/service-worker.js`, {
+      staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
+      stripPrefix: rootDir
+    }, callback);
+  });
+
+  gulp.task('dist', ['libraries', 'templates', 'scripts', 'styles', 'fonts', 'images', 'generate-service-worker']);
 
   gulp.task('watch', function () {
     gulp.watch(paths.libraries.scripts.concat(paths.libraries.styles), ['libraries']);

@@ -272,7 +272,7 @@ html.with-statusbar-overlay body .panel {
 	}
 	.panel.panel-left.panel-cover {
 		display: block;
-		left: 0%;
+		left: 100%;
 		width: 100%;
 		-webkit-transition: 0ms;
 		transition: 0ms;
@@ -312,9 +312,9 @@ html.with-statusbar-overlay body .panel {
 		-ms-transform: translate3d(100%, 0, 0);
 		transform: translate3d(100%, 0, 0);
 	}
-	.panel.panel-left.panel-cover {
-		left: -320px;
-	}
+	//.panel.panel-left.panel-cover {
+//		left: -320px;
+//	}
 	.choose-story {
 		display: block;
 		text-align: center;
@@ -332,7 +332,7 @@ html.with-statusbar-overlay body .panel {
 @media (min-width: 1024px) and (max-width: 1279px) {
 	.panel.panel-left.panel-cover {
 		display: block;
-		left: 0%;
+		left: 320px;
 	}
 	body.with-panel-left-cover .panel-left {
 		-webkit-transform: translate3d(0%, 0, 0);
@@ -353,7 +353,7 @@ html.with-statusbar-overlay body .panel {
 @media (min-width: 1280px) {
     .panel.panel-left.panel-cover {
 		display: block;
-		left: 0%;
+		left: 320px;
 	}
     .view-main {
         box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.2);

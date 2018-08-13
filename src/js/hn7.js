@@ -47,12 +47,6 @@
                     self.data.api = api
                 })
             }
-        },
-        on: {
-            init() {
-                var self = this;
-                self.methods.fetchAPI();
-            }
         }
     });
 

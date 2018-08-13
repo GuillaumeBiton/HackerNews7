@@ -25,7 +25,7 @@
         '{{/each}}'
     );
 
-    var app, mainView;
+    var app, mainView, leftView;
 
     // Init App
     app = new Framework7({
@@ -49,14 +49,29 @@
                 self.request.json(self.data.apiUrl, (api) => {
                     self.data.api = api
                 })
-            }
+            },
+            
+        },
+        // Enable panel left visibility breakpoint
+        panel: {
+            leftBreakpoint: 960,
         }
     });
 
+    
     // Add Right/Main View
     mainView = app.views.create('.view-main', {
-        url: '/'
+        url: '/empty/'
     });
+
+    // Add Right/Main View
+    leftView = app.views.create('.view-left', {
+        url: '/',
+        linksView: '.view-main'
+    });
+
+    // splitView mode
+    if (!app.panel.left.opened) delete leftView.params.linksView;
 
     // Export app to global
     window.app = app;

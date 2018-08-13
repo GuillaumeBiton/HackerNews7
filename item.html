@@ -1,0 +1,32 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="left sliding">
+      <!-- Panel link for split view -->
+      <a href="#" class="open-panel link icon-only"> <i class="icon icon-bars"></i></a>
+      <!-- Back link for single view -->
+      <a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a>
+    </div>
+    <div class="center sliding">{{title}}</div>
+    <div class="right sliding">
+      <!-- User link for small screen -->
+      <a href="#" data-panel="right" class="open-panel link icon-only"> <img src="img/avatar.svg" width="28px" /></a>
+    </div>
+  </div>
+</div>
+<div class="pages">
+  <div class="page" data-page="item">
+    <div class="page-content">
+      <div class="story-header">
+        <div class="story-title">{{title}}</div>
+        <div class="story-info">{{score}} points by {{by}} - {{time_ago time}}</div>
+        <div class="story-link"><a href="{{url}}" target="_blank" class="external">{{domain}}</a></div>
+      </div>
+			<div class="story-comments">
+        <div class="messages">
+          <div class="preloader"></div>
+          <div class="preloader-label">Loading comments <span class="preloader-progress">0</span>%</div>
+        </div>   
+      </div>
+    </div>
+  </div>
+</div>

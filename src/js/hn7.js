@@ -60,7 +60,7 @@
     
     // Add Right/Main View
     mainView = app.views.create('.view-main', {
-        url: '/about/'
+        url: '/empty/'
     });
 
     // Add Right/Main View

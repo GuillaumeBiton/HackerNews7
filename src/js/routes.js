@@ -15,12 +15,16 @@ routes = [
       }
     },
     {
+      path: '/empty/',
+      url: './pages/empty.html',
+    },
+    {
       path: '/about/',
       url: './pages/about.html',
     },
     {
-      path: '/storie/:id/',
-      componentUrl: './pages/storie.html',
+      path: '/story/:id/',
+      componentUrl: './pages/story.html',
     },
     // Default route (404 page). MUST BE THE LAST
     {

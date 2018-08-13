@@ -1,40 +1,34 @@
 <template>
-    <div class="page">
-      <div class="navbar">
-        <div class="navbar-inner sliding">
-          <div class="left">
-            <a href="#" class="link back">
-              <i class="icon icon-back"></i>
-              <span class="ios-only">Back</span>
-            </a>
-          </div>
-          {{#storie}}
-          <div class="title">{{title}}</div>
-          {{/storie}}
-        </div>
+<div class="page">
+  <!-- navbar -->
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">Back</span>
+        </a>
       </div>
-      <div class="page-content messages-content">
-        <div class="messages">
-        {{#storie}}
-          <div class="messages-title">{{title}}</div>
-          <div class="messages-title">{{points}} {{pluralize points single="point" multiple="points"}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
-          <div class="messages-title">{{domain}}</div>
-          {{#each comments}}
-          <div class="message message-sent">
-            <div class="message-content">
-                <div class="message-name">{{user}}</div>
-              <div class="message-bubble">
-                <div class="message-text">{{content}}</div>
-              </div>
-            </div>
-          </div>
-          {{/each}}
-          {{/storie}}
-        </div>
-      </div>
+      {{#storie}}
+      <div class="title">{{title}}</div>
+      {{/storie}}
     </div>
-  </template>
-  <script>
+  </div>
+
+  <!-- Page content -->
+  <div class="page-content messages-content">
+    <div class="messages messages-init" data-new-messages-first="true">
+    {{#storie}}
+      <div class="messages-title">{{title}}</div>
+      <div class="messages-title">{{points}} {{pluralize points single="point" multiple="points"}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
+      <div class="messages-title">{{domain}}</div>
+      {{> "comments"}}
+    {{/storie}}
+    </div>
+  </div>
+</div>
+</template>
+<script>
     return {
         data() {
             return {
@@ -57,28 +51,7 @@
                 var self = this;
                 var app = self.$app;
                 self.fetchStorie(self.$route.params.id);
-                self.messagebar = app.messagebar.create({
-                  el: page.$el.find('.messagebar'),
-                  attachments: []
-                });
-                self.messages = app.messages.create({
-                  el: page.$el.find('.messages'),
-                  firstMessageRule: function (message, previousMessage, nextMessage) {
-                    if (message.isTitle) return false;
-                    if (!previousMessage || previousMessage.type !== message.type || previousMessage.name !== message.name) return true;
-                    return false;
-                  },
-                  lastMessageRule: function (message, previousMessage, nextMessage) {
-                    if (message.isTitle) return false;
-                    if (!nextMessage || nextMessage.type !== message.type || nextMessage.name !== message.name) return true;
-                    return false;
-                  },
-                  tailMessageRule: function (message, previousMessage, nextMessage) {
-                    if (message.isTitle) return false;
-                    if (!nextMessage || nextMessage.type !== message.type || nextMessage.name !== message.name) return true;
-                    return false;
-                  }
-                });
+
             },
         },
     }

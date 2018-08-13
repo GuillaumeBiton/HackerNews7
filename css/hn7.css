@@ -1,3 +1,4 @@
+/* extend panel left default size */
 .panel-left {
   width: 320px;
 }
@@ -53,4 +54,11 @@
 		top: 50%;
 		margin-top: -15px;
 		text-align: center;
-	}
+  }
+  
+/* fix ios tab on panel 320px */
+@media (min-width: 768px) {
+  .ios .tabbar a.tab-link, .ios .tabbar-labels a.tab-link, .ios .tabbar a.link, .ios .tabbar-labels a.link {
+    min-width: 20%;
+  }
+}

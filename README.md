@@ -7,11 +7,24 @@ About
 -----
 This is a demo app to show how [Framework7](https://github.com/nolimits4web/Framework7) makes it easy to develop hybrid apps.
 
-It is based on the [Official Hacker News API](https://github.com/HackerNews/API) even if I think that the [Unofficial Hacker News API](https://github.com/cheeaun/node-hnapi/) provides a better structure (but I hope they will be inspired by this last one).
+Features
+--------
 
-Some of my work here are inspired by the work of Lim Chee Aun ([cheeaun](https://github.com/cheeaun)) and is project [hackerweb](https://github.com/cheeaun/hackerweb)
+Framework7 v3 features demonstrate in component pages.
 
-This app is *multi-platform*. You can use it throw your web browser on your smartphone, tablet or desktop because it's responsive. You can also create a desktop app with [node-webkit](https://github.com/rogerwang/node-webkit).
+## stories.html
+
+- [Tabs](http://framework7.io/docs/tabs.html)
+- [Tabbar](http://framework7.io/docs/toolbar-tabbar.html)
+- [Infinite scroll](http://framework7.io/docs/infinite-scroll.html)
+- [Template7 helpers](http://idangero.us/template7)
+- [setState](https://blog.framework7.io/superpowered-router-components-in-framework7-3-1-0-296f598aeb99)
+
+## storie.html
+
+- [Messages](http://framework7.io/docs/messages.html)
+- [Template7 partial](http://idangero.us/template7)
+- [setState](https://blog.framework7.io/superpowered-router-components-in-framework7-3-1-0-296f598aeb99)
 
 License
 -------

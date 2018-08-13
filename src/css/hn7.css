@@ -1,3 +1,14 @@
+.panel-left {
+  width: 320px;
+}
+
+/* Panel left override main view on smartphone */
+.panel-left:not(.panel-visible-by-breakpoint) {
+  z-index: 6000;
+  display: block;
+  width: 100%;
+}
+
 /* Left Panel right border when it is visible by breakpoint */
 .panel-left.panel-visible-by-breakpoint:before {
     position: absolute;
@@ -28,10 +39,6 @@
     background: rgba(0,0,0,0.1);
     content: '';
     z-index: 6000;
-  }
-
-  .panel-left {
-	  width: 320px;
   }
 
   .choose-story {

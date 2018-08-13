@@ -50,11 +50,12 @@
                     self.data.api = api
                 })
             },
+            
         },
         // Enable panel left visibility breakpoint
         panel: {
             leftBreakpoint: 960,
-        },
+        }
     });
 
     
@@ -68,6 +69,9 @@
         url: '/',
         linksView: '.view-main'
     });
+
+    // splitView mode
+    if (!app.panel.left.opened) delete leftView.params.linksView;
 
     // Export app to global
     window.app = app;

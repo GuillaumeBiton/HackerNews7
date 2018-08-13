@@ -1,7 +1,7 @@
 {
     "name": "HackerNews7",
     "short_name": "HN7",
-    "start_url": ".",
+    "start_url": "./HackerNews7/",
     "display": "standalone",
     "background_color": "#fff",
     "theme_color": "#ff9800",

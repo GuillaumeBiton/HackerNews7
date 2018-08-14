@@ -66,22 +66,14 @@
       fetchStories() {
         var self = this;
         var app = self.$app;
-        if (stories = JSON.parse(localStorage.getItem(self.endpoint.topic))) {
+        var url = self.endpoint.url.substring(0, self.endpoint.url.lastIndexOf('/') + 1);
+        app.request.json(url + self.lastPage + '.json', (items) => {
+          var stories = self.stories.concat(items);
           self.$setState({
             stories: stories,
             lastPage: self.lastPage + 1
           })
-        } else {
-          var url = self.endpoint.url.substring(0, self.endpoint.url.lastIndexOf('/') + 1);
-          app.request.json(url + self.lastPage + '.json', (items) => {
-            var stories = self.stories.concat(items);
-            localStorage.setItem(self.endpoint.topic, JSON.stringify(stories));
-            self.$setState({
-              stories: stories,
-              lastPage: self.lastPage + 1
-            })
-          })
-        }
+        })
       },
       loadMore() {
         var self = this;

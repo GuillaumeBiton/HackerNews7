@@ -1,6 +1,6 @@
 {
   "name": "hackernews7",
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0",
   "description": "Framework7 HackerNews web app",
   "main": "index.html",
   "repository": {
@@ -31,7 +31,7 @@
     "gulp-connect": "^5.5.0",
     "gulp-gh-pages": "^0.5.4",
     "gulp-open": "^3.0.1",
-    "nw-builder": "^3.1.2",
+    "nw-builder": "^3.5.4",
     "sw-precache": "^5.2.1"
   },
   "window": {

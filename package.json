@@ -52,6 +52,7 @@
   "scripts": {
     "start": "gulp",
     "build:desktop": "gulp build",
+    "deploy": "gulp deploy",
     "stop": "gulp clean"
   }
 }

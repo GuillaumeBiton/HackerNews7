@@ -15,11 +15,11 @@
     paths = {
       libraries: {
         scripts: [
-					'node_modules/framework7/js/framework7.js',
-					'node_modules/framework7/js/framework7.js.map'
-				],
+          'node_modules/framework7/js/framework7.min.js',
+          'node_modules/framework7/js/framework7.js.map'
+        ],
         styles: [
-          'node_modules/framework7/css/framework7.css'
+          'node_modules/framework7/css/framework7.min.css'
         ],
         fonts: [
           'node_modules/framework7-icons/fonts/*',
@@ -78,9 +78,9 @@
       .pipe(gulp.dest(paths.dist.images));
   });
 
-  gulp.task('generate-service-worker', function(callback) {
+  gulp.task('generate-service-worker', function (callback) {
     var rootDir = 'www';
-  
+
     swPrecache.write(`${rootDir}/service-worker.js`, {
       staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff}'],
       stripPrefix: rootDir,

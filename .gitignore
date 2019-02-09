@@ -1,6 +1,2 @@
 node_modules
-cache
-www
-build
-.publish
 package-lock.json

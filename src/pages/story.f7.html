@@ -1,0 +1,58 @@
+<template>
+    <div class="page" data-name="story">
+      <!-- navbar -->
+      <div class="navbar">
+        <div class="navbar-inner sliding">
+          <div class="left">
+            <a href="#" class="link back">
+              <i class="icon icon-back"></i>
+              <span class="ios-only">Back</span>
+            </a>
+          </div>
+          {{#story}}
+          <div class="title">{{title}}</div>
+          {{/story}}
+        </div>
+      </div>
+    
+      <!-- Page content -->
+      <div class="page-content messages-content">
+        <div class="messages messages-init" data-new-messages-first="true">
+        {{#story}}
+          <div class="messages-title">{{title}}</div>
+          <div class="messages-title">{{points}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
+          <div class="messages-title">{{domain}}</div>
+          {{#if content}}<div class="block block-strong">{{content}}</div>{{/if}}
+          {{> "comments"}}
+        {{/story}}
+        </div>
+      </div>
+    </div>
+    </template>
+    <script>
+        export default {
+            data() {
+                return {
+                    story : null
+                }
+            },
+            methods: {
+                fetchStory(id) {
+                    var self = this;
+                    var app = self.$app;
+                    app.request.json('https://api.hnpwa.com/v0/item/' + id + '.json', (story) => {
+                        self.$setState({
+                            story: story
+                        })
+                    })
+                }
+            },
+            on: {
+                pageInit(e, page) {
+                    var self = this;
+                    var app = self.$app;
+                    self.fetchStory(self.$route.params.id);
+                },
+            },
+        }
+      </script>

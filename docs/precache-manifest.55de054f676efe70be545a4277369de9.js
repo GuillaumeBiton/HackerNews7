@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "4afd0be30c3a0c58e5a3",
+    "revision": "90432fb81a8677bece05",
     "url": "css/app.css"
   },
   {
-    "revision": "4afd0be30c3a0c58e5a3",
+    "revision": "90432fb81a8677bece05",
     "url": "js/app.js"
-  },
-  {
-    "revision": "5fce7c1238bad823bee064bd127fe4cd",
-    "url": "fonts/Framework7Icons-Regular.woff"
   },
   {
     "revision": "19158ff09eb907432a7ccacd074ef9d5",
     "url": "fonts/Framework7Icons-Regular.woff2"
+  },
+  {
+    "revision": "5fce7c1238bad823bee064bd127fe4cd",
+    "url": "fonts/Framework7Icons-Regular.woff"
   },
   {
     "revision": "570eb83859dc23dd0eec423a49e147fe",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "fonts/MaterialIcons-Regular.eot"
   },
   {
-    "revision": "cb17a478abe4d6012163a45de58649b8",
+    "revision": "fdc3dd0017fd9a2bf21a08b358768a5d",
     "url": "./index.html"
   },
   {
@@ -56,12 +56,12 @@ self.__precacheManifest = [
     "url": "static/icons/128x128.png"
   },
   {
-    "revision": "b174b0ec82db4b8ea3c4e5fb7a41cda9",
-    "url": "static/icons/152x152.png"
-  },
-  {
     "revision": "b5147a157dbee1b411bd9de281896ae5",
     "url": "static/icons/144x144.png"
+  },
+  {
+    "revision": "b174b0ec82db4b8ea3c4e5fb7a41cda9",
+    "url": "static/icons/152x152.png"
   },
   {
     "revision": "56a6f087b2509df23805162066e27c3f",

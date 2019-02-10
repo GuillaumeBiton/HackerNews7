@@ -5,7 +5,13 @@
 
 /* master detail width */
 :root {
-  --f7-page-master-width: 360px;
+  --f7-page-master-width: 380px;
+}
+
+/* fix view-master tab width */
+.tabbar-scrollable a.tab-link {
+  width: 100%;
+  flex-shrink: initial;
 }
 
 /* Your app custom styles here */

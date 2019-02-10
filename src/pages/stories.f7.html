@@ -5,7 +5,7 @@
           <div class="title">HackerNews7</div>
         </div>
       </div>
-      <div class="toolbar tabbar toolbar-top">
+      <div class="toolbar tabbar tabbar-scrollable toolbar-top">
         <div class="toolbar-inner">
           {{#each endpoints}} {{#if this.maxPages}}
           <a href="#tab-{{@index}}" class="tab-link{{#if @first}} tab-link-active{{/if}}" @click="selectTopic({{@index}})">{{this.topic}}</a>

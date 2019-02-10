@@ -21,7 +21,7 @@
         {{#story}}
           <div class="messages-title">{{title}}</div>
           <div class="messages-title">{{points}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
-          <div class="messages-title">{{domain}}</div>
+          <div class="messages-title"><a href="{{url}}" class="external">{{domain}}</a></div>
           {{#if content}}<div class="block block-strong">{{content}}</div>{{/if}}
           {{> "comments"}}
         {{/story}}

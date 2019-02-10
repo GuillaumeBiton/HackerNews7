@@ -1,7 +1,7 @@
 {
   "name": "hackernews7",
   "private": true,
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Framework7 HackerNews web app",
   "repository": {
     "type": "git",
@@ -23,9 +23,10 @@
   },
   "homepage": "https://guillaumebiton.github.com/HackerNews7",
   "framework7": {
-    "cwd": "/Users/guillaumebiton/Downloads/hackernews7",
+    "cwd": "/Users/guillaumebiton/Downloads/hn7",
     "type": [
-      "web"
+      "web",
+      "pwa"
     ],
     "name": "hackernews7",
     "framework": "core",
@@ -36,7 +37,7 @@
   },
   "scripts": {
     "build-prod": "cross-env NODE_ENV=production node ./build/build.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.js --host 0.0.0.0",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.js",
     "start": "npm run dev"
   },
   "browserslist": [
@@ -79,6 +80,7 @@
     "url-loader": "^1.1.2",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "workbox-webpack-plugin": "^3.6.3"
   }
 }

@@ -10,7 +10,7 @@ This is a demo app to show how [Framework7](https://github.com/nolimits4web/Fram
 Features
 --------
 
-Framework7 v3 features demonstrate in component pages.
+Framework7 v4 features demonstrate in component pages.
 
 ## stories.html
 

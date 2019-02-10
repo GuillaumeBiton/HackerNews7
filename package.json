@@ -33,7 +33,8 @@
     "template": "single-view",
     "bundler": "webpack",
     "cssPreProcessor": false,
-    "customColor": false
+    "customColor": true,
+    "color": "#ff6b22"
   },
   "scripts": {
     "build-prod": "cross-env NODE_ENV=production node ./build/build.js",

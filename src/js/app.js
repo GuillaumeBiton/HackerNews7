@@ -60,6 +60,6 @@ var app = new Framework7({
 
   // Register service worker
   serviceWorker: {
-    path: '/service-worker.js',
+    path: '/HackerNews7/service-worker.js',
   },
 });

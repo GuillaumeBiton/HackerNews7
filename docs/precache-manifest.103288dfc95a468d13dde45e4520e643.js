@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "90432fb81a8677bece05",
+    "revision": "6a056302633c1aa3e186",
     "url": "css/app.css"
   },
   {
-    "revision": "90432fb81a8677bece05",
+    "revision": "6a056302633c1aa3e186",
     "url": "js/app.js"
   },
   {
@@ -24,12 +24,12 @@ self.__precacheManifest = [
     "url": "fonts/MaterialIcons-Regular.woff"
   },
   {
-    "revision": "28db829912bb402df5b1e6fb16f1908c",
-    "url": "fonts/Framework7Icons-Regular.eot"
-  },
-  {
     "revision": "111371010ef70bbcf7e6968abc8e2fb2",
     "url": "fonts/Framework7Icons-Regular.ttf"
+  },
+  {
+    "revision": "28db829912bb402df5b1e6fb16f1908c",
+    "url": "fonts/Framework7Icons-Regular.eot"
   },
   {
     "revision": "a37b0c01c0baf1888ca812cc0508f6e2",

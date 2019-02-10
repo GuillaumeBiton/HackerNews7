@@ -3,6 +3,11 @@
   --f7-theme-color: #FF6B22;
 }
 
+/* master detail width */
+:root {
+  --f7-page-master-width: 360px;
+}
+
 /* Your app custom styles here */
 .view-master-detail .page-master-detail .link.back,
 .view-master-detail .navbar-master-detail .link.back {

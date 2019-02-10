@@ -57,4 +57,9 @@ var app = new Framework7({
   },
   // App routes
   routes: routes,
+
+  // Register service worker
+  serviceWorker: {
+    path: '/service-worker.js',
+  },
 });

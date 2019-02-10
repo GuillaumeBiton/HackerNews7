@@ -3,7 +3,7 @@
   "short_name": "hn7",
   "description": "Framework7 HackerNews web app",
   "lang": "en-US",
-  "start_url": "/",
+  "start_url": "/HackerNews7/",
   "display": "standalone",
   "background_color": "#FF6B22",
   "theme_color": "#FF6B22",

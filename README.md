@@ -12,6 +12,8 @@ Features
 
 Framework7 v4 features demonstrate in component pages.
 
+This demo is developped using [Framework Command-Line Interface](http://framework7.io/cli/).
+
 ## stories.html
 
 - [Tabs](http://framework7.io/docs/tabs.html)

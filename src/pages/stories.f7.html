@@ -71,7 +71,8 @@
             var stories = self.stories.concat(items);
             self.$setState({
               stories: stories,
-              lastPage: self.lastPage + 1
+              lastPage: self.lastPage + 1,
+              allowInfinite: true
             });
           });
         },
@@ -81,7 +82,7 @@
           var $ = self.$$;
           if (!self.allowInfinite) return;
           self.allowInfinite = false;
-  
+          
           if (self.lastPage > self.endpoint.maxPages) {
             self.$setState({
               hasMoreItems: false
@@ -90,17 +91,16 @@
           }
   
           self.fetchStories();
-          self.allowInfinite = true;
         },
         selectTopic(index) {
           var self = this;
-  
+          
           self.$setState({
             endpoint: self.endpoints[index],
             stories: [],
             lastPage: 1,
             allowInfinite: true,
-            hasMoreItems: true,
+            hasMoreItems: (self.endpoints[index].maxPages > 1) ? true : false,
             indexTopic: index
           });
   

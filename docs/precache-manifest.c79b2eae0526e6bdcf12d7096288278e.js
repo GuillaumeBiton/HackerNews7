@@ -1,35 +1,35 @@
 self.__precacheManifest = [
   {
-    "revision": "7ffc0e29e5f2845a9b6d",
+    "revision": "1fc2f4874c1e5c695bf8",
     "url": "css/app.css"
   },
   {
-    "revision": "7ffc0e29e5f2845a9b6d",
+    "revision": "1fc2f4874c1e5c695bf8",
     "url": "js/app.js"
-  },
-  {
-    "revision": "570eb83859dc23dd0eec423a49e147fe",
-    "url": "fonts/MaterialIcons-Regular.woff2"
-  },
-  {
-    "revision": "5fce7c1238bad823bee064bd127fe4cd",
-    "url": "fonts/Framework7Icons-Regular.woff"
   },
   {
     "revision": "19158ff09eb907432a7ccacd074ef9d5",
     "url": "fonts/Framework7Icons-Regular.woff2"
   },
   {
+    "revision": "5fce7c1238bad823bee064bd127fe4cd",
+    "url": "fonts/Framework7Icons-Regular.woff"
+  },
+  {
+    "revision": "570eb83859dc23dd0eec423a49e147fe",
+    "url": "fonts/MaterialIcons-Regular.woff2"
+  },
+  {
     "revision": "012cf6a10129e2275d79d6adac7f3b02",
     "url": "fonts/MaterialIcons-Regular.woff"
   },
   {
-    "revision": "111371010ef70bbcf7e6968abc8e2fb2",
-    "url": "fonts/Framework7Icons-Regular.ttf"
-  },
-  {
     "revision": "28db829912bb402df5b1e6fb16f1908c",
     "url": "fonts/Framework7Icons-Regular.eot"
+  },
+  {
+    "revision": "111371010ef70bbcf7e6968abc8e2fb2",
+    "url": "fonts/Framework7Icons-Regular.ttf"
   },
   {
     "revision": "a37b0c01c0baf1888ca812cc0508f6e2",
@@ -52,10 +52,6 @@ self.__precacheManifest = [
     "url": "static/icons/favicon.ico"
   },
   {
-    "revision": "b174b0ec82db4b8ea3c4e5fb7a41cda9",
-    "url": "static/icons/152x152.png"
-  },
-  {
     "revision": "4a30eea30e507a8122bbe44c05233fdd",
     "url": "static/icons/128x128.png"
   },
@@ -64,8 +60,8 @@ self.__precacheManifest = [
     "url": "static/icons/144x144.png"
   },
   {
-    "revision": "956df353394a14efbdae3c58150d16c8",
-    "url": "static/icons/192x192.png"
+    "revision": "b174b0ec82db4b8ea3c4e5fb7a41cda9",
+    "url": "static/icons/152x152.png"
   },
   {
     "revision": "56a6f087b2509df23805162066e27c3f",
@@ -74,6 +70,10 @@ self.__precacheManifest = [
   {
     "revision": "4a30eea30e507a8122bbe44c05233fdd",
     "url": "static/icons/favicon.png"
+  },
+  {
+    "revision": "956df353394a14efbdae3c58150d16c8",
+    "url": "static/icons/192x192.png"
   },
   {
     "revision": "08900e5fb42c91704fbf5a01796b3e94",

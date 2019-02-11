@@ -32,7 +32,7 @@ This demo is developped using [Framework Command-Line Interface](http://framewor
 License
 -------
 
-Licensed under the [MIT License](https://guillaumebiton.github.com/HackerNews7/LICENSE)
+Licensed under the [MIT License](https://github.com/GuillaumeBiton/HackerNews7/raw/master/LICENSE)
 
 PWA
 ---

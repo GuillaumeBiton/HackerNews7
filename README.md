@@ -37,7 +37,7 @@ Licensed under the [MIT License](https://guillaumebiton.github.com/HackerNews7/L
 PWA
 ---
 
-![LightHouse Score](https://guillaumebiton.github.com/HackerNews7lighthouse-score.png)
+![LightHouse Score](https://github.com/GuillaumeBiton/HackerNews7/raw/master/lighthouse-score.png)
 
 Thanks
 ------

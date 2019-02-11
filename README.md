@@ -18,13 +18,14 @@ Framework7 v4 features demonstrate in component pages.
 - [Tabbar](http://framework7.io/docs/toolbar-tabbar.html)
 - [Infinite scroll](http://framework7.io/docs/infinite-scroll.html)
 - [Template7 helpers](http://idangero.us/template7)
-- [setState](https://blog.framework7.io/superpowered-router-components-in-framework7-3-1-0-296f598aeb99)
+- [virtual Dom](http://framework7.io/docs/router-component.html#virtual-dom)
+- [Master details](http://framework7.io/docs/view.html#master-detail)
 
 ## storie.html
 
 - [Messages](http://framework7.io/docs/messages.html)
 - [Template7 partial](http://idangero.us/template7)
-- [setState](https://blog.framework7.io/superpowered-router-components-in-framework7-3-1-0-296f598aeb99)
+- [virtual Dom](http://framework7.io/docs/router-component.html#virtual-dom)
 
 License
 -------

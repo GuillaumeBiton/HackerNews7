@@ -25,7 +25,7 @@
                     <div class="item-inner">
                       <div class="item-title">
                         {{title}} ({{domain}})
-                        <div class="item-footer">{{points}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
+                        <div class="item-footer">{{points}} {{pluralize points single="point" multiple="points"}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
                       </div>
                       {{#if comments_count}}
                       <div class="item-after">

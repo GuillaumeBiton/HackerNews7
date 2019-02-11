@@ -20,7 +20,7 @@
         <div class="messages messages-init" data-new-messages-first="true">
         {{#story}}
           <div class="messages-title">{{title}}</div>
-          <div class="messages-title">{{points}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
+          <div class="messages-title">{{points}} {{pluralize points single="point" multiple="points"}} {{#if user}} by {{user}} {{/if}}{{time_ago}}</div>
           <div class="messages-title"><a href="{{url}}" class="external">{{domain}}</a></div>
           {{#if content}}<div class="block block-strong">{{content}}</div>{{/if}}
           {{> "comments"}}

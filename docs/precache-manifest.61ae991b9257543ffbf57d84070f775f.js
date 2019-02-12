@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "e53fffe9177909a22e9c",
+    "revision": "3680d82049e878e2427c",
     "url": "css/app.css"
   },
   {
-    "revision": "e53fffe9177909a22e9c",
+    "revision": "3680d82049e878e2427c",
     "url": "js/app.js"
   },
   {
@@ -52,12 +52,12 @@ self.__precacheManifest = [
     "url": "static/icons/favicon.ico"
   },
   {
-    "revision": "4a30eea30e507a8122bbe44c05233fdd",
-    "url": "static/icons/128x128.png"
-  },
-  {
     "revision": "b5147a157dbee1b411bd9de281896ae5",
     "url": "static/icons/144x144.png"
+  },
+  {
+    "revision": "4a30eea30e507a8122bbe44c05233fdd",
+    "url": "static/icons/128x128.png"
   },
   {
     "revision": "b174b0ec82db4b8ea3c4e5fb7a41cda9",

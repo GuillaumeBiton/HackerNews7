@@ -1,6 +1,7 @@
 /* Custom color theme properties */
 :root {
   --f7-theme-color: #FF6B22;
+  --f7-message-sent-bg-color: #cddc39;
 }
 
 /* master detail width */

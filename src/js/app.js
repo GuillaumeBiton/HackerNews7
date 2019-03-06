@@ -1,5 +1,13 @@
 import T7 from 'template7';
-import Framework7 from 'framework7/framework7.esm.bundle.js';
+import Framework7 from 'framework7';
+
+// import F7 components
+import Tabs from 'framework7/components/tabs/tabs.js';
+import Toolbar from 'framework7/components/toolbar/toolbar.js';
+import Infinitescroll from 'framework7/components/infinite-scroll/infinite-scroll.js';
+
+// Install F7 Components
+Framework7.use([Tabs, Toolbar, Infinitescroll]);
 
 // Template7 helpers
 T7.registerHelper('pluralize', function (arr, options) {

@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f6d2a1909ff1eecaa961",
+    "revision": "aba562baa8dc57bd9d89",
     "url": "css/app.css"
   },
   {
-    "revision": "f6d2a1909ff1eecaa961",
+    "revision": "aba562baa8dc57bd9d89",
     "url": "js/app.js"
   },
   {
@@ -12,24 +12,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "fonts/Framework7Icons-Regular.woff2"
   },
   {
-    "revision": "570eb83859dc23dd0eec423a49e147fe",
-    "url": "fonts/MaterialIcons-Regular.woff2"
-  },
-  {
     "revision": "5fce7c1238bad823bee064bd127fe4cd",
     "url": "fonts/Framework7Icons-Regular.woff"
+  },
+  {
+    "revision": "570eb83859dc23dd0eec423a49e147fe",
+    "url": "fonts/MaterialIcons-Regular.woff2"
   },
   {
     "revision": "012cf6a10129e2275d79d6adac7f3b02",
     "url": "fonts/MaterialIcons-Regular.woff"
   },
   {
-    "revision": "111371010ef70bbcf7e6968abc8e2fb2",
-    "url": "fonts/Framework7Icons-Regular.ttf"
-  },
-  {
     "revision": "28db829912bb402df5b1e6fb16f1908c",
     "url": "fonts/Framework7Icons-Regular.eot"
+  },
+  {
+    "revision": "111371010ef70bbcf7e6968abc8e2fb2",
+    "url": "fonts/Framework7Icons-Regular.ttf"
   },
   {
     "revision": "a37b0c01c0baf1888ca812cc0508f6e2",
